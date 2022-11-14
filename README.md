@@ -1,1 +1,4 @@
-NFT MARKET NOTES
+STEP
+1. npm install
+npm run dev
+
