@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 //INTERNAL IMPORT
 import Style from "../styles/index.module.css";
@@ -20,6 +20,10 @@ import {
 } from "../components/componentsindex";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "NFT";
+  }, []);
+
   return (
     <div className={Style.homePage}>
       <HeroSection />
