@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "framer-motion": "^7.2.1",
+    "ethers": "^5.7.2",
+    "framer-motion": "^7.6.7",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.2",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "recoil": "^0.7.6"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^18.0.9",
+    "sass": "^1.56.1"
   }
 }

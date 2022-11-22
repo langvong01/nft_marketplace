@@ -1,14 +1,17 @@
-import "../styles/globals.css";
+import '../styles/globals.css';
 
+import { RecoilRoot } from 'recoil';
 //INTRNAL IMPORT
-import { NavBar, Footer } from "../components/componentsindex";
+import { NavBar, Footer } from '../components/componentsindex';
 
 const MyApp = ({ Component, pageProps }) => (
-  <div>
-    <NavBar />
-    <Component {...pageProps} />
-    <Footer />
-  </div>
+  <RecoilRoot>
+    <>
+      <NavBar />
+      <Component {...pageProps} />
+      <Footer />
+    </>
+  </RecoilRoot>
 );
 
 export default MyApp;

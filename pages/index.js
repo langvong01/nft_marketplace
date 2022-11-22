@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 //INTERNAL IMPORT
-import Style from "../styles/index.module.css";
+import Style from '../styles/index.module.css';
 import {
   HeroSection,
   Service,
@@ -17,16 +17,15 @@ import {
   Slider,
   Brand,
   Video,
-} from "../components/componentsindex";
+} from '../components/componentsindex';
 
 const Home = () => {
   useEffect(() => {
-    document.title = "NFT";
+    document.title = 'NFT';
   }, []);
 
   return (
     <div className={Style.homePage}>
-      <HeroSection />
       <Service />
       <BigNFTSilder />
       <Title
