@@ -1,145 +1,144 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 //----IMPORT ICON
-import { MdNotifications } from "react-icons/md";
-import { BsSearch } from "react-icons/bs";
-import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
+import { MdNotifications, MdShoppingCart } from 'react-icons/md';
+import { BsSearch } from 'react-icons/bs';
+import { CgMenuRight } from 'react-icons/cg';
+import { ethers } from 'ethers';
+import { AnimatePresence, motion } from 'framer-motion';
 
 //INTERNAL IMPORT
-import Style from "./NavBar.module.css";
-import { Discover, HelpCenter, Notification, Profile, SideBar } from "./index";
-import { Button } from "../componentsindex";
-import images from "../../img";
+import Style from './NavBar.module.scss';
+import { Discover, HelpCenter, Notification, Profile, SideBar } from './index';
+import images from '../../img';
+import SubTotalCart from './SubToTalCart/SubTotalCart';
+import { useRecoilState } from 'recoil';
+import { cartModalState } from '../../global-state/modal';
+import ModalBase from '../Modal/ModalBase';
+import Cart from '../Cart/Cart';
+import Link from 'next/link';
+import useHover from '../../hook/useHover';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
-  const [discover, setDiscover] = useState(false);
-  const [help, setHelp] = useState(false);
-  const [notification, setNotification] = useState(false);
-  const [profile, setProfile] = useState(false);
+  const [profileRef, isProfileRef] = useHover(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-
-  const openMenu = (e) => {
-    const btnText = e.target.innerText;
-    if (btnText == "Discover") {
-      setDiscover(true);
-      setHelp(false);
-      setNotification(false);
-      setProfile(false);
-    } else if (btnText == "Help Center") {
-      setDiscover(false);
-      setHelp(true);
-      setNotification(false);
-      setProfile(false);
-    } else {
-      setDiscover(false);
-      setHelp(false);
-      setNotification(false);
-      setProfile(false);
-    }
-  };
-
-  const openNotification = () => {
-    if (!notification) {
-      setNotification(true);
-      setDiscover(false);
-      setHelp(false);
-      setProfile(false);
-    } else {
-      setNotification(false);
-    }
-  };
-
-  const openProfile = () => {
-    if (!profile) {
-      setProfile(true);
-      setHelp(false);
-      setDiscover(false);
-      setNotification(false);
-    } else {
-      setProfile(false);
-    }
-  };
-
-  const openSideBar = () => {
-    if (!openSideMenu) {
-      setOpenSideMenu(true);
-    } else {
-      setOpenSideMenu(false);
-    }
-  };
+  const [openCart, setOpenCart] = useRecoilState(cartModalState);
+  const [discoveryRef, isDiscoveryRef] = useHover();
+  const [helpRef, isHelpRef] = useHover();
 
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
+        {/* left */}
+
         <div className={Style.navbar_container_left}>
-          <div className={Style.logo}>
-            <Image
-              src={images.logo}
-              alt="NFT MARKET PLACE"
-              width={100}
-              height={100}
-            />
-          </div>
+          <Link href="/" passHref>
+            <div className={Style.logo}>
+              <img
+                src="https://opensea.io/static/images/logos/opensea.svg"
+                alt="logo"
+              />
+              <p>Underground</p>
+            </div>
+          </Link>
           <div className={Style.navbar_container_left_box_input}>
             <div className={Style.navbar_container_left_box_input_box}>
-              <input type="text" placeholder="Search NFT" />
+              <input
+                type="text"
+                placeholder="Search items, collections, and accounts"
+              />
               <BsSearch onClick={() => {}} className={Style.search_icon} />
             </div>
           </div>
         </div>
 
+        {/* right */}
         {/* //END OF LEFT SECTION */}
         <div className={Style.navbar_container_right}>
-          <div className={Style.navbar_container_right_discover}>
-            {/* DISCOVER MENU */}
-            <p onClick={(e) => openMenu(e)}>Discover</p>
-            {discover && (
-              <div className={Style.navbar_container_right_discover_box}>
-                <Discover />
-              </div>
-            )}
+          {/* Collection meny*/}
+          <div className={Style.navbar_container_right_collection}>
+            <Link href="/collection">Collection</Link>
+          </div>
+
+          {/* DISCOVER MENU */}
+          <div
+            className={Style.navbar_container_right_discover}
+            ref={discoveryRef}
+          >
+            <p>Discover</p>
+            <AnimatePresence>
+              {isDiscoveryRef && (
+                <motion.ul
+                  className={Style.navbar_container_right_discover_box}
+                  initial={{ y: '-15px', opacity: 0 }}
+                  animate={{ y: '16px', opacity: 1 }}
+                  exit={{ y: '-15px', opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  type="spring"
+                >
+                  <Discover />
+                </motion.ul>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* HELP CENTER MENU */}
-          <div className={Style.navbar_container_right_help}>
-            <p onClick={(e) => openMenu(e)}>Help Center</p>
-            {help && (
-              <div className={Style.navbar_container_right_help_box}>
-                <HelpCenter />
-              </div>
-            )}
+          <div className={Style.navbar_container_right_help} ref={helpRef}>
+            <p>Help Center</p>
+            <AnimatePresence>
+              {isHelpRef && (
+                <motion.ul
+                  className={Style.navbar_container_right_help_box}
+                  initial={{ y: '-15px', opacity: 0 }}
+                  animate={{ y: '16px', opacity: 1 }}
+                  exit={{ y: '-15px', opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  type="spring"
+                >
+                  <HelpCenter />
+                </motion.ul>
+              )}
+            </AnimatePresence>
           </div>
 
-          {/* NOTIFICATION */}
-          <div className={Style.navbar_container_right_notify}>
-            <MdNotifications
-              className={Style.notify}
-              onClick={() => openNotification()}
-            />
-            {notification && <Notification />}
+          {/* Cart */}
+          <div className={Style.navbar_container_right_cart}>
+            <MdShoppingCart
+              className={Style.cart}
+              onClick={() =>
+                setOpenCart((prev) => {
+                  return { ...prev, open: true, animation: true };
+                })
+              }
+            ></MdShoppingCart>
+            <SubTotalCart></SubTotalCart>
+            <AnimatePresence>
+              {openCart.open ? (
+                <ModalBase selector="body">
+                  <Cart></Cart>
+                </ModalBase>
+              ) : null}
+            </AnimatePresence>
           </div>
 
           {/* CREATE BUTTON SECTION */}
-          <div className={Style.navbar_container_right_button}>
-            <Button btnName="Create" handleClick={() => {}} />
-          </div>
 
           {/* USER PROFILE */}
 
-          <div className={Style.navbar_container_right_profile_box}>
+          <div
+            className={Style.navbar_container_right_profile_box}
+            ref={profileRef}
+          >
             <div className={Style.navbar_container_right_profile}>
               <Image
                 src={images.user1}
                 alt="Profile"
                 width={40}
                 height={40}
-                onClick={() => openProfile()}
                 className={Style.navbar_container_right_profile}
               />
-
-              {profile && <Profile />}
+              <AnimatePresence>{isProfileRef && <Profile />}</AnimatePresence>
             </div>
           </div>
 
