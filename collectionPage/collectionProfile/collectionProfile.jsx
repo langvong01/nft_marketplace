@@ -1,17 +1,17 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 import {
   TiSocialFacebook,
   TiSocialLinkedin,
   TiSocialTwitter,
   TiSocialInstagram,
-} from "react-icons/ti";
+} from 'react-icons/ti';
 
 //INTERNAL IMPORT
-import Style from "./collectionProfile.module.css";
-import images from "../../img";
+import Style from './collectionProfile.module.css';
+import images from '../../img';
 
-const collectionProfile = () => {
+const CollectionProfile = () => {
   const cardArray = [1, 2, 3, 4];
   return (
     <div className={Style.collectionProfile}>
@@ -67,4 +67,4 @@ const collectionProfile = () => {
   );
 };
 
-export default collectionProfile;
+export default CollectionProfile;

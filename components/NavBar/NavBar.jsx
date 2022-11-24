@@ -24,6 +24,7 @@ import ModalWallet from '../modal/modal-wall-net/ModalWallet';
 import Profile from './profile/Profile';
 import HelpCenter from './help-center/HelpCenter';
 import Discover from './discover/Discover';
+import Search from '../search/Search';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
@@ -58,15 +59,7 @@ const NavBar = () => {
                 <p>Underground</p>
               </div>
             </Link>
-            <div className={Style.navbar_container_left_box_input}>
-              <div className={Style.navbar_container_left_box_input_box}>
-                <input
-                  type="text"
-                  placeholder="Search items, collections, and accounts"
-                />
-                <BsSearch onClick={() => {}} className={Style.search_icon} />
-              </div>
-            </div>
+            <Search></Search>
           </div>
 
           {/* right */}

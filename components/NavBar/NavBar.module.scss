@@ -25,42 +25,6 @@
   align-items: center;
 }
 
-.navbar_container_left_box_input_box {
-  width: 100%;
-  border: 1px solid var(--icons-color);
-  display: flex;
-  align-items: center;
-  padding: 0.75rem;
-  border-radius: 8px;
-  background-color: white;
-  margin-right: 16px;
-  border: unset;
-}
-
-.navbar_container_left_box_input_box input {
-  width: 100%;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  border: unset;
-  cursor: text;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.navbar_container_left_box_input_box input::placeholder {
-  color: #8a939b;
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.search_icon {
-  cursor: pointer;
-  font-size: 1.4rem;
-  color: #8a939b;
-  font-weight: 600;
-}
-
 /* //-------RIGHT */
 /* custome css navbar */
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Style from './Modal.module.css';
 import ReactDOM from 'react-dom';
 import { motion } from 'framer-motion';
-const ModalBase = ({ selector, children }) => {
+const ModalBase = ({ selector, children, className }) => {
   const ref = useRef();
 
   const [mounted, setMounted] = useState(false);
@@ -16,7 +16,7 @@ const ModalBase = ({ selector, children }) => {
   return mounted
     ? ReactDOM.createPortal(
         <motion.div
-          className={Style.modal_container}
+          className={className ? className : Style.modal_container}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

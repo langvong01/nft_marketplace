@@ -4,9 +4,12 @@ import React from 'react';
 import Style from '../styles/collection.module.css';
 import images from '../img';
 
-import { Slider, Brand } from '../components/componentsindex';
 import Filter from '../components/Filter/Filter';
 import Banner from 'collectionPage/Banner/Banner';
+import NFTCardTwo from 'collectionPage/NFTCardTwo/NFTCardTwo';
+import Slider from '@/components/slider/Slider';
+import Brand from '@/components/brand/Brand';
+import CollectionProfile from 'collectionPage/collectionProfile/collectionProfile';
 
 const collection = () => {
   const collectionArray = [
