@@ -18,7 +18,6 @@ import {
   Brand,
   Video,
 } from '../components/componentsindex';
-
 const Home = () => {
   useEffect(() => {
     document.title = 'NFT';

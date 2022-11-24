@@ -1,15 +1,18 @@
 import React from 'react';
-import Image from 'next/image';
-import { FaUserAlt, FaRegImage, FaUserEdit } from 'react-icons/fa';
+
+import { FaUserAlt, FaRegImage, FaUserEdit, FaReplyAll } from 'react-icons/fa';
 import { MdHelpCenter } from 'react-icons/md';
-import { TbDownloadOff, TbDownload } from 'react-icons/tb';
+import { TbDownload } from 'react-icons/tb';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-//INTERNAL IMPORT
+
 import Style from './Profile.module.css';
-import images from '../../../img';
 
 const Profile = () => {
+  const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
+
+  const handleConnectMetaMask = async () => {};
+
   return (
     <motion.div
       className={Style.profile}
@@ -22,17 +25,26 @@ const Profile = () => {
       <div className={Style.profile_menu}>
         <div className={Style.profile_menu_one}>
           <div className={Style.profile_menu_one_item}>
+            <FaReplyAll />
+            <p>
+              <span>Connect metamask</span>
+            </p>
+          </div>
+
+          <div className={Style.profile_menu_one_item}>
             <FaUserAlt />
             <p>
               <Link href={{ pathname: '/myprofile' }}>My Profile</Link>
             </p>
           </div>
+
           <div className={Style.profile_menu_one_item}>
             <FaRegImage />
             <p>
               <Link href={{ pathname: '/my-items' }}>My Items</Link>
             </p>
           </div>
+
           <div className={Style.profile_menu_one_item}>
             <FaUserEdit />
             <p>
@@ -48,6 +60,7 @@ const Profile = () => {
               <Link href={{ pathname: '/help' }}>Help</Link>
             </p>
           </div>
+
           <div className={Style.profile_menu_one_item}>
             <TbDownload />
             <p>

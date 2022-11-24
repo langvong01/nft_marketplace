@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
-import { BsCircleFill } from "react-icons/bs";
-
+import React from 'react';
+import Image from 'next/image';
+import { BsCircleFill } from 'react-icons/bs';
+import { v4 as uuidv4 } from 'uuid';
 //INTERNAL IMPORT
-import Style from "./Category.module.css";
-import images from "../../img";
+import Style from './Category.module.css';
+import images from '../../img';
 
 const Category = () => {
   const CategoryArray = [
@@ -19,7 +19,7 @@ const Category = () => {
     <div className={Style.box_category}>
       <div className={Style.category}>
         {CategoryArray.map((el, i) => (
-          <div className={Style.category_box} key={1 + 1}>
+          <div className={Style.category_box} key={uuidv4()}>
             <Image
               src={el}
               className={Style.category_box_img}

@@ -1,42 +1,60 @@
-import React from "react";
+import React from 'react';
 import {
   RecoilRoot,
   atom,
   selector,
   useRecoilState,
   useRecoilValue,
-} from "recoil";
-import { ethers } from "ethers";
+} from 'recoil';
+import { ethers } from 'ethers';
+import Web3 from 'web3';
+import axios from 'axios';
 
-export const connectMataMaskState = atom({
-  key: "connectMetaMask", // unique ID (with respect to other atoms/selectors)
+const handleSignMessage = async (publicAddress, nonce) => {
+  try {
+    const web3 = new Web3(window.ethereum);
+    const signature = await web3.eth.personal.sign(
+      `${nonce}`,
+      publicAddress
+      // MetaMask will ignore the password argument here
+    );
+
+    return { publicAddress, signature };
+  } catch (err) {
+    throw new Error('You need to sign the message to be able to log in.');
+  }
+};
+
+export const connectMetaMaskState = atom({
+  key: 'connectMetaMask', // unique ID (with respect to other atoms/selectors)
   default: {
-    error: "",
+    error: '',
     openError: false,
-    currentAccount: "",
-    accountBalance: "",
+    currentAccount: '',
+    accountBalance: '',
+    signature: '',
     checkIfWalletConnected: async () => {
       try {
         //brower
         if (!window.ethereum) {
           return {
-            error: "Install MetaMask",
+            error: 'Install MetaMask',
             openError: true,
-            currentAccount: "",
-            accountBalance: "",
+            currentAccount: '',
+            accountBalance: '',
           };
         }
 
         const accounts = await window.ethereum.request({
-          method: "eth_accounts",
+          method: 'eth_accounts',
         });
 
         if (!accounts.length) {
           return {
-            error: "No Account Found",
+            error: 'No Account Found',
             openError: true,
-            currentAccount: "",
-            accountBalance: "",
+            currentAccount: '',
+            accountBalance: '',
           };
         }
 
@@ -45,7 +63,7 @@ export const connectMataMaskState = atom({
         const bal = ethers.utils.formatEther(getBalance);
 
         return {
-          error: "",
+          error: '',
           openError: false,
           currentAccount: accounts[0],
           accountBalance: bal,
@@ -53,10 +71,10 @@ export const connectMataMaskState = atom({
       } catch (error) {
         console.log(error);
         return {
-          error: "Something wrong while connecting to wallet",
+          error: 'Something wrong while connecting to wallet',
           openError: true,
-          currentAccount: "",
-          accountBalance: "",
+          currentAccount: '',
+          accountBalance: '',
         };
       }
     },
@@ -65,26 +83,50 @@ export const connectMataMaskState = atom({
         // install metamask - turn on modal
         if (!window.ethereum) {
           return {
-            error: "Install MetaMask",
+            error: 'Install MetaMask',
             openError: true,
-            currentAccount: "",
-            accountBalance: "",
+            currentAccount: '',
+            accountBalance: '',
           };
         }
 
         const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
+          method: 'eth_requestAccounts',
         });
 
-        setMetamask((prev) => {
-          return { ...prev, currentAccount: accounts[0] };
-        });
+        const responseGetNonce = await axios.get(
+          `http://localhost:8080/api/v1/auth/nonce?walletAddress=${accounts[0]}`
+        );
+
+        // console.log(responseGetNonce.data);
+
+        const { body: nonce } = responseGetNonce.data;
+
+        const { publicAddress, signature } = await handleSignMessage(
+          accounts[0],
+          nonce
+        );
+
+        console.log(publicAddress, signature);
+
+        const responeAuth = await axios.post(
+          `http://localhost:8080/api/v1/auth/login`,
+          { walletAddress: publicAddress, signature },
+          {
+            withCredentials: true,
+          }
+        );
+
+        console.log(responseGetNonce, responeAuth);
+
+        return { currentAccount: accounts[0], signature: signature };
       } catch (error) {
+        console.log(error);
         return {
-          error: "Error while connecting to wallet",
+          error: 'Error while connecting to wallet',
           openError: true,
-          currentAccount: "",
-          accountBalance: "",
+          currentAccount: '',
+          accountBalance: '',
         };
       }
     },

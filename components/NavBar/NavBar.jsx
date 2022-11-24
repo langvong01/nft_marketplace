@@ -18,6 +18,7 @@ import ModalBase from '../Modal/ModalBase';
 import Cart from '../Cart/Cart';
 import Link from 'next/link';
 import useHover from '../../hook/useHover';
+import { connectMetaMaskState } from '../../global-state/connect-metamask';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
@@ -141,8 +142,6 @@ const NavBar = () => {
               <AnimatePresence>{isProfileRef && <Profile />}</AnimatePresence>
             </div>
           </div>
-
-          {/* MENU BUTTON */}
 
           <div className={Style.navbar_container_right_menuBtn}>
             <CgMenuRight
