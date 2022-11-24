@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 //INTERNAL IMPORT
-import Style from "./Brand.module.css";
-import images from "../../img";
-import { Button } from "../../components/componentsindex.js";
+import Style from './Brand.module.css';
+import images from '../../img';
+import { Button } from '../componentsindex.js';
 
 const Brand = () => {
   return (

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { GrClose } from "react-icons/gr";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { GrClose } from 'react-icons/gr';
 import {
   TiSocialFacebook,
   TiSocialLinkedin,
@@ -10,12 +10,12 @@ import {
   TiSocialInstagram,
   TiArrowSortedDown,
   TiArrowSortedUp,
-} from "react-icons/ti";
+} from 'react-icons/ti';
 
 //INTERNAL IMPORT
-import Style from "./SideBar.module.css";
-import images from "../../../img";
-import Button from "../../Button/Button";
+import Style from './SideBar.module.css';
+import images from '../../../img';
+import Button from '../../button/Button';
 
 const SideBar = ({ setOpenSideMenu }) => {
   //------USESTATE
@@ -25,55 +25,55 @@ const SideBar = ({ setOpenSideMenu }) => {
   //--------DISCOVER NAVIGATION MENU
   const discover = [
     {
-      name: "Collection",
-      link: "collection",
+      name: 'Collection',
+      link: 'collection',
     },
     {
-      name: "Search",
-      link: "search",
+      name: 'Search',
+      link: 'search',
     },
     {
-      name: "Author Profile",
-      link: "author-profile",
+      name: 'Author Profile',
+      link: 'author-profile',
     },
     {
-      name: "NFT Details",
-      link: "NFT-details",
+      name: 'NFT Details',
+      link: 'NFT-details',
     },
     {
-      name: "Account Setting",
-      link: "account-setting",
+      name: 'Account Setting',
+      link: 'account-setting',
     },
     {
-      name: "Connect Wallet",
-      link: "connect-wallet",
+      name: 'Connect Wallet',
+      link: 'connect-wallet',
     },
     {
-      name: "Blog",
-      link: "blog",
+      name: 'Blog',
+      link: 'blog',
     },
   ];
   //------HELP CNTEER
   const helpCenter = [
     {
-      name: "About",
-      link: "about",
+      name: 'About',
+      link: 'about',
     },
     {
-      name: "Contact Us",
-      link: "contact-us",
+      name: 'Contact Us',
+      link: 'contact-us',
     },
     {
-      name: "Sign Up",
-      link: "sign-up",
+      name: 'Sign Up',
+      link: 'sign-up',
     },
     {
-      name: "Sign In",
-      link: "sign-in",
+      name: 'Sign In',
+      link: 'sign-in',
     },
     {
-      name: "Subscription",
-      link: "subscription",
+      name: 'Subscription',
+      link: 'subscription',
     },
   ];
 

@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { TiArrowLeftThick, TiArrowRightThick } from "react-icons/ti";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { TiArrowLeftThick, TiArrowRightThick } from 'react-icons/ti';
 
 //INTERNAL IMPORT
-import Style from "./Slider.module.css";
-import SliderCard from "./SliderCard/SliderCard";
-import images from "../../img";
+import Style from './Slider.module.css';
+import SliderCard from './slider-card/SliderCard';
+import images from '../../img';
 
 const Slider = () => {
   const FollowingArray = [
@@ -45,7 +45,7 @@ const Slider = () => {
     const { current } = dragSlider;
     const scrollAmount = window.innerWidth > 1800 ? 270 : 210;
 
-    if (direction == "left") {
+    if (direction == 'left') {
       current.scrollLeft -= scrollAmount;
     } else {
       current.scrollLeft += scrollAmount;
@@ -61,13 +61,13 @@ const Slider = () => {
           <div className={Style.slider_box_button_btn}>
             <div
               className={Style.slider_box_button_btn_icon}
-              onClick={() => handleScroll("left")}
+              onClick={() => handleScroll('left')}
             >
               <TiArrowLeftThick />
             </div>
             <div
               className={Style.slider_box_button_btn_icon}
-              onClick={() => handleScroll("right")}
+              onClick={() => handleScroll('right')}
             >
               <TiArrowRightThick />
             </div>

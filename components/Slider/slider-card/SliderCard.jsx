@@ -1,11 +1,11 @@
-import React from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
+import React from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 //INTERNAL IMPORT
-import Style from "./SliderCard.module.css";
-import images from "../../../img";
-import LikeProfile from "../../LikeProfile/LikeProfile";
+import Style from './SliderCard.module.css';
+import images from '../../../img';
+import LikeProfile from '../../like-profile/LikeProfile';
 
 const SliderCard = ({ el, i }) => {
   return (

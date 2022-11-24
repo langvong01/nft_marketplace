@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
-import { AiFillFire, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { MdVerified, MdTimer } from "react-icons/md";
-import { TbArrowBigLeftLines, TbArrowBigRightLine } from "react-icons/tb";
+import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
+import { AiFillFire, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { MdVerified, MdTimer } from 'react-icons/md';
+import { TbArrowBigLeftLines, TbArrowBigRightLine } from 'react-icons/tb';
 
 //INTERNAL IMPORT
-import Style from "./BigNFTSilder.module.css";
-import images from "../../img";
-import Button from "../Button/Button";
+import Style from './BigNFTSilder.module.css';
+import images from '../../img';
+import Button from '../button/Button';
 
 const BigNFTSilder = () => {
   const [idNumber, setIdNumber] = useState(0);
 
   const sliderData = [
     {
-      title: "Hello NFT",
+      title: 'Hello NFT',
       id: 1,
-      name: "Daulat Hussain",
-      collection: "GYm",
-      price: "00664 ETH",
+      name: 'Daulat Hussain',
+      collection: 'GYm',
+      price: '00664 ETH',
       like: 243,
       image: images.user1,
       nftImage: images.nft_image_1,
@@ -30,11 +30,11 @@ const BigNFTSilder = () => {
       },
     },
     {
-      title: "Buddy NFT",
+      title: 'Buddy NFT',
       id: 2,
-      name: "Shoaib Hussain",
-      collection: "Home",
-      price: "0000004 ETH",
+      name: 'Shoaib Hussain',
+      collection: 'Home',
+      price: '0000004 ETH',
       like: 243,
       image: images.user2,
       nftImage: images.nft_image_2,
@@ -46,11 +46,11 @@ const BigNFTSilder = () => {
       },
     },
     {
-      title: "Gym NFT",
+      title: 'Gym NFT',
       id: 3,
-      name: "Raayan Hussain",
-      collection: "GYm",
-      price: "0000064 ETH",
+      name: 'Raayan Hussain',
+      collection: 'GYm',
+      price: '0000064 ETH',
       like: 243,
       image: images.user3,
       nftImage: images.nft_image_3,
@@ -62,11 +62,11 @@ const BigNFTSilder = () => {
       },
     },
     {
-      title: "Home NFT",
+      title: 'Home NFT',
       id: 4,
-      name: "Raayan Hussain",
-      collection: "GYm",
-      price: "4664 ETH",
+      name: 'Raayan Hussain',
+      collection: 'GYm',
+      price: '4664 ETH',
       like: 243,
       image: images.user4,
       nftImage: images.nft_image_1,
@@ -110,7 +110,7 @@ const BigNFTSilder = () => {
               <div className={Style.bigNFTSlider_box_left_creator_profile_info}>
                 <p>Creator</p>
                 <h4>
-                  {sliderData[idNumber].name}{" "}
+                  {sliderData[idNumber].name}{' '}
                   <span>
                     <MdVerified />
                   </span>

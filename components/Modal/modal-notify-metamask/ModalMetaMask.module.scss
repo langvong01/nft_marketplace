@@ -1,0 +1,92 @@
+.modal_metamask_container {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 500px;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  padding: 16px;
+  border-radius: 8px;
+  color: black;
+
+  .modal_metamask_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      text-align: center;
+      flex: 1;
+      font-size: 20px;
+    }
+
+    button {
+      background-color: unset;
+      outline: unset;
+      border: unset;
+      font-size: 1.75rem;
+      cursor: pointer;
+      transition: 0.3s all;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .modal_metamask_text {
+    color: #727c85;
+    font-weight: 400;
+    margin: 24px 0;
+    text-align: center;
+    span {
+      color: #2081e2;
+    }
+  }
+
+  .line {
+    width: 100%;
+    color: #eee;
+    height: 0.75px;
+  }
+
+  .modal_list_meta {
+    margin: 24px 0;
+    list-style: none;
+    width: 100%;
+
+    .modal_meta_item {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 8px 0;
+      transition: 0.1s all;
+
+      &:hover {
+        background-color: #fafafb;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        column-gap: 16px;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        column-gap: 16px;
+      }
+
+      .modal_meta_popular {
+        text-transform: capitalize;
+        color: #727c85;
+        font-weight: 400;
+        font-size: 14px;
+      }
+    }
+  }
+}

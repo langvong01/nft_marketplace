@@ -1,75 +1,86 @@
 import React from 'react';
 
-import { FaUserAlt, FaRegImage, FaUserEdit, FaReplyAll } from 'react-icons/fa';
-import { MdHelpCenter } from 'react-icons/md';
+import { FaUserAlt, FaRegImage } from 'react-icons/fa';
+
 import { TbDownload } from 'react-icons/tb';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 import Style from './Profile.module.css';
+import { useRecoilState } from 'recoil';
+import { connectMetaMaskState } from '../../../global-state/connect-metamask';
+import { modalNotifyMetaMask } from '../../../global-state/modal';
 
 const Profile = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
+  const [metaModal, setMetaModal] = useRecoilState(modalNotifyMetaMask);
 
-  const handleConnectMetaMask = async () => {};
+  const handleClickNotLogin = () => {
+    if (!metaMask.accountCurrent) {
+      return setMetaModal((prev) => {
+        return { ...prev, open: true };
+      });
+    }
+    return;
+  };
 
   return (
-    <motion.div
-      className={Style.profile}
-      initial={{ y: '-15px', opacity: 0 }}
-      animate={{ y: '4px', opacity: 1 }}
-      exit={{ y: '-15px', opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      type="spring"
-    >
-      <div className={Style.profile_menu}>
-        <div className={Style.profile_menu_one}>
-          <div className={Style.profile_menu_one_item}>
-            <FaReplyAll />
-            <p>
-              <span>Connect metamask</span>
-            </p>
+    <>
+      <motion.div
+        className={Style.profile}
+        initial={{ y: '-15px', opacity: 0 }}
+        animate={{ y: '4px', opacity: 1 }}
+        exit={{ y: '-15px', opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        type="spring"
+      >
+        <div className={Style.profile_menu}>
+          <div className={Style.profile_menu_one}>
+            <div
+              className={Style.profile_menu_one_item}
+              onClick={handleClickNotLogin}
+            >
+              <FaUserAlt />
+              <p>
+                {metaMask.accountCurrent ? (
+                  <Link href="/my-profile">My Profile</Link>
+                ) : (
+                  'My Profile'
+                )}
+              </p>
+            </div>
+
+            <div
+              className={Style.profile_menu_one_item}
+              onClick={handleClickNotLogin}
+            >
+              <FaRegImage />
+
+              <p>
+                {metaMask.accountCurrent ? (
+                  <Link href={{ pathname: '/my-items' }}>My Items</Link>
+                ) : (
+                  'My Items'
+                )}
+              </p>
+            </div>
           </div>
 
-          <div className={Style.profile_menu_one_item}>
-            <FaUserAlt />
-            <p>
-              <Link href={{ pathname: '/myprofile' }}>My Profile</Link>
-            </p>
-          </div>
-
-          <div className={Style.profile_menu_one_item}>
-            <FaRegImage />
-            <p>
-              <Link href={{ pathname: '/my-items' }}>My Items</Link>
-            </p>
-          </div>
-
-          <div className={Style.profile_menu_one_item}>
-            <FaUserEdit />
-            <p>
-              <Link href={{ pathname: '/edit-profile' }}>Edit Profile</Link>
-            </p>
+          <div className={Style.profile_menu_two}>
+            <div className={Style.profile_menu_one_item}>
+              <TbDownload />
+              <p>
+                {metaMask.accountCurrent ? (
+                  <Link href={{ pathname: '/disconnet' }}>Disconnet</Link>
+                ) : (
+                  'Disconnet'
+                )}
+              </p>
+            </div>
           </div>
         </div>
-
-        <div className={Style.profile_menu_two}>
-          <div className={Style.profile_menu_one_item}>
-            <MdHelpCenter />
-            <p>
-              <Link href={{ pathname: '/help' }}>Help</Link>
-            </p>
-          </div>
-
-          <div className={Style.profile_menu_one_item}>
-            <TbDownload />
-            <p>
-              <Link href={{ pathname: '/disconnet' }}>Disconnet</Link>
-            </p>
-          </div>
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </>
   );
 };
 

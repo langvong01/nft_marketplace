@@ -6,6 +6,5 @@
 }
 
 .discover:hover {
-  background-color: var(--icons-color);
-  color: #fff;
+  background-color: #fafafb;
 }

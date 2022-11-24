@@ -3,21 +3,22 @@ import Style from './Cart.module.css';
 import { motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import { MdWarning, MdClose } from 'react-icons/md';
-import { cartModalState } from '../../global-state/modal';
+
 import useOnClickOutside from '../../hook/useClickOutSide';
+import { modalCartState } from '../../global-state/modal';
 import CartDetails from './cart-details/CartDetails';
 
 const Cart = () => {
+  const [openCart, setOpenCart] = useRecoilState(modalCartState);
   const refCart = useRef();
-  const [openCart, setOpenCart] = useRecoilState(cartModalState);
 
-  const handleClose = () => {
+  const handleCloseModalCart = () => {
     setOpenCart((prev) => {
       return { ...prev, open: false };
     });
   };
 
-  useOnClickOutside(refCart, handleClose);
+  useOnClickOutside(refCart, handleCloseModalCart);
 
   return (
     <>
@@ -27,7 +28,6 @@ const Cart = () => {
         initial={{ x: '107%', opacity: 0 }}
         animate={{ x: '0', opacity: 1 }}
         exit={{ x: '107%', opacity: 0 }}
-        transition={{ type: 'linear' }}
       >
         <div className={Style.cart_header}>
           <div className={Style.cart_header_text}>
@@ -36,7 +36,10 @@ const Cart = () => {
               <MdWarning></MdWarning>
             </span>
           </div>
-          <div className={Style.cart_header_close} onClick={handleClose}>
+          <div
+            className={Style.cart_header_close}
+            onClick={handleCloseModalCart}
+          >
             <span>
               <MdClose></MdClose>
             </span>

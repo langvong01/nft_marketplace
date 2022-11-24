@@ -1,0 +1,73 @@
+.modal_wallet_container {
+  width: 420px;
+  border-radius: 12px;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  height: 90%;
+  background-color: white;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 16px;
+
+  .modal_wallet_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .modal_wallet_info {
+      display: flex;
+      column-gap: 12px;
+      align-items: center;
+      p {
+        margin-bottom: 8px;
+      }
+      span {
+        font-size: 24px;
+      }
+    }
+
+    .modal_wallet_token {
+      p {
+        color: #707a83;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .modal_wallet_payment {
+    margin-top: 24px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+
+    .modal_wallet_total {
+      padding: 16px;
+      text-align: center;
+      p:first-child {
+        color: #707a83;
+        font-weight: 500;
+      }
+      p:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 4px;
+        font-size: 20px;
+      }
+    }
+    button {
+      color: white;
+      font-weight: bold;
+      width: 100%;
+      padding: 17px 24px;
+      font-size: 16px;
+      text-transform: capitalize;
+      background-color: #2081e2;
+      cursor: pointer;
+      border: unset;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      outline: unset;
+    }
+  }
+}

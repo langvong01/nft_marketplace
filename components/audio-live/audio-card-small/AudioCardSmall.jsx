@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
 
 //INTERNAL IMPORT
-import Style from "./AudioCardSmall.module.css";
-import images from "../../../img";
-import LikeProfile from "../../LikeProfile/LikeProfile";
+import Style from './AudioCardSmall.module.css';
+import images from '../../../img';
+import LikeProfile from '../../like-profile/LikeProfile';
 
 const AudioCardSmall = () => {
   const [play, setPlay] = useState(false);

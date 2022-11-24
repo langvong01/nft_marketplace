@@ -51,7 +51,7 @@
 .navbar_container_left_box_input_box input::placeholder {
   color: #8a939b;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .search_icon {
@@ -109,12 +109,17 @@
   font-size: 1.75rem;
 }
 
-.navbar_container_right_cart {
+.navbar_container_right_cart,
+.navbar_container_right_metamask {
   position: relative;
   cursor: pointer;
 }
 
-.cart {
+.cart_icons {
+  font-size: 1.75rem;
+}
+
+.navbar_container_right_metamask {
   font-size: 1.75rem;
 }
 

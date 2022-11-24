@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 //INTERNAL IMPORT
-import Style from "./AudioLive.module.css";
-import AudioCard from "./AudioCard/AudioCard";
-import AudioCardSmall from "./AudioCardSmall/AudioCardSmall";
+import Style from './AudioLive.module.css';
+import AudioCard from './audio-card/AudioCard';
+import AudioCardSmall from './audio-card-small/AudioCardSmall';
 
 const AudioLive = () => {
   return (

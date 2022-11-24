@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
 
 //INTERNAL IMPORT
-import Style from "./AudioCard.module.css";
-import images from "../../../img";
-import LikeProfile from "../../LikeProfile/LikeProfile";
+import Style from './AudioCard.module.css';
+import images from '../../../img';
+import LikeProfile from '../../like-profile/LikeProfile';
 
 const AudioCard = () => {
   const [like, setLike] = useState(false);

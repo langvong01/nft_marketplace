@@ -16,6 +16,7 @@ const CartItem = () => {
             src="https://img.seadn.io/files/be307be33e6f9f835ec31b300bbcfd36.png?fit=max&w=1000"
             className={Style.cart_img}
             loader={myLoader}
+            unoptimized={true} // <=== insert this prop
             height={75}
             width={75}
           ></Image>
