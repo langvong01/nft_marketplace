@@ -1,8 +1,10 @@
-import React from "react";
+import React from 'react';
+import NFTDescription from './nft-description/NFTDescription';
+import NFTDetailsImg from './nft-details-img/NFTDetailsImg';
 
 //INTERNAL IMPORT
-import { NFTDescription, NFTDetailsImg, NFTTabs } from "./NFTDetailsIndex";
-import Style from "./NFTDetailsPage.module.css";
+
+import Style from './NFTDetailsPage.module.css';
 
 const NFTDetailsPage = () => {
   return (

@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 //INTERNAL IMPORT
 import Style from './NavBar.module.scss';
-import { Discover, HelpCenter, Profile, SideBar } from './index';
+
 import images from '../../img';
 import SubTotalCart from './sub-total-cart/SubTotalCart';
 import { useRecoilState } from 'recoil';
@@ -21,6 +21,9 @@ import useHover from '../../hook/useHover';
 import { connectMetaMaskState } from '../../global-state/connect-metamask';
 import ModalMetaMask from '../Modal/modal-notify-metamask/ModalMetaMask';
 import ModalWallet from '../modal/modal-wall-net/ModalWallet';
+import Profile from './profile/Profile';
+import HelpCenter from './help-center/HelpCenter';
+import Discover from './discover/Discover';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS

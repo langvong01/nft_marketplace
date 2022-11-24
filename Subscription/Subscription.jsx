@@ -1,9 +1,9 @@
-import React from "react";
-import { TiTick } from "react-icons/ti";
+import Button from '@/components/button/Button';
+import React from 'react';
+import { TiTick } from 'react-icons/ti';
 
 //INTERNAL IMPORT
-import Style from "../Subscription/Subscription.module.css";
-import { Button } from "../components/componentsindex.js";
+import Style from '../Subscription/Subscription.module.css';
 
 const Subscription = ({ el, i }) => {
   return (
@@ -11,7 +11,7 @@ const Subscription = ({ el, i }) => {
       <div className={Style.SubscriptionBox_box}>
         <span className={Style.SubscriptionBox_box_span}>{el.plan}</span>
         <small className={Style.SubscriptionBox_box_small}>
-          {el.popular || ""}
+          {el.popular || ''}
         </small>
         <p className={Style.SubscriptionBox_box_price}>{el.price}</p>
 

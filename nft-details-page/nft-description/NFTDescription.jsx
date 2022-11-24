@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState } from 'react';
+import Image from 'next/image';
 import {
   MdVerified,
   MdCloudUpload,
   MdTimer,
   MdReportProblem,
   MdOutlineDeleteSweep,
-} from "react-icons/md";
-import { BsThreeDots } from "react-icons/bs";
-import { FaWallet, FaPercentage } from "react-icons/fa";
+} from 'react-icons/md';
+import { BsThreeDots } from 'react-icons/bs';
+import { FaWallet, FaPercentage } from 'react-icons/fa';
 import {
   TiSocialFacebook,
   TiSocialLinkedin,
   TiSocialTwitter,
   TiSocialYoutube,
   TiSocialInstagram,
-} from "react-icons/ti";
-import { BiTransferAlt, BiDollar } from "react-icons/bi";
+} from 'react-icons/ti';
+import { BiTransferAlt, BiDollar } from 'react-icons/bi';
 
 //INTERNAL IMPORT
-import Style from "./NFTDescription.module.css";
-import images from "../../img";
-import { Button } from "../../components/componentsindex.js";
-import { NFTTabs } from "../NFTDetailsIndex";
+import Style from './NFTDescription.module.css';
+import images from '../../img';
+import { Button } from '../../components/componentsindex.js';
+import { NFTTabs } from '../NFTDetailsIndex';
 
 const NFTDescription = () => {
   const [social, setSocial] = useState(false);
@@ -74,11 +74,11 @@ const NFTDescription = () => {
   const openTabs = (e) => {
     const btnText = e.target.innerText;
 
-    if (btnText == "Bid History") {
+    if (btnText == 'Bid History') {
       setHistory(true);
       setProvanance(false);
       setOwner(false);
-    } else if (btnText == "Provanance") {
+    } else if (btnText == 'Provanance') {
       setHistory(false);
       setProvanance(true);
       setOwner(false);

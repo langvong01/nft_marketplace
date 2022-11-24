@@ -1,47 +1,47 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 //INTERNAL IMPORT
-import Style from "../styles/aboutus.module.css";
-import { Brand } from "../components/componentsindex";
-import images from "../img";
+import Style from '../styles/aboutus.module.css';
+import images from '../img';
+import Brand from '@/components/brand/Brand';
 
 const aboutus = () => {
   const founderArray = [
     {
       name: "Niamh O'Shea",
-      position: "Co-founder and Chief Executive",
+      position: 'Co-founder and Chief Executive',
       images: images.founder1,
     },
     {
-      name: "Danien Jame",
-      position: "Co-founder and Chief Executive",
+      name: 'Danien Jame',
+      position: 'Co-founder and Chief Executive',
       images: images.founder2,
     },
     {
-      name: "Orla Dwyer",
-      position: "Co-founder, Chairman",
+      name: 'Orla Dwyer',
+      position: 'Co-founder, Chairman',
       images: images.founder3,
     },
     {
-      name: "Dara Frazier",
-      position: "Co-Founder, Chief Strategy Officer",
+      name: 'Dara Frazier',
+      position: 'Co-Founder, Chief Strategy Officer',
       images: images.founder4,
     },
   ];
 
   const factsArray = [
     {
-      title: "10 million",
-      info: "Articles have been public around the world (as of Sept. 30, 2021)",
+      title: '10 million',
+      info: 'Articles have been public around the world (as of Sept. 30, 2021)',
     },
     {
-      title: "100,000",
-      info: "Registered users account (as of Sept. 30, 2021)",
+      title: '100,000',
+      info: 'Registered users account (as of Sept. 30, 2021)',
     },
     {
-      title: "220+",
-      info: "Countries and regions have our presence (as of Sept. 30, 2021",
+      title: '220+',
+      info: 'Countries and regions have our presence (as of Sept. 30, 2021',
     },
   ];
   return (

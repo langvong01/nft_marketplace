@@ -1,15 +1,15 @@
-import React from "react";
-import { HiOutlineMail } from "react-icons/hi";
-import { MdOutlineHttp, MdOutlineContentCopy } from "react-icons/md";
+import Button from '@/components/button/Button';
+import React from 'react';
+import { HiOutlineMail } from 'react-icons/hi';
+import { MdOutlineHttp, MdOutlineContentCopy } from 'react-icons/md';
 import {
   TiSocialFacebook,
   TiSocialTwitter,
   TiSocialInstagram,
-} from "react-icons/ti";
+} from 'react-icons/ti';
 
 //INTERNAL IMPORT
-import Style from "./Form.module.css";
-import { Button } from "../../components/componentsindex.js";
+import Style from './Form.module.css';
 
 const Form = () => {
   return (

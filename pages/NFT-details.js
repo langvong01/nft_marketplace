@@ -1,8 +1,10 @@
-import React from "react";
+import Brand from '@/components/brand/Brand';
+import Category from '@/components/category/Category';
+import React from 'react';
 
 //INTERNAL IMPORT
-import { Button, Category, Brand } from "../components/componentsindex";
-import NFTDetailsPage from "../NFTDetailsPage/NFTDetailsPage";
+
+import NFTDetailsPage from '../nft-details-page/NFTDetailsPage';
 const NFTDetails = () => {
   return (
     <div>

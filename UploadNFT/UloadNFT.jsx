@@ -1,51 +1,51 @@
-import React, { useState } from "react";
-import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
-import { FaPercent } from "react-icons/fa";
-import { AiTwotonePropertySafety } from "react-icons/ai";
-import { TiTick } from "react-icons/ti";
-import Image from "next/image";
+import React, { useState } from 'react';
+import { MdOutlineHttp, MdOutlineAttachFile } from 'react-icons/md';
+import { FaPercent } from 'react-icons/fa';
+import { AiTwotonePropertySafety } from 'react-icons/ai';
+import { TiTick } from 'react-icons/ti';
+import Image from 'next/image';
 
 //INTERNAL IMPORT
-import Style from "./Upload.module.css";
-import formStyle from "../AccountPage/Form/Form.module.css";
-import images from "../img";
-import { Button } from "../components/componentsindex.js";
-import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
+import Style from './Upload.module.css';
+import formStyle from '../AccountPage/Form/Form.module.css';
+import images from '../img';
+import { DropZone } from '../UploadNFT/uploadNFTIndex.js';
+import Button from '@/components/button/Button';
 
 const UloadNFT = () => {
   const [active, setActive] = useState(0);
-  const [itemName, setItemName] = useState("");
-  const [website, setWebsite] = useState("");
-  const [description, setDescription] = useState("");
-  const [royalties, setRoyalties] = useState("");
-  const [fileSize, setFileSize] = useState("");
+  const [itemName, setItemName] = useState('');
+  const [website, setWebsite] = useState('');
+  const [description, setDescription] = useState('');
+  const [royalties, setRoyalties] = useState('');
+  const [fileSize, setFileSize] = useState('');
   const [category, setCategory] = useState(0);
-  const [properties, setProperties] = useState("");
+  const [properties, setProperties] = useState('');
 
   const categoryArry = [
     {
       image: images.nft_image_1,
-      category: "Sports",
+      category: 'Sports',
     },
     {
       image: images.nft_image_2,
-      category: "Arts",
+      category: 'Arts',
     },
     {
       image: images.nft_image_3,
-      category: "Music",
+      category: 'Music',
     },
     {
       image: images.nft_image_1,
-      category: "Digital",
+      category: 'Digital',
     },
     {
       image: images.nft_image_2,
-      category: "Time",
+      category: 'Time',
     },
     {
       image: images.nft_image_3,
-      category: "Photography",
+      category: 'Photography',
     },
   ];
 
@@ -123,7 +123,7 @@ const UloadNFT = () => {
             {categoryArry.map((el, i) => (
               <div
                 className={`${Style.upload_box_slider} ${
-                  active == i + 1 ? Style.active : ""
+                  active == i + 1 ? Style.active : ''
                 }`}
                 key={i + 1}
                 onClick={() => (setActive(i + 1), setCategory(el.category))}

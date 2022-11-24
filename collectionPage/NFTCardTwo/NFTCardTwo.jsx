@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { BsImage } from "react-icons/bs";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { MdVerified, MdTimer } from "react-icons/md";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { BsImage } from 'react-icons/bs';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { MdVerified, MdTimer } from 'react-icons/md';
 
 //INTERNAL IMPORT
-import Style from "./NFTCardTwo.module.css";
-import { LikeProfile } from "../../components/componentsindex";
+import Style from './NFTCardTwo.module.css';
+import LikeProfile from '@/components/like-profile/LikeProfile';
 
 const NFTCardTwo = ({ NFTData }) => {
   const [like, setLike] = useState(false);
@@ -32,7 +32,7 @@ const NFTCardTwo = ({ NFTData }) => {
                 <BsImage className={Style.NFTCardTwo_box_like_box_box_icon} />
                 <p onClick={() => likeNFT()}>
                   {like ? <AiOutlineHeart /> : <AiFillHeart />}
-                  {""}
+                  {''}
                   <span>{likeInc + 1}</span>
                 </p>
               </div>

@@ -1,15 +1,12 @@
-import React from "react";
+import React from 'react';
 
 //INTERNAL IMPORT
-import Style from "../styles/collection.module.css";
-import images from "../img";
-import {
-  Banner,
-  CollectionProfile,
-  NFTCardTwo,
-} from "../collectionPage/collectionIndex";
-import { Slider, Brand } from "../components/componentsindex";
-import Filter from "../components/Filter/Filter";
+import Style from '../styles/collection.module.css';
+import images from '../img';
+
+import { Slider, Brand } from '../components/componentsindex';
+import Filter from '../components/Filter/Filter';
+import Banner from 'collectionPage/Banner/Banner';
 
 const collection = () => {
   const collectionArray = [
