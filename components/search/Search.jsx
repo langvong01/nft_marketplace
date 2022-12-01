@@ -7,58 +7,68 @@ import Loading from '../loading/Loading';
 import { AnimatePresence, motion } from 'framer-motion';
 import useDebounce from 'hook/useDebounce';
 import Link from 'next/link';
+import Image from 'next/image';
+import useOnClickOutside from 'hook/useClickOutSide';
 
-const promise = new Promise((resolve, reject) => {
-  const fakeData = [
-    {
-      type: 'collections',
-      name: 'agj',
-      img: 'https://i.seadn.io/gae/YcEhaLullll7uOW_J2LgFzNExy20VjjGJQYLKapP5RvA0g98fyyJc7Wyo4hWduM0ZEPSD2yzLPnVp2xr5vWrH_7SjUgMy2ePjZ5T8A?auto=format&w=64&h=64',
-      total_item: 1,
-    },
+async function searchCharacters(search) {
+  const apiKey = 'f9dfb1e8d466d36c27850bedd2047687';
+  try {
+    const r = await fetch(`https://jsonplaceholder.typicode.com/todos`, {
+      method: 'GET',
+    });
+    const r_1 = await r.json();
 
-    {
-      type: 'accounts',
-      name: 'agj',
-      img: 'https://i.seadn.io/gae/YcEhaLullll7uOW_J2LgFzNExy20VjjGJQYLKapP5RvA0g98fyyJc7Wyo4hWduM0ZEPSD2yzLPnVp2xr5vWrH_7SjUgMy2ePjZ5T8A?auto=format&w=64&h=64',
-      total_item: 2,
-    },
-  ];
-
-  setTimeout(() => {
-    resolve(fakeData);
-  }, 2000);
-});
+    return r_1;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
 
 const Search = () => {
   const refSearch = useRef();
   const [searchText, setSearchText] = useState('');
-  const [modalSearch, setModalSearch] = useRecoilState(modalSearchState);
   const [dataSearch, setDataSearch] = useState([]);
-  const debouncedSearchText = useDebounce(searchText, 400);
+
+  const [modalSearch, setModalSearch] = useRecoilState(modalSearchState);
+  const debouncedSearchText = useDebounce(searchText, 600);
+
+  const handleOnChangeInput = (e) => {
+    setSearchText(e.target.value);
+  };
 
   useEffect(() => {
     if (debouncedSearchText) {
       setModalSearch((prev) => {
-        return { ...prev, open: true, type: 'result', isLoading: true };
+        return { ...prev, isLoading: true, open: true };
       });
 
-      promise.then((result) => {
-        if (result) {
-          setModalSearch((prev) => {
-            return { ...prev, isLoading: false };
-          });
-          setDataSearch(refSearch);
-        }
-      });
-    } else {
-      setModalSearch((prev) => {
-        return { ...prev, open: false, type: 'loading', isLoading: false };
+      searchCharacters(debouncedSearchText).then((results) => {
+        setModalSearch((prev) => {
+          return { ...prev, isLoading: false };
+        });
+        setDataSearch(results);
       });
     }
-  }, [debouncedSearchText]);
+  }, [debouncedSearchText, setModalSearch]);
 
-  console.log(modalSearch);
+  useEffect(() => {
+    if (searchText === '') {
+      setDataSearch([]);
+
+      setModalSearch({
+        open: false,
+        isLoading: false,
+      });
+    }
+  }, [searchText]);
+
+  useOnClickOutside(refSearch, () => {
+    setModalSearch((prev) => {
+      return { open: false, isLoading: false };
+    });
+  });
+
   return (
     <>
       <div className={Style.search_container} ref={refSearch}>
@@ -66,7 +76,7 @@ const Search = () => {
           <input
             type="text"
             placeholder="Search items, collections, and accounts"
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={handleOnChangeInput}
           />
           <BsSearch onClick={() => {}} className={Style.search_icon} />
         </div>
@@ -84,17 +94,21 @@ const Search = () => {
   );
 };
 
-const SearchFilter = ({ modalSearch }) => {
+const imageLoader = ({ src, width, quality }) => {
+  return `https://i.seadn.io/gae/9BXMUpdbaylPBUVYhJTZSBL7bUlXITA3DGUt0hr-f24SP6oqa1HijT0lj-oEMgs0sbBVBXVLG2wO6cEgwIVr83W-uaFYUb1Bn_77dA?auto=format&w=64&h=64}`;
+};
+
+const SearchFilter = ({ modalSearch, data = [] }) => {
   return (
     <>
       <motion.div
         className={Style.search_filter_container}
         initial={{ y: '-10px', opacity: 0 }}
-        animate={{ y: '0', opacity: 1 }}
+        animate={{ y: '-2px', opacity: 1 }}
         exit={{ y: '-10px', opacity: 0 }}
         transition={{ duration: 0.2 }}
       >
-        {modalSearch.isLoading ? (
+        {modalSearch.isLoading && (
           <>
             <div className={Style.search_loading}>
               <Loading></Loading>
@@ -104,14 +118,97 @@ const SearchFilter = ({ modalSearch }) => {
               Enter the press to search all items
             </p>
           </>
+        )}
+
+        {!modalSearch.isLoading && data.length > 0 ? (
+          <>
+            <div className={Style.search_collections}>
+              <hr color="#eee"></hr>
+              <strong>Collection</strong>
+              <ul>
+                <li>
+                  <Link href={'#'}>
+                    <div className={Style.search_collections_item}>
+                      <Image
+                        src="https://i.seadn.io/gae/9BXMUpdbaylPBUVYhJTZSBL7bUlXITA3DGUt0hr-f24SP6oqa1HijT0lj-oEMgs0sbBVBXVLG2wO6cEgwIVr83W-uaFYUb1Bn_77dA?auto=format&w=64&h=64"
+                        alt="collection"
+                        loader={imageLoader}
+                        height={40}
+                        width={40}
+                        className={Style.search_collection_img}
+                      ></Image>
+
+                      <div className={Style.search_collection_description}>
+                        <p>Jacob Lee - Break My Heart Again</p>
+                        <p>101 Items</p>
+                      </div>
+                      <div className={Style.search_collection_price}>
+                        <p>
+                          <span>0,25</span>ETH
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+                <li>
+                  <Link href={'#'}>
+                    <div className={Style.search_collections_item}>
+                      <Image
+                        src="https://i.seadn.io/gae/9BXMUpdbaylPBUVYhJTZSBL7bUlXITA3DGUt0hr-f24SP6oqa1HijT0lj-oEMgs0sbBVBXVLG2wO6cEgwIVr83W-uaFYUb1Bn_77dA?auto=format&w=64&h=64"
+                        alt="collection"
+                        loader={imageLoader}
+                        height={40}
+                        width={40}
+                        className={Style.search_collection_img}
+                      ></Image>
+
+                      <div className={Style.search_collection_description}>
+                        <p>Jacob Lee - Break My Heart Again</p>
+                        <p>101 Items</p>
+                      </div>
+                      <div className={Style.search_collection_price}>
+                        <p>
+                          <span>0,25</span>ETH
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <hr color="#eee"></hr>
+            <div className={Style.search_items}>
+              <strong>Items</strong>
+              <ul>
+                <li>
+                  <Link href={'#'}>
+                    <div className={Style.search_item}>
+                      <Image
+                        src="https://i.seadn.io/gae/9BXMUpdbaylPBUVYhJTZSBL7bUlXITA3DGUt0hr-f24SP6oqa1HijT0lj-oEMgs0sbBVBXVLG2wO6cEgwIVr83W-uaFYUb1Bn_77dA?auto=format&w=64&h=64"
+                        alt="collection"
+                        loader={imageLoader}
+                        height={40}
+                        width={40}
+                        className={Style.search_item_img}
+                      ></Image>
+
+                      <div className={Style.search_item_description}>
+                        <p>Jacob Lee - Break My Heart Again</p>
+                        <p>101 Items</p>
+                      </div>
+                      <div className={Style.search_item_price}>
+                        <p>
+                          <span>0,25</span>ETH
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </>
         ) : null}
-        <div className={Style.search_collections}>
-          <strong>Collection</strong>
-          <hr color="#eee"></hr>
-          <ul>
-            <li>aaa</li>
-          </ul>
-        </div>
       </motion.div>
     </>
   );

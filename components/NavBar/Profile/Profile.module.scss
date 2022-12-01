@@ -8,7 +8,7 @@
   left: -15rem;
   top: 100%;
   z-index: 22222222222;
-  background-color: var(--main-bg-color);
+  background-color: white;
 }
 
 .profile_account {
@@ -27,6 +27,7 @@
 
 .profile_account_info p {
   font-weight: 600;
+  margin: 0;
 }
 
 .profile_menu_one_item {
@@ -36,6 +37,9 @@
   padding: 0rem 1.5rem;
   transition: 0.2s all;
   padding: 8px 16px;
+  p {
+    margin: 0;
+  }
 }
 
 .profile_menu_one_item:hover {

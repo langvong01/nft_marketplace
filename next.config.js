@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-import intercept from 'intercept-stdout';
+const intercept = require('intercept-stdout');
 
 // safely ignore recoil warning messages in dev (triggered by HMR)
 function interceptStdout(text) {
@@ -19,4 +19,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+exports.default = nextConfig;

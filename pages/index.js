@@ -23,6 +23,7 @@ const Home = () => {
 
   return (
     <div className={Style.homePage}>
+      <Slider></Slider>
       <Service />
       <BigNFTSilder />
       <Title

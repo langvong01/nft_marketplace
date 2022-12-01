@@ -6,7 +6,7 @@ import { TbDownload } from 'react-icons/tb';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import Style from './Profile.module.css';
+import Style from './Profile.module.scss';
 import { useRecoilState } from 'recoil';
 import { connectMetaMaskState } from '../../../global-state/connect-metamask';
 import { modalNotifyMetaMask } from '../../../global-state/modal';

@@ -1,8 +1,9 @@
-import '../styles/globals.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { RecoilRoot } from 'recoil';
 import NavBar from '../components/navbar/NavBar';
 import Footer from '../components/footer/Footer';
+import '../styles/globals.css';
 //INTRNAL IMPORT
 
 const MyApp = ({ Component, pageProps }) => (

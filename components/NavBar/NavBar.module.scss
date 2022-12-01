@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  background-image: url('https://opensea.io/static/images/home-gradient-light.png');
+
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
@@ -46,10 +46,16 @@
 .navbar_container_right_discover {
   position: relative;
   cursor: pointer;
+  p {
+    margin: 0;
+  }
 }
 .navbar_container_right_help {
   position: relative;
   cursor: pointer;
+  p {
+    margin: 0;
+  }
 }
 
 .navbar_container_right_discover_box,
@@ -61,7 +67,9 @@
   font-size: 1rem;
   width: 15rem;
   border-radius: 1rem;
-  background-color: var(--main-bg-color);
+  background-color: white;
+  box-shadow: 0px 0px 5px slategrey;
+  z-index: 99999999999999;
 }
 
 .navbar_container_right_notify {

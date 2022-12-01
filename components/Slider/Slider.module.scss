@@ -1,0 +1,17 @@
+.slider_container {
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  padding: 32px;
+  .slider_header {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 18px;
+  }
+  // customs slider
+}

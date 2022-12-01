@@ -19,7 +19,6 @@ export const modalSearchState = atom({
   key: 'modalSearch',
   default: {
     open: false,
-    type: 'loading',
     isLoading: false,
   },
 });
