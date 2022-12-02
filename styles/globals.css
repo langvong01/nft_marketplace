@@ -1,8 +1,11 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'); */
-:root{
+:root {
   --icons-color: #4c5773;
   --icons-light-color: #4c577341;
   --icons-bg-color: #e2e6e9;
@@ -11,24 +14,23 @@
   --shadow-light-color: #fff;
   --main-bg-color: #ecf0f3;
   --box-shadow: 1rem 1rem 1rem var(--shadow-dark-color),
-  -1rem -1rem 1rem var(--shadow-light-color);
+    -1rem -1rem 1rem var(--shadow-light-color);
   --box-shadow-2: 0rem 0rem 0rem var(--shadow-dark-color),
-  -.3rem -.3rem 1rem var(--shadow-dark-color)
-
-  /* custome css variable */
-  --color-text-primary : #04111D;
+    -.3rem -.3rem 1rem var(--shadow-dark-color)
+    /* custome css variable */
+    --color-text-primary: #04111D;
   --fw-text-primary: 600;
-  --bg-text-primary : rgb(32, 129, 226);
+  --bg-text-primary: rgb(32, 129, 226);
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
 }
 
 
 html,
-body {  
+body {
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -76,6 +78,7 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
@@ -87,14 +90,17 @@ a {
 *::after {
   box-sizing: border-box;
 }
+
 * {
   margin: 0;
   padding: 0;
   font: inherit;
 }
+
 body {
   line-height: 1.5;
 }
+
 img,
 picture,
 video,
@@ -103,12 +109,14 @@ svg {
   display: block;
   max-width: 100%;
 }
+
 input,
 button,
 textarea,
 select {
   outline: none;
 }
+
 p,
 h1,
 h2,
@@ -119,12 +127,16 @@ h6 {
   overflow-wrap: break-word;
 }
 
-.swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
+.swiper-horizontal>.swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-horizontal {
   display: none;
 
 }
 
-.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+.swiper-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
   display: none;
 }
 
@@ -189,7 +201,9 @@ h6 {
   color: white;
   font-size: 14px;
 }
-.swiper-button-next, .swiper-button-prev {
+
+.swiper-button-next,
+.swiper-button-prev {
   color: slategray !important;
   background-color: white !important;
   border-radius: 50%;
@@ -197,7 +211,7 @@ h6 {
   height: 50px !important;
 }
 
-.swiper-button-next:after, .swiper-button-prev:after {
+.swiper-button-next:after,
+.swiper-button-prev:after {
   font-size: 24px !important;
 }
-
