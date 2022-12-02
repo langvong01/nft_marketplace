@@ -38,6 +38,7 @@ const CollectionProfile = () => {
             <a href="#">
               <TiSocialTwitter />
             </a>
+            
           </div>
         </div>
 

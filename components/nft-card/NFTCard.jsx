@@ -5,6 +5,7 @@ import Image from "next/image";
 
 //INTERNAL IMPORT
 import Style from "./NFTCard.module.css";
+
 import images from "../../img";
 
 const NFTCard = () => {
@@ -32,7 +33,7 @@ const NFTCard = () => {
 
   return (
     <div className={Style.NFTCard}>
-      {CardArray.map((el, i) => (
+      {/* {CardArray.map((el, i) => (
         <div className={Style.NFTCard_box} key={i + 1}>
           <div className={Style.NFTCard_box_img}>
             <Image
@@ -94,7 +95,7 @@ const NFTCard = () => {
             </div>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };
