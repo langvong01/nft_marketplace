@@ -26,23 +26,16 @@ const Home = () => {
       <Slider></Slider>
       <Service />
       <BigNFTSilder />
-      <Title
-        heading="Audio Collection"
-        paragraph="Discover the most outstanding NFTs in all topics of life."
-      />
-      <AudioLive />
       <FollowerTab />
       <Slider />
       <Collection />
       <Title
-        heading="Featured NFTs"
-        paragraph="Discover the most outstanding NFTs in all topics of life."
+        heading="List all collection"
       />
       <Filter />
       <NFTCard />
       <Title
         heading="Browse by category"
-        paragraph="Explore the NFTs in the most featured categories."
       />
       <Category />
       <Subscribe />
