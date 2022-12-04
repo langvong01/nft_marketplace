@@ -42,7 +42,7 @@
 }
 
 .Form_box_input_box_icon{
-    font-size: 2rem;
+    font-size: 3rem;
     background-color: var(--icons-color);
     padding: .5rem 1rem;
     color: var(--main-bg-color);
@@ -63,6 +63,7 @@
     outline: none;
     border-radius: 1rem;
     padding: 1rem;
+    border: 1px solid var(--icons-color);
 }
 
 .Form_box_input_social{

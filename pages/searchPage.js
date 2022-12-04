@@ -2,11 +2,13 @@ import React from "react";
 
 //INTRNAL IMPORT
 import Style from "../styles/searchPage.module.css";
-import { Slider, Brand } from "../components/componentsindex";
+import Brand from "@/components/Brand/Brand";
 import { SearchBar } from "../SearchPage/searchBarIndex";
-import { Filter } from "../components/componentsindex";
+import Filter from "@/components/Filter/Filter";
+import Slider from "@/components/Slider/Slider";
 
-import { NFTCardTwo, Banner } from "../collectionPage/collectionIndex";
+import NFTCardTwo from "collectionPage/NFTCardTwo/NFTCardTwo";
+import Banner from "collectionPage/Banner/Banner";
 import images from "../img";
 
 const searchPage = () => {
