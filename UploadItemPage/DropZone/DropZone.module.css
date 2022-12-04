@@ -14,7 +14,7 @@
 }
 
 .DropZone_box_input p{
-    line-height: 0;
+    line-height: inherit;
 }
 
 .DropZone_box_input_img_img{
@@ -35,23 +35,14 @@
     gap: 3rem;
 }
 
-.DropZone_box_aside_box_preview p span{
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-inline: 1rem;
-}
-
-.DropZone_box_aside_box_preview_one{
+.DropZone_box_aside_box_preview {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 700;
-    font-size: 1.2rem;
+    flex-direction: column;
 }
-
-.DropZone_box_aside_box_preview_three{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.DropZone_box_aside_box_preview span {
+    font-size: 1.2rem;
+    margin-inline: 1rem;
+    font-weight: 700;
 }
 
 @media screen and (max-width: 35em) {
