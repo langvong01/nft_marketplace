@@ -34,6 +34,8 @@ const ModalMetaMask = () => {
 
     const response = await connectMetaMaskService();
 
+    console.log(response);
+
     setMetaMask((prev) => {
       return { ...prev, ...response };
     });
@@ -69,7 +71,11 @@ const ModalMetaMask = () => {
                 <p>MetaMask</p>
               </div>
             ) : (
-              <a href="https://metamask.io/download/" target="_blank">
+              <a
+                href="https://metamask.io/download/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Image
                   src={images.provider1}
                   alt={images.provider1}

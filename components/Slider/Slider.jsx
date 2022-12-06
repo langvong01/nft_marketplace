@@ -9,7 +9,6 @@ import 'swiper/css/scrollbar';
 import Style from './Slider.module.scss';
 
 import Image from 'next/image';
-import images from '../../img';
 
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';

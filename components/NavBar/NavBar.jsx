@@ -25,6 +25,7 @@ import Profile from './profile/Profile';
 import HelpCenter from './help-center/HelpCenter';
 import Discover from './discover/Discover';
 import Search from '../search/Search';
+import SideBar from './side-bar/SideBar';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS

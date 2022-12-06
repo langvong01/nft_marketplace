@@ -7,13 +7,16 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 import Style from './Profile.module.scss';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { connectMetaMaskState } from '../../../global-state/connect-metamask';
 import { modalNotifyMetaMask } from '../../../global-state/modal';
+import axiosClient from 'utils/axiosClient';
 
 const Profile = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
   const [metaModal, setMetaModal] = useRecoilState(modalNotifyMetaMask);
+
+  const resetMetaMask = useResetRecoilState(connectMetaMaskState);
 
   const handleClickNotLogin = () => {
     if (!metaMask.accountCurrent) {
@@ -22,6 +25,11 @@ const Profile = () => {
       });
     }
     return;
+  };
+
+  const handleLogout = async () => {
+    const response = await axiosClient.get('/auth/logout');
+    resetMetaMask();
   };
 
   return (
@@ -71,7 +79,12 @@ const Profile = () => {
               <TbDownload />
               <p>
                 {metaMask.accountCurrent ? (
-                  <Link href={{ pathname: '/disconnet' }}>Disconnet</Link>
+                  <button
+                    onClick={handleLogout}
+                    href={{ pathname: '/disconnet' }}
+                  >
+                    Disconnet
+                  </button>
                 ) : (
                   'Disconnet'
                 )}
