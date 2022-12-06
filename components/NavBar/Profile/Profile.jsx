@@ -2,7 +2,6 @@ import React from 'react';
 
 import { FaUserAlt, FaRegImage } from 'react-icons/fa';
 
-import { TbDownload } from 'react-icons/tb';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -11,6 +10,7 @@ import { useRecoilState, useResetRecoilState } from 'recoil';
 import { connectMetaMaskState } from '../../../global-state/connect-metamask';
 import { modalNotifyMetaMask } from '../../../global-state/modal';
 import axiosClient from 'utils/axiosClient';
+import { TbDownload } from 'react-icons/tb';
 
 const Profile = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
@@ -74,23 +74,21 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className={Style.profile_menu_two}>
-            <div className={Style.profile_menu_one_item}>
-              <TbDownload />
-              <p>
-                {metaMask.accountCurrent ? (
+          {metaMask.accountCurrent ? (
+            <div className={Style.profile_menu_two}>
+              <div className={Style.profile_menu_one_item}>
+                <TbDownload />
+                <p>
                   <button
                     onClick={handleLogout}
                     href={{ pathname: '/disconnet' }}
                   >
                     Disconnet
                   </button>
-                ) : (
-                  'Disconnet'
-                )}
-              </p>
+                </p>
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
       </motion.div>
     </>

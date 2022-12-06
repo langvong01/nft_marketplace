@@ -4,6 +4,7 @@ import Brand from '@/components/brand/Brand';
 import Category from '@/components/category/Category';
 import Collection from '@/components/collection/Collection';
 import Filter from '@/components/filter/Filter';
+import FilterCollection from '@/components/filter/FilterCollection';
 import FollowerTab from '@/components/follower-tab/FollowerTab';
 import NFTCard from '@/components/nft-card/NFTCard';
 import Service from '@/components/service/Service';
@@ -24,23 +25,16 @@ const Home = () => {
   return (
     <div className={Style.homePage}>
       <Slider></Slider>
-      <Service />
+      <FilterCollection></FilterCollection>
+      {/* <Filter /> */}
       <BigNFTSilder />
       <FollowerTab />
-      <Slider />
-      <Collection />
-      <Title
-        heading="List all collection"
-      />
-      <Filter />
-      <NFTCard />
-      <Title
-        heading="Browse by category"
-      />
-      <Category />
-      <Subscribe />
-      <Brand />
-      <Video />
+      {/* <Collection /> */}
+      {/* <NFTCard />/ */}
+      {/* <Category /> */}
+      {/* <Subscribe /> */}
+      {/* <Brand /> */}
+      {/* <Video /> */}
     </div>
   );
 };

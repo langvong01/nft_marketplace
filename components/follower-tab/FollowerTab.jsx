@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   RiUserFollowFill,
   RiUserUnfollowFill,
   RiAwardLine,
-} from "react-icons/ri";
+} from 'react-icons/ri';
 
 //INTERNAL IMPORT
-import Style from "./FollowerTab.module.css";
-import FollowerTabCard from "./FollowerTabCard/FollowerTabCard";
-import images from "../../img";
+import Style from './FollowerTab.module.scss';
+import FollowerTabCard from './FollowerTabCard/FollowerTabCard';
+import images from '../../img';
 
 const FollowerTab = () => {
   const CardArray = [
@@ -117,6 +117,7 @@ const FollowerTab = () => {
       setNews(false);
     }
   };
+
   const openFollower = () => {
     if (!following) {
       setPopular(false);
@@ -124,6 +125,7 @@ const FollowerTab = () => {
       setNews(false);
     }
   };
+
   const openNews = () => {
     if (!news) {
       setPopular(false);
@@ -138,13 +140,22 @@ const FollowerTab = () => {
         <h2> Top Creators List..</h2>
         <div className={Style.followerTab_tabs}>
           <div className={Style.followerTab_tabs_btn}>
-            <button onClick={() => openPopular()}>
+            <button
+              onClick={() => openPopular()}
+              className="!bg-blue-500 px-4 py-3 gap-x-2 flex items-center text-white border-0 !text-base hover:!opacity-90 !transition-all !font-semibold "
+            >
               <RiUserFollowFill /> Popular
             </button>
-            <button onClick={() => openFollower()}>
+            <button
+              onClick={() => openFollower()}
+              className="!bg-blue-500 px-4 py-3 gap-x-2 flex items-center text-white border-0 !text-base hover:!opacity-90 !transition-all !font-semibold "
+            >
               <RiUserFollowFill /> Following
             </button>
-            <button onClick={() => openNews()}>
+            <button
+              onClick={() => openNews()}
+              className="!bg-blue-500 px-4 py-3 gap-x-2 flex items-center text-white border-0 !text-base hover:!opacity-90 !transition-all !font-semibold "
+            >
               <RiAwardLine /> NoteWorthy
             </button>
           </div>
@@ -154,7 +165,9 @@ const FollowerTab = () => {
       {popular && (
         <div className={Style.followerTab_box}>
           {CardArray.map((el, i) => (
-            <FollowerTabCard key={i + 1} i={i} el={el} />
+            <>
+              <FollowerTabCard key={i + 1} i={i} el={el} />
+            </>
           ))}
         </div>
       )}
@@ -162,7 +175,9 @@ const FollowerTab = () => {
       {following && (
         <div className={Style.followerTab_box}>
           {FollowingArray.map((el, i) => (
-            <FollowerTabCard key={i + 1} i={i} el={el} />
+            <>
+              <FollowerTabCard key={i + 1} i={i} el={el} />
+            </>
           ))}
         </div>
       )}
@@ -170,17 +185,12 @@ const FollowerTab = () => {
       {news && (
         <div className={Style.followerTab_box}>
           {NewsArray.map((el, i) => (
-            <FollowerTabCard key={i + 1} i={i} el={el} />
+            <>
+              <FollowerTabCard key={i + 1} i={i} el={el} />
+            </>
           ))}
         </div>
       )}
-
-      <div className={Style.followerTab_member}>
-        <div className={Style.followerTab_member_box}>
-          <a href="#">Show me more</a>
-          <a href="#">Become, author</a>
-        </div>
-      </div>
     </div>
   );
 };

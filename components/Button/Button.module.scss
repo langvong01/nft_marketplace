@@ -1,0 +1,16 @@
+.button {
+  padding: 1rem 2rem;
+  border: unset;
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  @apply bg-blue-500
+  /* box-shadow: var(--box-shadow); */;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
