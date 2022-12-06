@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import Carousel from 'react-bootstrap/Carousel';
 //INTERNAL IMPORT
 import 'swiper/css';
 import 'swiper/css/navigation';

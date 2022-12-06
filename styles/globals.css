@@ -43,7 +43,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   color: var(--icons-color);
-  color: var(--color-text-primary);
+  /* color: var(--color-text-primary); */
 }
 
 a {
