@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+
 //INTERNAL IMPORT
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Style from './Slider.module.scss';
-
 import Image from 'next/image';
 
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
