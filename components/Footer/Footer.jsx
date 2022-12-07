@@ -17,9 +17,9 @@ const Footer = () => {
             </p>
             <div className="flex gap-x-5 ">
               <input
-                type="text"
+                type="email"
                 placeholder="Your email address"
-                className="px-6 py-3 w-[70%] rounded-md"
+                className="px-6 py-3 w-[70%] rounded-md text-black"
               />
               <button className="bg-[#2081E2] px-4 py-2 rounded-lg">
                 Sign up
@@ -51,7 +51,7 @@ const Footer = () => {
         <div className="line w-full h-[2px] bg-slate-300 mt-8"></div>
 
         <div className="footer-botton py-8 text-center">
-          <p>© 2018 - 2022 Team NFT-FPT Aptect</p>
+          <p>© 2020 - 2022 Team NFT-FPT Aptech</p>
         </div>
       </footer>
     </div>

@@ -1,8 +1,10 @@
 // import Category from '@/components/category/Category';
 
+import Collections from '@/components/collections/Collections';
 import Category from '@/components/follower-tab/Category';
 import Question from '@/components/questions/Question';
 import Slider from '@/components/slider/Slider';
+
 import React, { useEffect } from 'react';
 
 //INTERNAL IMPORT
@@ -16,7 +18,7 @@ const Home = () => {
   return (
     <div className={Style.homePage}>
       <Slider></Slider>
-
+      <Collections></Collections>
       <Category />
       <Question></Question>
     </div>
