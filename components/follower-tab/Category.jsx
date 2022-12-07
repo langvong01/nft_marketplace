@@ -10,8 +10,6 @@ import { v4 as uuidv4 } from 'uuid';
 const Category = () => {
   const { data, erorr } = useSWR('category', fetcherSWR);
 
-  console.log(data);
-
   if (!data) {
     return (
       <>

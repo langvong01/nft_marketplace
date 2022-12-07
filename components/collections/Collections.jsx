@@ -55,7 +55,7 @@ const Collections = () => {
               <div className="collections-filter"></div>
             </TabList>
           </Box>
-          <div className="h-[1px] bg-slate-400 mt-2"></div>
+          <div className="h-[1px] bg-gray-200 mt-2"></div>
           <TabPanel value="1">collection</TabPanel>
           <TabPanel value="2">Items</TabPanel>
         </TabContext>
