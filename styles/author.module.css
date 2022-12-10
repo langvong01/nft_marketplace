@@ -1,5 +1,7 @@
 
-
+.author {
+    position: relative;
+}
 .author_box{
     width: 80%;
     margin: 0 auto;

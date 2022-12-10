@@ -39,7 +39,7 @@ const ModalWallet = () => {
           </div>
 
           <div className={Style.modal_wallet_token}>
-            <p>EfdC68...57e8</p>
+            <p>{metaMask.accountCurrent}</p>
           </div>
         </div>
 

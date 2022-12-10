@@ -1,60 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { TiTick } from "react-icons/ti";
-import Image from "next/image";
+import React, { useEffect, useState } from 'react';
+import { TiTick } from 'react-icons/ti';
+import Image from 'next/image';
 
 //INTERNAL IMPORT
-import Style from "../UploadItemPage/UploadItem.module.css";
-import formStyle from "../AccountPage/Form/Form.module.css";
-import images from "../img";
-import  Button  from "../components/Button/Button";
-import { DropZone } from "../UploadItemPage/uploadItemIndex";
-import { useForm } from "react-hook-form";
-import Input from "../CreateNftItem/FormControll/input";
-import TextArea from "../CreateNftItem/FormControll/TextArea/TextArea";
-import InputWithIcon from "../CreateNftItem/FormControll/InputWithIcon/inputIcon";
-import axiosClient from "../utils/axiosClient";
-import collection from "pages/collection";
+import Style from '../UploadItemPage/UploadItem.module.css';
+import formStyle from '../AccountPage/Form/Form.module.css';
+import images from '../img';
+import Button from '../components/Button/Button';
+import { DropZone } from '../UploadItemPage/uploadItemIndex';
+import { useForm } from 'react-hook-form';
+import Input from '../CreateNftItem/FormControll/input';
+import TextArea from '../CreateNftItem/FormControll/TextArea/TextArea';
+import InputWithIcon from '../CreateNftItem/FormControll/InputWithIcon/inputIcon';
+import axiosClient from '../utils/axiosClient';
+import collection from 'pages/collection';
 
 const UploadItem = () => {
   const [active, setActive] = useState(0);
-  const [name, setItemName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const [name, setItemName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
   const [collectionUI, setcollectionUI] = useState(null);
   const [image, setImage] = useState(null);
 
   const [collectionID, setCollectionID] = useState(null);
-  const [fetchCollection,setFetchCollection] = useState(null);
+  const [fetchCollection, setFetchCollection] = useState(null);
 
-console.log(collectionID)
-    
+  console.log(collectionID);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    criteriaMode: "all",
+    criteriaMode: 'all',
   });
 
   const onSubmit = async (data) => {
-
-    if(!image & !collectionUI) {
-      alert("Please upload image and choose collection")
-      return
+    if (!image & !collectionUI) {
+      alert('Please upload image and choose collection');
+      return;
     }
 
     const { itemName, price, description } = data;
 
     try {
       const formData = new FormData();
-      formData.append("itemName", itemName);
-      formData.append("price", price);
-      formData.append("description", description);
-      formData.append("collectionId", collectionID);
-      formData.append("mediaFile", image);
+      formData.append('itemName', itemName);
+      formData.append('price', price);
+      formData.append('description', description);
+      formData.append('collectionId', collectionID);
+      formData.append('mediaFile', image);
 
       const respone = await axiosClient.post(`/item`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
     } catch (error) {
@@ -97,17 +96,16 @@ console.log(collectionID)
 
   const getAllCollections = async () => {
     try {
-      const respone = await axiosClient.get(`/collection/personal`)
-      const {body : data} = respone.data;
+      const respone = await axiosClient.get(`/collection/personal`);
+      const { body: data } = respone.data;
       console.log(data);
-      setFetchCollection(data)
-    } catch (error) {
-    }
-  }
+      setFetchCollection(data);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     getAllCollections();
-  },[])
+  }, []);
 
   return (
     <div className={Style.upload}>
@@ -153,22 +151,23 @@ console.log(collectionID)
               {fetchCollection?.map((el, i) => (
                 <div
                   className={`${Style.upload_box_slider} ${
-                    active == i + 1 ? Style.active : ""
+                    active == i + 1 ? Style.active : ''
                   }`}
                   key={i + 1}
                   onClick={() => (
                     setActive(i + 1),
                     setcollectionUI(el.category.categoryName),
-                    setCollectionID(el.collectionId)  
+                    setCollectionID(el.collectionId)
                   )}
                 >
                   <div className={Style.upload_box_slider_box}>
                     <div className={Style.upload_box_slider_box_img}>
-                      <img
-                        width="50px"
-                        height = "50px"
+                      <Image
+                        loader={() => el.logoImage}
+                        width={50}
+                        height={50}
                         src={el.logoImage}
-                        alt= {el.collectionName}
+                        alt={el.collectionName}
                         className={Style.upload_box_slider_box_img_img}
                       />
                     </div>
@@ -176,7 +175,9 @@ console.log(collectionID)
                       <TiTick />
                     </div>
                   </div>
-                  <p className="mt-3 fs-6 text-capitalize">{el.collectionName}</p>
+                  <p className="mt-3 fs-6 text-capitalize">
+                    {el.collectionName}
+                  </p>
                 </div>
               ))}
             </div>

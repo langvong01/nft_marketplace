@@ -3,7 +3,12 @@
 .banner_img_mobile{
     display: none;
 }
-
+.banner_img {
+    width: 100%;
+    max-width: 2520px;
+    max-height: 320px;
+    position: relative;
+}
 @media screen and (max-width: 35em) {
     .banner_img_mobile{
         display: block;

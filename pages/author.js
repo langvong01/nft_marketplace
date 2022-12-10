@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react';
 //INTERNAL IMPORT
 import Style from '../styles/author.module.css';
 
-import { Brand, Title } from '../components/componentsindex';
-import FollowerTabCard from '../components/FollowerTab/FollowerTabCard/FollowerTabCard';
+import Brand from '../components/Brand/Brand'
+import Title from '../components/Title/Title'
+import FollowerTabCard from '../components/follower-tab/FollowerTabCard/FollowerTabCard';
 import images from '../img';
 import Banner from 'collectionPage/Banner/Banner';
-import AuthorProfileCard from './authorPage/AuthorProfileCard/AuthorProfileCard';
-import AuthorTaps from './authorPage/AuthorTaps/AuthorTaps';
-import AuthorNFTCardBox from './authorPage/AuthorNFTCardBox/AuthorNFTCardBox';
+import AuthorProfileCard from '../authorPage/AuthorProfileCard/AuthorProfileCard';
+import AuthorTaps from '../authorPage/AuthorTaps/AuthorTaps';
+import AuthorNFTCardBox from '../authorPage/AuthorNFTCardBox/AuthorNFTCardBox';
 
 const author = () => {
   const followerArray = [
