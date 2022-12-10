@@ -1,6 +1,6 @@
 .NFTDetailsPage {
   width: 100%;
-  margin-block: 5rem;
+  margin-block: 4rem;
 }
 
 .NFTDetailsPage_box {
@@ -8,7 +8,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 5rem;
+  gap: 3rem;
 }
 
 @media screen and (max-width: 35em) {

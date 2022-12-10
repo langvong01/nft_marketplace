@@ -19,14 +19,12 @@ const UploadItem = () => {
   const [active, setActive] = useState(0);
   const [name, setItemName] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
   const [collectionUI, setcollectionUI] = useState(null);
   const [image, setImage] = useState(null);
 
   const [collectionID, setCollectionID] = useState(null);
   const [fetchCollection, setFetchCollection] = useState(null);
 
-  console.log(collectionID);
 
   const {
     register,
@@ -42,12 +40,11 @@ const UploadItem = () => {
       return;
     }
 
-    const { itemName, price, description } = data;
+    const { itemName,description } = data;
 
     try {
       const formData = new FormData();
       formData.append('itemName', itemName);
-      formData.append('price', price);
       formData.append('description', description);
       formData.append('collectionId', collectionID);
       formData.append('mediaFile', image);
@@ -116,7 +113,6 @@ const UploadItem = () => {
           subHeading="or Browse media on your device"
           itemName={name}
           description={description}
-          price={price}
           collection={collectionUI}
           image={images.upload}
           register={register}
@@ -183,16 +179,7 @@ const UploadItem = () => {
             </div>
           </div>
 
-          <div className={formStyle.Form_box_input_social}>
-            <InputWithIcon
-              label="price"
-              onChange={(e) => setPrice(e.target.value)}
-              placeholder="Treasure"
-              register={register}
-              type="text"
-              errors={errors}
-            />
-          </div>
+
 
           <div className={Style.upload_box_btn}>
             <Button

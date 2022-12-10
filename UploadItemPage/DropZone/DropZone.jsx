@@ -15,7 +15,7 @@ const DropZone = React.forwardRef(
       subHeading,
       itemName,
       description,
-      price,
+
       collection,
       image,
       register,
@@ -26,7 +26,7 @@ const DropZone = React.forwardRef(
     ref
   ) => {
     const [fileUrl, setFileUrl] = useState(null);
-    const imageBox = isCreateCollection ? '' : Style.DropZone_box_aside_box;
+    const imageBox = isCreateCollection  ? Style.DropZone_box_upload_collection : Style.DropZone_box_aside_box;
 
     const onDrop = useCallback(async (acceptedFile) => {
       const url = URL.createObjectURL(acceptedFile[0]);
@@ -69,7 +69,7 @@ const DropZone = React.forwardRef(
                 alt="nft image"
                 width={500}
                 height={200}
-                objectFit="contain"
+                objectFit="cover"
               />
 
               <div className={Style.DropZone_box_aside_box_preview}>
@@ -91,14 +91,6 @@ const DropZone = React.forwardRef(
                   </div>
                 )}
 
-                {price && (
-                  <div className={Style.DropZone_box_aside_box_preview_three}>
-                    <p>
-                      <span>Price</span>
-                      {price || ''}
-                    </p>
-                  </div>
-                )}
                 {collection && (
                   <p>
                     <span>Collection</span>

@@ -1,7 +1,7 @@
 
 .uploadNFT{
     width: 100%;
-    margin-block: 8rem;
+    margin-block: 4rem;
 }
 
 .uploadNFT_box{
@@ -14,9 +14,9 @@
 }
 
 .uploadNFT_box_heading h1{
-    font-size: 3.5rem;
-    line-height:inherit
+    font-size: 2rem
 }
+
 
 .uploadNFT_box_heading p{
     font-size: 1.4rem;
@@ -30,8 +30,7 @@
 }
 
 .uploadNFT_box_title h2{
-    font-size: 2.5rem;
-    line-height: inherit
+    font-size: 2rem;
 }
 
 .uploadNFT_box_title p{
