@@ -13,20 +13,15 @@ const DropZone = React.forwardRef(
       title,
       heading,
       subHeading,
-      itemName,
-      description,
-
-      collection,
-      image,
       register,
       label,
       setImage,
-      isCreateCollection,
     },
     ref
   ) => {
-    const [fileUrl, setFileUrl] = useState(null);
-    const imageBox = isCreateCollection  ? Style.DropZone_box_upload_collection : Style.DropZone_box_aside_box;
+    const [fileUrl, setFileUrl] = useState(images.upload);
+
+    // const imageBox = isCreateCollection  ? Style.DropZone_box_upload_collection : Style.DropZone_box_aside_box;
 
     const onDrop = useCallback(async (acceptedFile) => {
       const url = URL.createObjectURL(acceptedFile[0]);
@@ -48,10 +43,10 @@ const DropZone = React.forwardRef(
             <p>{title}</p>
             <div className={Style.DropZone_box_input_img}>
               <Image
-                src={image}
+                src={fileUrl}
                 alt="upload"
-                width={100}
-                height={100}
+                width={600}
+                height={600}
                 objectFit="contain"
                 className={Style.DropZone_box_input_img_img}
               />
@@ -60,47 +55,6 @@ const DropZone = React.forwardRef(
             {subHeading && <p>{subHeading}</p>}
           </div>
         </div>
-
-        {fileUrl && (
-          <aside className={Style.DropZone_box_aside}>
-            <div className={imageBox}>
-              <Image
-                src={fileUrl}
-                alt="nft image"
-                width={500}
-                height={200}
-                objectFit="cover"
-              />
-
-              <div className={Style.DropZone_box_aside_box_preview}>
-                {itemName && (
-                  <div className={Style.DropZone_box_aside_box_preview_one}>
-                    <p>
-                      <span>NFT Name:</span>
-                      {itemName || ''}
-                    </p>
-                  </div>
-                )}
-
-                {description && (
-                  <div className={Style.DropZone_box_aside_box_preview_two}>
-                    <p>
-                      <span>Description</span>
-                      {description || ''}
-                    </p>
-                  </div>
-                )}
-
-                {collection && (
-                  <p>
-                    <span>Collection</span>
-                    {collection || ''}
-                  </p>
-                )}
-              </div>
-            </div>
-          </aside>
-        )}
       </div>
     );
   }

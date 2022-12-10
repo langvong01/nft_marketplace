@@ -96,7 +96,6 @@ const UloadNFT = () => {
                 register={register}
                 label="featuredImage"
                 setImage={setFeaturedImage}
-                isCreateCollection
               />
               <DropZone
                 title="Drag & drop logoImage here"
@@ -105,7 +104,6 @@ const UloadNFT = () => {
                 register={register}
                 label="logoImage"
                 setImage={setLogoImage}
-                isCreateCollection
               />
               <DropZone
                 title="Drag & drop file bannerImage"
@@ -114,7 +112,6 @@ const UloadNFT = () => {
                 register={register}
                 label="bannerImage"
                 setImage={setBannerImage}
-                isCreateCollection
               />
               <div className={Style.upload_box}>
                 <Input
