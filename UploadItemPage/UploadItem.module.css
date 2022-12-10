@@ -1,4 +1,8 @@
-
+.upload {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap : 2rem;
+}
 
 .upload_box_input_para{
     padding: 0 1rem;
