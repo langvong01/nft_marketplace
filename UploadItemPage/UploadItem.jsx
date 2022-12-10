@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TiTick } from 'react-icons/ti';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 //INTERNAL IMPORT
 import Style from '../UploadItemPage/UploadItem.module.css';
@@ -16,6 +17,7 @@ import axiosClient from '../utils/axiosClient';
 import collection from 'pages/collection';
 
 const UploadItem = () => {
+  const router = useRouter();
   const [active, setActive] = useState(0);
   const [collectionUI, setcollectionUI] = useState(null);
   const [image, setImage] = useState(null);
@@ -32,24 +34,22 @@ const UploadItem = () => {
   });
 
   const onSubmit = async (data) => {
-    if (!image & !collectionUI) {
+    if (!image || !collectionUI) {
       alert('Please upload image and choose collection');
       return;
     }
-
     const { itemName, description } = data;
-
     try {
       const formData = new FormData();
       formData.append('itemName', itemName);
       formData.append('description', description);
       formData.append('collectionId', collectionID);
       formData.append('mediaFile', image);
-
       const respone = await axiosClient.post(`/item`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
+      router.push("/NFT-details")
     } catch (error) {
       console.log(error);
     }
