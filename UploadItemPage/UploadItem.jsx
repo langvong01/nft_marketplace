@@ -14,6 +14,9 @@ import TextArea from '../CreateNftItem/FormControll/TextArea/TextArea';
 import InputWithIcon from '../CreateNftItem/FormControll/InputWithIcon/inputIcon';
 import axiosClient from '../utils/axiosClient';
 import collection from 'pages/collection';
+import Web3Modal from 'web3modal';
+import {nftContractAbi, marketContractAbi, NFT, Market } from '../contractsABI.json';
+import {ethers } from 'ethers';
 
 const UploadItem = () => {
   const [active, setActive] = useState(0);
@@ -41,7 +44,7 @@ const UploadItem = () => {
     }
 
     const { itemName,description } = data;
-
+    const itemId = 0;
     try {
       const formData = new FormData();
       formData.append('itemName', itemName);
@@ -53,8 +56,40 @@ const UploadItem = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
+      console.log(respone.data)
+      itemId = respone.data.body.itemId;
+      const metaDataURI = respone.data.body.metaDataFileUrl;
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      console.log(NFT)
+      console.log(nftContractAbi)
+      console.log(signer)
+      let contract = new ethers.Contract(NFT, nftContractAbi, signer);
+      let transaction = await contract.createToken(metaDataURI);
+      let tx = await transaction.wait()
+      console.log('Transaction: ',tx)
+      console.log('Transaction events: ',tx.events[0])
+      let event = tx.events[0]
+      let value = event.args[2]
+      let tokenId = value.toNumber();
+      let transactionHash = tx.transactionHash;
+      const r = await axiosClient.post(`/item/set-minted`, {
+        tokenId : tokenId,
+        itemId : itemId,
+        txnHashLink : "https://mumbai.polygonscan.com/tx/" + transactionHash
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
+      console.log(tokenId);
+
     } catch (error) {
       console.log(error);
+      if(itemId) {
+        await axiosClient.delete('/item/' + itemId);
+      }
     }
   };
 
