@@ -154,33 +154,33 @@ const ListCollection = React.memo(({ data }) => {
               </div>
             ))}
         </div>
+        {data.length > 5 && (
+          <div className="list-collection-right w-[45%]">
+            <div className="list-collection-header flex justify-between mb-3">
+              <p className="capitalize">Collection</p>
+              <p className="capitalize">Total</p>
+            </div>
 
-        <div className="list-collection-right w-[45%]">
-          <div className="list-collection-header flex justify-between mb-3">
-            <p className="capitalize">Collection</p>
-            <p className="capitalize">Total</p>
-          </div>
-
-          {Array(2)
-            .fill(0)
-            .map((collection, index) => (
-              <div
-                className="list-collection-item w-full flex items-center justify-between mb-4 cursor-pointer hover:bg-slate-100 p-2"
-                key={uuidv4()}
-              >
-                <div className="flex-1 flex items-center gap-x-8">
-                  <p>1</p>
-                  <img
-                    src="https://i.seadn.io/gcs/files/a722300d6a86d74b7affa478af46dcf2.png?auto=format&w=3840"
-                    alt="collection-img"
-                    className="w-[60px] h-[60px]"
-                  />
-                  <p>Pointers by Steve Pikelny</p>
+            {data.length > 5 &&
+              data.slice(5, 10).map((collection, index) => (
+                <div
+                  className="list-collection-item w-full flex items-center justify-between mb-4 cursor-pointer hover:bg-slate-100 p-2"
+                  key={uuidv4()}
+                >
+                  <div className="flex-1 flex items-center gap-x-8">
+                    <p>{index + 1}</p>
+                    <img
+                      src={collection.featuredImage}
+                      alt="collection-img"
+                      className="w-[60px] h-[60px] object-cover rounded-md"
+                    />
+                    <p className="capitalize">{collection.collectionName}</p>
+                  </div>
+                  <p>{collection.totalValue || 1}</p>
                 </div>
-                <p>2.10</p>
-              </div>
-            ))}
-        </div>
+              ))}
+          </div>
+        )}
       </div>
     </>
   );
@@ -220,26 +220,33 @@ const ListItem = React.memo(({ data }) => {
             <p className="capitalize">Collection</p>
             <p className="capitalize">Total</p>
           </div>
-
-          {Array(2)
-            .fill(0)
-            .map((collection, index) => (
-              <div
-                className="list-collection-item w-full flex items-center justify-between mb-4 cursor-pointer hover:bg-slate-100 p-2"
-                key={uuidv4()}
-              >
-                <div className="flex-1 flex items-center gap-x-8">
-                  <p>1</p>
-                  <img
-                    src="https://i.seadn.io/gcs/files/a722300d6a86d74b7affa478af46dcf2.png?auto=format&w=3840"
-                    alt="collection-img"
-                    className="w-[60px] h-[60px]"
-                  />
-                  <p>Pointers by Steve Pikelny</p>
-                </div>
-                <p>2.10</p>
+          {data.length > 5 && (
+            <div className="list-collection-right w-[45%]">
+              <div className="list-collection-header flex justify-between mb-3">
+                <p className="capitalize">Collection</p>
+                <p className="capitalize">Total</p>
               </div>
-            ))}
+
+              {data.length > 5 &&
+                data.slice(5, 10).map((collection, index) => (
+                  <div
+                    className="list-collection-item w-full flex items-center justify-between mb-4 cursor-pointer hover:bg-slate-100 p-2"
+                    key={uuidv4()}
+                  >
+                    <div className="flex-1 flex items-center gap-x-8">
+                      <p>{index + 1}</p>
+                      <img
+                        src={collection.featuredImage}
+                        alt="collection-img"
+                        className="w-[60px] h-[60px] object-cover rounded-md"
+                      />
+                      <p className="capitalize">{collection.collectionName}</p>
+                    </div>
+                    <p>{collection.totalValue || 1}</p>
+                  </div>
+                ))}
+            </div>
+          )}
         </div>
       </div>
     </>
