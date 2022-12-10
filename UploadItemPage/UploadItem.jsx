@@ -15,6 +15,9 @@ import TextArea from '../CreateNftItem/FormControll/TextArea/TextArea';
 import InputWithIcon from '../CreateNftItem/FormControll/InputWithIcon/inputIcon';
 import axiosClient from '../utils/axiosClient';
 import collection from 'pages/collection';
+import Web3Modal from 'web3modal';
+import {nftContractAbi, marketContractAbi, NFT, Market } from '../contractsABI.json';
+import {ethers } from 'ethers';
 
 const UploadItem = () => {
   const router = useRouter();
@@ -38,7 +41,9 @@ const UploadItem = () => {
       alert('Please upload image and choose collection');
       return;
     }
-    const { itemName, description } = data;
+
+    const { itemName,description } = data;
+    let itemId = 0;
     try {
       const formData = new FormData();
       formData.append('itemName', itemName);
@@ -49,9 +54,35 @@ const UploadItem = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
+      itemId = respone.data.body.itemId;
+      const metaDataURI = respone.data.body.metaDataFileUrl;
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      let contract = new ethers.Contract(NFT, nftContractAbi, signer);
+      let transaction = await contract.createToken(metaDataURI);
+      let tx = await transaction.wait()
+      let event = tx.events[0]
+      let value = event.args[2]
+      let tokenId = value.toNumber();
+      let transactionHash = tx.transactionHash;
+      const r = await axiosClient.post(`/item/set-minted`, {
+        tokenId : tokenId,
+        itemId : itemId,
+        txnHashLink : "https://mumbai.polygonscan.com/tx/" + transactionHash
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
+      console.log(tokenId);
+
       router.push("/NFT-details")
     } catch (error) {
       console.log(error);
+      if(itemId) {
+        await axiosClient.delete('/item/' + itemId);
+      }
     }
   };
 
