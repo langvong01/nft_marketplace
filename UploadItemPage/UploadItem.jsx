@@ -14,17 +14,17 @@ import TextArea from '../CreateNftItem/FormControll/TextArea/TextArea';
 import InputWithIcon from '../CreateNftItem/FormControll/InputWithIcon/inputIcon';
 import axiosClient from '../utils/axiosClient';
 import collection from 'pages/collection';
+import Web3Modal from 'web3modal';
+import {nftContractAbi, marketContractAbi, NFT, Market } from '../contractsABI.json';
+import {ethers } from 'ethers';
 
 const UploadItem = () => {
   const [active, setActive] = useState(0);
-  const [name, setItemName] = useState('');
-  const [description, setDescription] = useState('');
   const [collectionUI, setcollectionUI] = useState(null);
   const [image, setImage] = useState(null);
 
   const [collectionID, setCollectionID] = useState(null);
   const [fetchCollection, setFetchCollection] = useState(null);
-
 
   const {
     register,
@@ -41,7 +41,7 @@ const UploadItem = () => {
     }
 
     const { itemName,description } = data;
-
+    let itemId = 0;
     try {
       const formData = new FormData();
       formData.append('itemName', itemName);
@@ -53,8 +53,34 @@ const UploadItem = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
+      itemId = respone.data.body.itemId;
+      const metaDataURI = respone.data.body.metaDataFileUrl;
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      let contract = new ethers.Contract(NFT, nftContractAbi, signer);
+      let transaction = await contract.createToken(metaDataURI);
+      let tx = await transaction.wait()
+      let event = tx.events[0]
+      let value = event.args[2]
+      let tokenId = value.toNumber();
+      let transactionHash = tx.transactionHash;
+      const r = await axiosClient.post(`/item/set-minted`, {
+        tokenId : tokenId,
+        itemId : itemId,
+        txnHashLink : "https://mumbai.polygonscan.com/tx/" + transactionHash
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
+      console.log(tokenId);
+
     } catch (error) {
       console.log(error);
+      if(itemId) {
+        await axiosClient.delete('/item/' + itemId);
+      }
     }
   };
 
@@ -105,14 +131,12 @@ const UploadItem = () => {
   }, []);
 
   return (
-    <div className={Style.upload}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={Style.upload}>
         <DropZone
           title="JPG, PNG, WEBM , MAX 100MB"
           heading="Drag & drop file"
           subHeading="or Browse media on your device"
-          itemName={name}
-          description={description}
           collection={collectionUI}
           image={images.upload}
           register={register}
@@ -123,7 +147,6 @@ const UploadItem = () => {
         <div className={Style.upload_box}>
           <Input
             label="itemName"
-            onChange={(e) => setItemName(e.target.value)}
             placeholder="Treasure"
             register={register}
             type="text"
@@ -131,7 +154,6 @@ const UploadItem = () => {
           />
           <TextArea
             label="description"
-            onChange={(e) => setDescription(e.target.value)}
             placeholder="Something about your NFt"
             register={register}
             errors={errors}
@@ -152,7 +174,7 @@ const UploadItem = () => {
                   key={i + 1}
                   onClick={() => (
                     setActive(i + 1),
-                    setcollectionUI(el.category.categoryName),
+                    setcollectionUI(el.collectionName),
                     setCollectionID(el.collectionId)
                   )}
                 >
@@ -179,8 +201,6 @@ const UploadItem = () => {
             </div>
           </div>
 
-
-
           <div className={Style.upload_box_btn}>
             <Button
               btnName="Upload"
@@ -194,8 +214,8 @@ const UploadItem = () => {
             />
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
