@@ -1,0 +1,86 @@
+.followerTab {
+  width: 100%;
+  /* padding-block: 6rem; */
+  border: 1px;
+  position: relative;
+  padding-bottom: 4rem;
+  margin-top: 24px;
+}
+
+.followerTab_title {
+  width: 40rem;
+  margin: 0 auto;
+  padding: 0 0 2rem 0;
+  text-align: center;
+  text-align: center;
+}
+
+.followerTab_title h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-device-width: 320px) and (max-device-width: 425px) {
+  .followerTab {
+    padding-block: 6rem;
+  }
+
+  .followerTab_box {
+    width: 90%;
+    grid-template-columns: 1fr;
+  }
+
+  .followerTab_title {
+    width: 90%;
+  }
+
+  .followerTab_title h2 {
+    font-size: 2rem;
+  }
+  .followerTab_member_box {
+    gap: 0;
+  }
+  .followerTab_member_box a {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .followerTab_tabs_btn button {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-device-width: 428px) and (max-device-width: 769px) {
+  .followerTab {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .followerTab_title {
+    width: 90%;
+  }
+
+  .followerTab_title h2 {
+    font-size: 3rem;
+  }
+
+  .followerTab_member_box a {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media screen and (min-device-width: 428px) and (max-device-width: 769px) {
+  .followerTab_title {
+    width: 90%;
+  }
+
+  .followerTab_title h2 {
+    font-size: 3rem;
+  }
+
+  .followerTab_box {
+    width: 90%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

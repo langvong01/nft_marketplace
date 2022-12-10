@@ -1,76 +1,59 @@
 import React from 'react';
-import Image from 'next/image';
-import {
-  TiSocialFacebook,
-  TiSocialLinkedin,
-  TiSocialTwitter,
-  TiSocialYoutube,
-  TiSocialInstagram,
-} from 'react-icons/ti';
-import { RiSendPlaneFill } from 'react-icons/ri';
-
-//INTERNAL IMPORT
-import Style from './Footer.module.css';
-import images from '../../img';
-import Discover from '../navbar/discover/Discover';
-import HelpCenter from '../navbar/help-center/HelpCenter';
-
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import EmailIcon from '@mui/icons-material/Email';
+import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 const Footer = () => {
   return (
-    <div className={Style.footer}>
-      <div className={Style.footer_box}>
-        <div className={Style.footer_box_social}>
-          <Image src={images.logo} alt="footer logo" height={100} width={100} />
-          <p>
-            The world’s first and largest digital marketplace for crypto
-            collectibles and non-fungible tokens (NFTs). Buy, sell, and discover
-            exclusive digital items.
-          </p>
-
-          <div className={Style.footer_social}>
-            <a href="#">
-              <TiSocialFacebook />
-            </a>
-            <a href="#">
-              <TiSocialLinkedin />
-            </a>
-            <a href="#">
-              <TiSocialTwitter />
-            </a>
-            <a href="#">
-              <TiSocialYoutube />
-            </a>
-            <a href="#">
-              <TiSocialInstagram />
-            </a>
-          </div>
-        </div>
-
-        <div className={Style.footer_box_discover}>
-          <h3>Discover</h3>
-          <Discover />
-        </div>
-
-        <div className={Style.footer_box_help}>
-          <h3>Help Center</h3>
-          <HelpCenter />
-        </div>
-
-        <div className={Style.subscribe}>
-          <h3>Subscribe</h3>
-
-          <div className={Style.subscribe_box}>
-            <input type="email" placeholder="Enter your email *" />
-            <RiSendPlaneFill className={Style.subscribe_box_send} />
-          </div>
-          <div className={Style.subscribe_box_info}>
-            <p>
-              Discover, collect, and sell extraordinary NFTs OpenSea is the
-              world first and largest NFT marketplace
+    <div className="w-full bg-[#1867B6] py-10">
+      <footer className="w-[90%] mx-auto  text-white">
+        <div className="footer-top grid grid-flow-col px-10">
+          <div className="footer-top-left">
+            <h2 className="text-3xl">Stay in loop</h2>
+            <p className="mt-4 w-[600px] text-base font-normal mb-4">
+              Join our mailing list to stay in the loop with our newest feature
+              releases, NFT drops, and tips and tricks for navigating OpenSea.
             </p>
+            <div className="flex gap-x-5 ">
+              <input
+                type="email"
+                placeholder="Your email address"
+                className="px-6 py-3 w-[70%] rounded-md text-black"
+              />
+              <button className="bg-[#2081E2] px-4 py-2 rounded-lg">
+                Sign up
+              </button>
+            </div>
+          </div>
+          <div className="footer-top-right ">
+            <h2 className="text-3xl">Join the community</h2>
+            <div className="mt-4 w-[600px] text-base font-normal mb-4 flex items-center gap-x-5">
+              <span className=" p-2  block bg-[#2081E2] rounded-lg">
+                <TwitterIcon></TwitterIcon>
+              </span>
+              <span className="p-2 block bg-[#2081E2] rounded-lg">
+                <FacebookIcon></FacebookIcon>
+              </span>
+              <span className="p-2 block bg-[#2081E2] rounded-lg">
+                <InstagramIcon></InstagramIcon>
+              </span>
+              <span className="p-2 block bg-[#2081E2] rounded-lg">
+                <EmailIcon></EmailIcon>
+              </span>
+              <span className="p-2 block bg-[#2081E2] rounded-lg">
+                <AddLocationAltIcon></AddLocationAltIcon>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+
+        <div className="line w-full h-[2px] bg-slate-300 mt-8"></div>
+
+        <div className="footer-botton py-8 text-center">
+          <p>© 2020 - 2022 Team NFT-FPT Aptech</p>
+        </div>
+      </footer>
     </div>
   );
 };

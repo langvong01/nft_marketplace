@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 //----IMPORT ICON
 import { MdPayments, MdShoppingCart } from 'react-icons/md';
-import { BsSearch } from 'react-icons/bs';
+
 import { CgMenuRight } from 'react-icons/cg';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,17 +14,18 @@ import images from '../../img';
 import SubTotalCart from './sub-total-cart/SubTotalCart';
 import { useRecoilState } from 'recoil';
 import { modalCartState, modalNotifyMetaMask } from '../../global-state/modal';
-import ModalBase from '../Modal/ModalBase';
+import ModalBase from '../modal/ModalBase';
 import Cart from '../cart/Cart';
 import Link from 'next/link';
 import useHover from '../../hook/useHover';
 import { connectMetaMaskState } from '../../global-state/connect-metamask';
-import ModalMetaMask from '../Modal/modal-notify-metamask/ModalMetaMask';
+import ModalMetaMask from '../modal/modal-notify-metamask/ModalMetaMask';
 import ModalWallet from '../modal/modal-wall-net/ModalWallet';
 import Profile from './profile/Profile';
 import HelpCenter from './help-center/HelpCenter';
 import Discover from './discover/Discover';
 import Search from '../search/Search';
+import SideBar from './side-bar/SideBar';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS

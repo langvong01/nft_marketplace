@@ -23,14 +23,20 @@
   --bg-text-primary: rgb(32, 129, 226);
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  line-height: unset !important;
+
+}
 
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 17px;
   font-weight: var(--fw-text-primary);
   /* background-color: var(--main-bg-color); */
   background: white !important;
@@ -211,3 +217,6 @@ h6 {
 .swiper-button-prev:after {
   font-size: 24px !important;
 }
+
+/* react ui */
+
