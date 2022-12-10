@@ -1,0 +1,87 @@
+.SellNftPage {
+  width: 100%;
+  margin-block: 5rem;
+}
+.SellNftPage_box {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  margin-top: 3rem;
+  align-items: flex-start;
+}
+.SellNftPage_box_left_img {
+  height: 100%;
+  display: grid;
+}
+.SellNftPage_box_left {
+  height: 100%;
+}
+
+.SellNftPage_heading {
+  width: 80%;
+  margin: 0 auto;
+}
+.SellNftPage_heading h2 {
+  font-size: 3rem;
+}
+.SellNftPage_heading p {
+  font-size: 1.3rem;
+  width: 50%;
+  border-bottom: 1px solid var(--shadow-dark-color);
+}
+
+.SellNftPage_box_form {
+  width: 100%;
+}
+.SellNftPage_box_form h2 {
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+.SellNftPage_box_form_input {
+  margin-top: 2rem;
+}
+
+.SellNftPage_box_form_input label {
+  display: block;
+  width: 100%;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.SellNftPage_box_form_summary {
+  font-size: 1rem;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--shadow-dark-color);
+}
+.SellNftPage_box_form_summary h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.SellNftPage_box_form_summary_row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+.SellNftPage_box_form_summary_row span {
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.SellNftPage_box_form_total {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+   align-items: center;
+}
+.SellNftPage_box_form_total span {
+    font-size: 1rem;
+    font-weight: 400;
+}
+.button_Sell {
+    width: 100%;
+    margin-top: 1rem;
+}

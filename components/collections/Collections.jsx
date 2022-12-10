@@ -9,6 +9,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { getTopTenCollectionLatest } from 'services/collectionService';
 import { getTopTenItemLatest } from 'services/itemService';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/router';
 
 const CollectionStyles = styled.div`
   width: 95%;
@@ -129,6 +130,8 @@ const Collections = () => {
 };
 
 const ListCollection = React.memo(({ data }) => {
+  const router = useRouter();
+
   return (
     <>
       <div className="list-collection-container flex items-center justify-between ">
@@ -142,6 +145,9 @@ const ListCollection = React.memo(({ data }) => {
               <div
                 className="list-collection-item w-full flex items-center justify-between mb-4 cursor-pointer hover:bg-slate-100 p-2"
                 key={uuidv4()}
+                onClick={() => {
+                  router.push(`/category/${collection.collectionName}`);
+                }}
               >
                 <div className="flex-1 flex items-center gap-x-8">
                   <p>{index + 1}</p>
@@ -150,7 +156,7 @@ const ListCollection = React.memo(({ data }) => {
                     alt="collection-img"
                     className="w-[60px] h-[60px] object-cover rounded-md"
                   />
-                  <p>{collection.collectionName}</p>
+                  <p className="capitalize">{collection.collectionName}</p>
                 </div>
                 <p>{collection.totalValue || 1}</p>
               </div>

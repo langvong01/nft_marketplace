@@ -1,5 +1,6 @@
 import Brand from '@/components/brand/Brand';
 import Category from '@/components/category/Category';
+import LineChart from '@/components/NftChart/LineChart';
 import React from 'react';
 
 //INTERNAL IMPORT
@@ -9,8 +10,6 @@ const NFTDetails = () => {
   return (
     <div>
       <NFTDetailsPage />
-      <Category />
-      <Brand />
     </div>
   );
 };

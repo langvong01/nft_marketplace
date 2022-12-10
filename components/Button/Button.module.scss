@@ -10,7 +10,14 @@
   @apply bg-blue-500
   /* box-shadow: var(--box-shadow); */;
 }
-
 .button:hover {
   opacity: 0.9;
+}
+.button:disabled,
+.button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.3;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

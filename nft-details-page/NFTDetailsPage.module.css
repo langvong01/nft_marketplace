@@ -1,25 +1,49 @@
-
-
-.NFTDetailsPage{
-    width: 100%;
-    margin-block: 5rem;
+.NFTDetailsPage {
+  width: 100%;
+  margin-block: 4rem;
 }
 
-.NFTDetailsPage_box{
-    width: 80%;
-    margin:  0 auto;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 5rem;
+.NFTDetailsPage_box {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
 }
 
 @media screen and (max-width: 35em) {
-    .NFTDetailsPage{
-        margin-block: 2rem;
-    }
+  .NFTDetailsPage {
+    margin-block: 2rem;
+  }
 
-    .NFTDetailsPage_box{
-        width: 90%;
-        grid-template-columns: 1fr;
-    }
+  .NFTDetailsPage_box {
+    width: 90%;
+    grid-template-columns: 1fr;
+  }
+}
+
+.NFTDetailsPage_activity_wrapper {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  background-color: var(--main-bg-color);
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow);
+}
+.NFTDetailsPage_activity_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--icons-light-color);
+  padding: 1rem;
+}
+
+.NFTDetailsPage_activity_box p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: .5rem;
+}
+.NFTDetailsPage_card {
+  width: 100%;
+  margin-top: 2rem;
 }

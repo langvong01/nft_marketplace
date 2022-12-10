@@ -1,51 +1,41 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import {
-  MdVerified,
-  MdCloudUpload,
-  MdOutlineReportProblem,
-} from "react-icons/md";
-import { FiCopy } from "react-icons/fi";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { MdVerified, MdCloudUpload } from 'react-icons/md';
+import { FiCopy } from 'react-icons/fi';
 import {
   TiSocialFacebook,
   TiSocialLinkedin,
   TiSocialYoutube,
   TiSocialInstagram,
-} from "react-icons/ti";
-import { BsThreeDots } from "react-icons/bs";
+} from 'react-icons/ti';
 
 //INTERNAL IMPORT
-import Style from "./AuthorProfileCard.module.css";
-import images from "../../img";
-import { Button } from "../../components/componentsindex.js";
+import Style from './AuthorProfileCard.module.css';
+import images from '../../img';
+import Button from '../../components/Button/Button';
+import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 
 const AuthorProfileCard = () => {
   const [share, setShare] = useState(false);
-  const [report, setReport] = useState(false);
+
+  const [toast, setToast] = useState({
+    open: false,
+    vertical: 'bottom',
+    horizontal: 'center',
+  });
 
   //copyAddress function
   const copyAddress = () => {
-    const copyText = document.getElementById("myInput");
-
-    copyText.select();
-    navigator.clipboard.writeText(copyText.value);
+    const copyText = document.getElementById('myWalletAdress');
+    navigator.clipboard.writeText(copyText.innerText);
+    setToast({ ...toast, open: true });
   };
 
   const openShare = () => {
     if (!share) {
       setShare(true);
-      setReport(false);
     } else {
       setShare(false);
-    }
-  };
-
-  const openReport = () => {
-    if (!report) {
-      setReport(true);
-      setShare(false);
-    } else {
-      setReport(false);
     }
   };
 
@@ -63,30 +53,27 @@ const AuthorProfileCard = () => {
         </div>
 
         <div className={Style.AuthorProfileCard_box_info}>
-          <h2>
-            Dony Herrera{""}{" "}
-            <span>
-              <MdVerified />
-            </span>{" "}
-          </h2>
-
-          <div className={Style.AuthorProfileCard_box_info_address}>
-            <input
-              type="text"
-              value="0x829BD824B03D092293333..A830"
-              id="myInput"
-            />
-            <FiCopy
-              onClick={() => copyAddress()}
-              className={Style.AuthorProfileCard_box_info_address_icon}
-            />
+          <div className={Style.AuthorProfileCard_box_info_name}>
+            <h2>Dony Herrera</h2>
+            <MdVerified className={Style.AuthorProfileCard_box_info_icon} />
           </div>
 
-          <p>
-            Punk #4786 / An OG Cryptopunk Collector, hoarder of NFTs.
-            Contributing to @ether_cards, an NFT Monetization Platform.
-          </p>
-
+          <div className={Style.AuthorProfileCard_box_info_address}>
+            <span id="myWalletAdress">
+              0xf4910c763ed4e47a585e2d34baa9a4b611ae448c
+            </span>
+            <FiCopy
+              onClick={() => copyAddress()}
+              className={Style.AuthorProfileCard_box_info_icon}
+            />
+            <SnackBarSuccess
+              open={toast.open}
+              vertical={toast.vertical}
+              horizontal={toast.horizontal}
+              message="Copy is success"
+              setToast = {setToast}
+            />
+          </div>
           <div className={Style.AuthorProfileCard_box_info_social}>
             <a href="#">
               <TiSocialFacebook />
@@ -115,35 +102,34 @@ const AuthorProfileCard = () => {
               <p>
                 <span>
                   <TiSocialFacebook />
-                </span>{" "}
-                {""}
+                </span>{' '}
+                {''}
                 Facebook
               </p>
               <p>
                 <span>
                   <TiSocialInstagram />
-                </span>{" "}
-                {""}
+                </span>{' '}
+                {''}
                 Instragram
               </p>
               <p>
                 <span>
                   <TiSocialLinkedin />
-                </span>{" "}
-                {""}
+                </span>{' '}
+                {''}
                 LinkedIn
               </p>
               <p>
                 <span>
                   <TiSocialYoutube />
-                </span>{" "}
-                {""}
+                </span>{' '}
+                {''}
                 YouTube
               </p>
             </div>
           )}
-
-          <BsThreeDots
+          {/* <BsThreeDots
             onClick={() => openReport()}
             className={Style.AuthorProfileCard_box_share_icon}
           />
@@ -152,11 +138,11 @@ const AuthorProfileCard = () => {
             <p className={Style.AuthorProfileCard_box_share_report}>
               <span>
                 <MdOutlineReportProblem />
-              </span>{" "}
-              {""}
+              </span>{' '}
+              {''}
               Report abouse
             </p>
-          )}
+          )} */}
         </div>
       </div>
     </div>

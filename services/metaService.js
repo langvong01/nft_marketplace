@@ -17,13 +17,14 @@ const handleSignMessage = async (publicAddress, nonce) => {
     throw new Error('You need to sign the message to be able to log in.');
   }
 };
-export const connectCreateCollectService = async () => {
-  console.log()
-  await axiosClient.post(`/v1/collection`, {
-    walletAddress: publicAddress,
-    signature,
-  });
-}
+
+// export const connectCreateCollectService = async () => {
+//   console.log()
+//   await axiosClient.post(`/v1/collection`, {
+//     walletAddress: publicAddress,
+//     signature,
+//   });
+// }
 
 export const connectMetaMaskService = async () => {
   try {
@@ -107,6 +108,8 @@ export const checkMetaMaskService = async () => {
       };
     }
 
+
+  
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const getBalance = await provider.getBalance(accounts[0]);
     const bal = ethers.utils.formatEther(getBalance);
