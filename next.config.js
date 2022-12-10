@@ -14,12 +14,13 @@ intercept(interceptStdout);
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  styledComponents: true,
   // images: {
   //   domains: ['https://img.seadn.io/'],
   // },
   images: {
-    domains: ['res.cloudinary.com']
-  }
+    domains: ['res.cloudinary.com'],
+  },
 };
 
 exports.default = nextConfig;

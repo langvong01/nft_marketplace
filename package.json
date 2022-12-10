@@ -37,6 +37,7 @@
   "devDependencies": {
     "@types/react-dom": "^18.0.9",
     "autoprefixer": "^10.4.13",
+    "babel-plugin-styled-components": "^2.0.7",
     "intercept-stdout": "^0.1.2",
     "postcss": "^8.4.19",
     "sass": "^1.56.1",
