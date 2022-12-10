@@ -6,9 +6,11 @@ import Stack from '@mui/material/Stack';
 import useSWR from 'swr';
 import { fetcherSWR } from 'utils/api-config';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/router';
 
 const Category = () => {
   const { data, erorr } = useSWR('category', fetcherSWR);
+  const router = useRouter();
 
   if (!data) {
     return (
@@ -87,6 +89,7 @@ const Category = () => {
             <div
               className="category-item cursor-pointer  rounded-lg overflow-hidden shadow-md w-[30%]"
               key={uuidv4()}
+              onClick={() => router.push(`/category/${categori.categoryId}`)}
             >
               <div className="category-image overflow-hidden ">
                 <img

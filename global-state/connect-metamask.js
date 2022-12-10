@@ -20,6 +20,7 @@ export const connectMetaMaskState = atom({
     accountCurrent: '',
     accountBalance: '',
     signature: '',
+    isLogin: false,
 
     // checkIfWalletConnected: async () => {
     //   try {
