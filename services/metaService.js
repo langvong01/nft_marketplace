@@ -36,6 +36,7 @@ export const connectMetaMaskService = async () => {
         accountCurrent: '',
         accountBalance: '',
         signature: '',
+        isLogin: false,
       };
     }
 
@@ -68,6 +69,7 @@ export const connectMetaMaskService = async () => {
       accountBalance: bal,
       error: '',
       openError: false,
+      isLogin: true,
     };
   } catch (error) {
     console.log(error);
@@ -77,6 +79,7 @@ export const connectMetaMaskService = async () => {
       accountCurrent: '',
       accountBalance: '',
       signature: '',
+      isLogin: false,
     };
   }
 };
@@ -91,6 +94,7 @@ export const checkMetaMaskService = async () => {
         accountCurrent: '',
         accountBalance: '',
         signature: '',
+        isLogin: false,
       };
     }
 
@@ -105,11 +109,10 @@ export const checkMetaMaskService = async () => {
         accountCurrent: '',
         accountBalance: '',
         signature: '',
+        isLogin: false,
       };
     }
 
-
-  
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const getBalance = await provider.getBalance(accounts[0]);
     const bal = ethers.utils.formatEther(getBalance);
@@ -120,6 +123,7 @@ export const checkMetaMaskService = async () => {
       accountCurrent: accounts[0],
       accountBalance: bal,
       signature: '',
+      isLogin: false,
     };
   } catch (error) {
     return {
@@ -128,6 +132,7 @@ export const checkMetaMaskService = async () => {
       accountCurrent: '',
       accountBalance: '',
       signature: '',
+      isLogin: false,
     };
   }
 };

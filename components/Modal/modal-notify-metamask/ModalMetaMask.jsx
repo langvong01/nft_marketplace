@@ -34,8 +34,6 @@ const ModalMetaMask = () => {
 
     const response = await connectMetaMaskService();
 
-    console.log(response);
-
     setMetaMask((prev) => {
       return { ...prev, ...response };
     });
