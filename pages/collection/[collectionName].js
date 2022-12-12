@@ -8,8 +8,9 @@ import images from '../../img';
 import Banner from '@/components/banner/Banner';
 import DesciptionCollection from '@/components/collections/DesciptionCollection';
 import ListItem from '@/components/collections/ListItem';
+import { getItemsInCollectionName } from 'services/itemService';
 
-const ListItemInCollection = () => {
+const ListItemInCollection = ({ items }) => {
   const collectionArray = [
     images.nft_image_1,
     images.nft_image_2,
@@ -22,8 +23,13 @@ const ListItemInCollection = () => {
   ];
   return (
     <div className={Style.searchPage}>
-      <Banner bannerImage={images.creatorbackground2} />
-      <DesciptionCollection></DesciptionCollection>
+      <Banner
+        bannerImage={images.creatorbackground2}
+        collection={items[0].collection}
+      />
+      <DesciptionCollection
+        collection={items[0].collection}
+      ></DesciptionCollection>
       <div className="search-items w-[95%] mx-auto my-4 flex items-center">
         <div className="w-[50%] flex items-center border-2 border-slate-200  cursor-pointer rounded-lg overflow-hidden">
           <span className="w-[50px] ">
@@ -52,10 +58,27 @@ const ListItemInCollection = () => {
           Search
         </button>
       </div>
-      {/* <Filter /> */}
-      <ListItem></ListItem>
+
+      <ListItem items={items}></ListItem>
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const { collectionName } = context.query;
+  const data = await getItemsInCollectionName(collectionName);
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      items: data,
+    },
+  };
+}
 
 export default ListItemInCollection;

@@ -85,24 +85,22 @@ const Category = () => {
           </div>
         </div>
         {data.body.map((categori) => (
-          <>
-            <div
-              className="category-item cursor-pointer  rounded-lg overflow-hidden shadow-md w-[30%]"
-              key={uuidv4()}
-              onClick={() => router.push(`/category/${categori.categoryId}`)}
-            >
-              <div className="category-image overflow-hidden ">
-                <img
-                  src="https://opensea.io/static/images/categories/sports.png"
-                  alt="arts"
-                  className="w-full h-full object-cover hover:scale-105 scale-100 transition-all"
-                />
-              </div>
-              <div className="category-text text-center">
-                <h2 className="p-8 text-2xl">{categori.categoryName}</h2>
-              </div>
+          <div
+            key={uuidv4()}
+            className="category-item cursor-pointer  rounded-lg overflow-hidden shadow-md w-[30%]"
+            onClick={() => router.push(`/category/${categori.categoryId}`)}
+          >
+            <div className="category-image overflow-hidden ">
+              <img
+                src="https://opensea.io/static/images/categories/sports.png"
+                alt="arts"
+                className="w-full h-full object-cover hover:scale-105 scale-100 transition-all"
+              />
             </div>
-          </>
+            <div className="category-text text-center">
+              <h2 className="p-8 text-2xl">{categori.categoryName}</h2>
+            </div>
+          </div>
         ))}
       </div>
     </div>

@@ -1,1 +1,12 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
+
+export const cartState = atom({
+  key: 'cartPayment',
+  default: {
+    itemSelected: [],
+  },
+  effects_UNSTABLE: [persistAtom],
+});

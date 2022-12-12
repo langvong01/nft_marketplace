@@ -5,14 +5,16 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-const DesciptionCollection = () => {
+const DesciptionCollection = ({ collection }) => {
   const [isSeeMore, setIsSeeMore] = useState(false);
 
   return (
     <>
       <div className="desc-col-container w-[95%] mx-auto mt-[120px]">
         <div className="desc-col-top flex items-centers justify-between">
-          <p className="desc-col-name text-3xl">1337 skulls</p>
+          <p className="desc-col-name text-3xl capitalize">
+            {collection.collectionName}
+          </p>
           <div className="desc-col-social flex items-center gap-x-5">
             <span className="w-[50px] h-[50px] cursor-pointer">
               <FacebookIcon className="w-full h-full"></FacebookIcon>
@@ -35,12 +37,7 @@ const DesciptionCollection = () => {
 
           <p className="text-base mt-2 font-normal w-[60%]">
             {!isSeeMore ? (
-              <>
-                1337 skulls is a collection of 7,331 pixel art skulls, deployed
-                fully on-chain with a public domain license. 600+ traits created
-                from new, original art and referencing 30+ existing cc0 NFT
-                projects. Free mint. 0% royalties...
-              </>
+              <>{collection.description}</>
             ) : (
               <>
                 1337 skulls is a collection of 7,331 pixel art skulls, deployed
@@ -81,7 +78,7 @@ const DesciptionCollection = () => {
 
         <div className="desc-col-value w-[60%] mt-2">
           <p className="text-2xl text-left">
-            <span>673</span>
+            <span>{collection.totalValue}</span>
             <span className="text-base font-normal block">total volume</span>
           </p>
         </div>

@@ -1,4 +1,6 @@
+import { cartState } from 'global-state/cart';
 import React from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const ItemStyles = styled.div`
@@ -39,7 +41,26 @@ const ItemStyles = styled.div`
   }
 `;
 
-const Item = () => {
+const Item = ({ item }) => {
+  const [cart, setCart] = useRecoilState(cartState);
+
+  const handleAddItem = (id) => {
+    setCart((prev) => {
+      const newArray = [...new Set([...prev.itemSelected, id])];
+      return { ...prev, itemSelected: newArray };
+    });
+  };
+
+  const handleRemoveCart = (id) => {
+    setCart((prev) => {
+      let newArray = [...new Set([...prev.itemSelected, id])];
+      newArray = newArray.filter((item) => {
+        return item !== id;
+      });
+      console.log(newArray);
+      return { ...prev, itemSelected: newArray };
+    });
+  };
   return (
     <ItemStyles>
       <div className=" item-img w-full h-[270px] overflow-hidden ">
@@ -52,17 +73,33 @@ const Item = () => {
 
       <div className="w-full p-2 mt-3">
         <p className="font-bold text-xl ">
-          1337 skulls <spa className="ml-1 w-[50px]">#1227</spa>
+          {item.itemName} <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
         </p>
         <p className="font-bold text-xl ">
-          0,22 <span className="ml-1 w-[50px] text-right">Meta</span>
+          {item.price} <span className="ml-1 w-[50px] text-right">Meta</span>
         </p>
 
         <p className="text-base mt-2">End in 7 days</p>
       </div>
 
       <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
-        <button>Add Cart</button>
+        {!cart.itemSelected.includes(item.itemId) ? (
+          <button
+            onClick={() => handleAddItem(item.itemId)}
+            className="w-full"
+            suppressHydrationWarning
+          >
+            Add Cart
+          </button>
+        ) : (
+          <button
+            className="w-full"
+            onClick={() => handleRemoveCart(item.itemId)}
+            suppressHydrationWarning
+          >
+            Remove Cart
+          </button>
+        )}
       </div>
     </ItemStyles>
   );
