@@ -65,6 +65,13 @@ const ListCollectionCategory = ({ collections }) => {
 export async function getServerSideProps(context) {
   const { categoryId } = context.query;
   const data = await getAllCollectionInCategory(categoryId);
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       collections: data,

@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 //INTERNAL IMPORT
 import Style from '../styles/author.module.css';
 
-import Brand from '../components/Brand/Brand'
-import Title from '../components/Title/Title'
-import FollowerTabCard from '../components/follower-tab/FollowerTabCard/FollowerTabCard';
+import Brand from '../components/Brand/Brand';
+import Title from '../components/Title/Title';
+import FollowerTabCard from '../components/category/FollowerTabCard/FollowerTabCard';
 import images from '../img';
 import Banner from 'collectionPage/Banner/Banner';
 import AuthorProfileCard from '../authorPage/AuthorProfileCard/AuthorProfileCard';

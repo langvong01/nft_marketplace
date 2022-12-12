@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 //INTERNAL IMPORT
-import Style from "./AuthorNFTCardBox.module.css";
-import images from "../../img";
-import  NFTCardTwo  from "../../collectionPage/NFTCardTwo/NFTCardTwo";
-import FollowerTabCard from "../../components/follower-tab/FollowerTabCard/FollowerTabCard";
+import Style from './AuthorNFTCardBox.module.css';
+import images from '../../img';
+import NFTCardTwo from '../../collectionPage/NFTCardTwo/NFTCardTwo';
+import FollowerTabCard from '../../components/category/FollowerTabCard/FollowerTabCard';
 
 const AuthorNFTCardBox = ({
   collectiables,
