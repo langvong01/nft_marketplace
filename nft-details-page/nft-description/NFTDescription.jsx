@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MdVerified } from 'react-icons/md';
 
@@ -8,9 +8,13 @@ import images from '../../img';
 import Button from '../../components/Button/Button';
 import LineChart from '@/components/NftChart/LineChart';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { connectMetaMaskState } from 'global-state/connect-metamask';
 
 const NFTDescription = ({ nft }) => {
   const [social, setSocial] = useState(false);
+  const [auth, setAuth] = useRecoilState(connectMetaMaskState);
+
   const [NFTMenu, setNFTMenu] = useState(false);
   const btnAddtoCart = nft.isOwner !== 1 || nft.isOnSale === 1;
   const router = useRouter();
@@ -33,6 +37,7 @@ const NFTDescription = ({ nft }) => {
     }
   };
 
+  useEffect(() => {}, [auth.isLogin]);
   return (
     <div className={Style.NFTDescription}>
       <div className={Style.NFTDescription_box}>
@@ -40,7 +45,7 @@ const NFTDescription = ({ nft }) => {
         <div className={Style.NFTDescription_box_share}>
           <p>Virtual Worlds</p>
           <div className={Style.NFTDescription_box_share_box}>
-            {nft.isOwner === 1 && (
+            {auth.isLogin && nft.isOwner === 1 && (
               <Button
                 btnName="Sell"
                 handleClick={() => router.push(`/sell/${nft.itemId}`)}
@@ -89,8 +94,10 @@ const NFTDescription = ({ nft }) => {
           </div>
 
           <div className={Style.NFTDescription_box_profile_biding}>
-              {nft.isOnSale === 1 && (
-            <div className={Style.NFTDescription_box_profile_biding_box_price}>
+            {nft.isOnSale === 1 && (
+              <div
+                className={Style.NFTDescription_box_profile_biding_box_price}
+              >
                 <div
                   className={
                     Style.NFTDescription_box_profile_biding_box_price_bid
@@ -101,8 +108,8 @@ const NFTDescription = ({ nft }) => {
                     1.000 ETH <span>( ≈ $3,221.22)</span>
                   </p>
                 </div>
-            </div>
-              )}
+              </div>
+            )}
             {btnAddtoCart && (
               <div
                 className={Style.NFTDescription_box_profile_biding_box_button}

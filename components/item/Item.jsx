@@ -1,4 +1,5 @@
 import { cartState } from 'global-state/cart';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -19,6 +20,7 @@ const ItemStyles = styled.div`
   overflow: hidden;
   transition: all 0.5s;
   cursor: pointer;
+  overflow: hidden;
 
   .item-btn {
     transition: all 0.2s;
@@ -43,6 +45,7 @@ const ItemStyles = styled.div`
 
 const Item = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
+  const router = useRouter();
 
   const handleAddItem = (item) => {
     setCart((prev) => {
@@ -71,12 +74,12 @@ const Item = ({ item }) => {
   };
 
   return (
-    <ItemStyles>
+    <ItemStyles onClick={() => router.push(`/NFT-details/${item.itemId}`)}>
       <div className=" item-img w-full h-[270px] overflow-hidden ">
         <img
-          src="https://i.seadn.io/gae/4_58T7JRKZ6t2aX_FJ_m1JQJrauUvFlYgtSwKQdBERLktfsLUpUr_rfelfH-IH__wHD42qezGvL1X7vw6nmFC60z15YlEwx_AOSdYg?auto=format&w=750"
           className=" w-full  object-cover h-full bg-center"
           alt=""
+          src={item.mediaFileUrl}
         />
       </div>
 
