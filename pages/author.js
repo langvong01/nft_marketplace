@@ -5,11 +5,12 @@ import Style from '../styles/author.module.css';
 
 import Brand from '../components/Brand/Brand';
 import Title from '../components/Title/Title';
-// import FollowerTabCard from '../components/category/FollowerTabCard/FollowerTabCard';
+
 import images from '../img';
+
 import AuthorProfileCard from '../authorPage/AuthorProfileCard/AuthorProfileCard';
 import AuthorTaps from '../authorPage/AuthorTaps/AuthorTaps';
-import AuthorNFTCardBox from '../authorPage/AuthorNFTCardBox/AuthorNFTCardBox';
+
 import Banner from '@/components/banner/Banner';
 
 const author = () => {
@@ -48,7 +49,7 @@ const author = () => {
 
   return (
     <div className={Style.author}>
-      <Banner bannerImage={images.creatorbackground2} />
+      <Banner bannerImage="https://i.seadn.io/gcs/files/381417af5d37fe69e6ac2b275c3004c4.png?auto=format&w=3840" />
       <AuthorProfileCard />
       <AuthorTaps
         setCollectiables={setCollectiables}
@@ -58,23 +59,18 @@ const author = () => {
         setFollowing={setFollowing}
       />
 
-      <AuthorNFTCardBox
+      {/* <AuthorNFTCardBox
         collectiables={collectiables}
         created={created}
         like={like}
         follower={follower}
         following={following}
-      />
+      /> */}
       <Title
         heading="Popular Creators"
         paragraph="Click on music icon and enjoy NTF music or audio
 "
       />
-      {/* <div className={Style.author_box}>
-        {followerArray.map((el, i) => (
-          <FollowerTabCard i={i} el={el} />
-        ))}
-      </div> */}
 
       <Brand />
     </div>

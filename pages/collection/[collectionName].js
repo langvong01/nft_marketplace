@@ -11,23 +11,9 @@ import ListItem from '@/components/collections/ListItem';
 import { getItemsInCollectionName } from 'services/itemService';
 
 const ListItemInCollection = ({ items }) => {
-  console.log(items)
-  const collectionArray = [
-    images.nft_image_1,
-    images.nft_image_2,
-    images.nft_image_3,
-    images.nft_image_1,
-    images.nft_image_2,
-    images.nft_image_3,
-    images.nft_image_1,
-    images.nft_image_2,
-  ];
   return (
     <div className={Style.searchPage}>
-      <Banner
-        
-        collection={items[0].collection}
-      />
+      <Banner collection={items[0].collection} />
       <DesciptionCollection
         collection={items[0].collection}
       ></DesciptionCollection>
