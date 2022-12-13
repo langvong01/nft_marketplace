@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { BsImage } from 'react-icons/bs';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { MdVerified, MdTimer } from 'react-icons/md';
+import { MdTimer } from 'react-icons/md';
 
 //INTERNAL IMPORT
 import Style from './NFTCardTwo.module.css';
