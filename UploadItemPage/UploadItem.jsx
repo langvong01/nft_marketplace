@@ -77,7 +77,7 @@ const UploadItem = () => {
       });
       console.log(tokenId);
 
-      router.push("/NFT-details")
+      router.push(`/NFT-details/${itemId}`)
     } catch (error) {
       console.log(error);
       if(itemId) {
@@ -86,39 +86,7 @@ const UploadItem = () => {
     }
   };
 
-  // const categoryArry = [
-  //   {
-  //     id: 1,
-  //     image: images.nft_image_1,
-  //     category: "Sports",
-  //   },
-  //   {
-  //     id: 2,
-  //     image: images.nft_image_2,
-  //     category: "Arts",
-  //   },
-  //   {
-  //     id: 3,
-  //     image: images.nft_image_3,
-  //     category: "Music",
-  //   },
-  //   {
-  //     id: 4,
-  //     image: images.nft_image_1,
-  //     category: "Digital",
-  //   },
-  //   {
-  //     id: 5,
-  //     image: images.nft_image_2,
-  //     category: "Time",
-  //   },
-  //   {
-  //     id: 6,
-  //     image: images.nft_image_3,
-  //     category: "Photography",
-  //   },
-  // ];
-
+ 
   const getAllCollections = async () => {
     try {
       const respone = await axiosClient.get(`/collection/personal`);

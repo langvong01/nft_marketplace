@@ -11,170 +11,49 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const columns = [
-  { id: 'event', align: 'right', label: 'Event', minWidth: 170 },
+  { id: 'event', align: 'right', label: 'Event', minWidth: 100 },
   { id: 'price', align: 'right', label: 'Price', minWidth: 100 },
   {
     id: 'from',
     label: 'From',
-    minWidth: 170,
+    minWidth: 100,
     align: 'right',
   },
   {
     id: 'to',
     label: 'TO',
-    minWidth: 170,
+    minWidth: 100,
     align: 'right',
   },
   {
     id: 'date',
     label: 'Date',
-    minWidth: 170,
+    minWidth: 100,
+    align: 'right',
+  },
+  {
+    id: 'scanLink',
+    label: 'ScanLink',
+    minWidth: 300,
     align: 'right',
   },
 ];
-const rows = [
-  {
-    id: 1,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 2,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 3,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 4,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 5,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 6,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 7,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 8,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 9,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 10,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 11,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 12,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 13,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 14,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 15,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 16,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-  {
-    id: 17,
-    event: 'Transfer',
-    price: 100,
-    from: 'ABCD',
-    to: 'QWER',
-    date: '2022-11-07',
-  },
-];
 
-const NFTActivity = () => {
+const NFTActivity = ({ itemsActivity }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowPerPage] = useState(10);
 
+  const activitys = itemsActivity.map((item) => {
+    return {
+      id: item.activityId,
+      event: item.operation,
+      price: item.price,
+      from: item.from,
+      to: item.to.username,
+      date: item.createdAt,
+      scanLink: item.txnScanLink,
+    };
+  });
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -210,10 +89,13 @@ const NFTActivity = () => {
               color: 'white',
               bgcolor: '#4c5773',
             },
-
             //style for table cell
             '& .css-177gid-MuiTableCell-root': {
               color: '#4c5773',
+            },
+            '& .css-177gid-MuiTableCell-root a': {
+              color: 'rgb(32, 129, 226)',
+              textDecoration: 'underline',
             },
           }}
         >
@@ -231,18 +113,28 @@ const NFTActivity = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {activitys
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column) => {
                       const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {typeof value === 'number' ? `${value} MATIC` : value}
-                        </TableCell>
-                      );
+                      if (column.id === 'scanLink') {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            <Link href={value}>Link</Link>
+                          </TableCell>
+                        );
+                      } else {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {typeof value === 'number'
+                              ? `${value} MATIC`
+                              : value}
+                          </TableCell>
+                        );
+                      }
                     })}
                   </TableRow>
                 );
@@ -253,7 +145,7 @@ const NFTActivity = () => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 15]}
         component="div"
-        count={rows.length}
+        count={activitys.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

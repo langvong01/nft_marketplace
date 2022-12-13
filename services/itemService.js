@@ -10,3 +10,21 @@ export const getTopTenItemLatest = async (order = 'DESC') => {
 
   return await response.data.body.content;
 };
+
+export const getItemDetails = async (itemId, isLogin = false ) => {
+  try {
+    if (!itemId) return;
+
+    let respone;
+
+    if (isLogin) {
+      respone = await axiosClient.get(`/item/auth/${itemId}`);
+
+    } else {
+      respone = await axiosClient.get(`/item/${itemId}`);
+    }
+
+    return respone.data.body;
+
+  } catch (error) {}
+};

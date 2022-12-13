@@ -1,30 +1,19 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import {
-  MdVerified,
-  MdCloudUpload,
-  MdReportProblem,
-  MdOutlineDeleteSweep,
-} from 'react-icons/md';
-import { BsThreeDots } from 'react-icons/bs';
-import {
-  TiSocialFacebook,
-  TiSocialLinkedin,
-  TiSocialTwitter,
-  TiSocialYoutube,
-  TiSocialInstagram,
-} from 'react-icons/ti';
-import { BiTransferAlt, BiDollar } from 'react-icons/bi';
+import { MdVerified } from 'react-icons/md';
 
 import Style from './NFTDescription.module.css';
 import images from '../../img';
 
 import Button from '../../components/Button/Button';
 import LineChart from '@/components/NftChart/LineChart';
+import { useRouter } from 'next/router';
 
-const NFTDescription = () => {
+const NFTDescription = ({ nft }) => {
   const [social, setSocial] = useState(false);
   const [NFTMenu, setNFTMenu] = useState(false);
+  const btnAddtoCart = nft.isOwner !== 1 || nft.isOnSale === 1;
+  const router = useRouter();
 
   const openSocial = () => {
     if (!social) {
@@ -51,17 +40,19 @@ const NFTDescription = () => {
         <div className={Style.NFTDescription_box_share}>
           <p>Virtual Worlds</p>
           <div className={Style.NFTDescription_box_share_box}>
-            <Button
-              btnName="Sell"
-              handleClick={() => {}}
-              classStyle={Style.button}
-            />
+            {nft.isOwner === 1 && (
+              <Button
+                btnName="Sell"
+                handleClick={() => router.push(`/sell/${nft.itemId}`)}
+                classStyle={Style.button}
+              />
+            )}
           </div>
         </div>
 
         {/* //Part TWO */}
         <div className={Style.NFTDescription_box_profile}>
-          <h1>BearX #23453</h1>
+          <h1 className="text-capitalize">{nft.itemName}</h1>
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
               <Image
@@ -98,25 +89,31 @@ const NFTDescription = () => {
           </div>
 
           <div className={Style.NFTDescription_box_profile_biding}>
+              {nft.isOnSale === 1 && (
             <div className={Style.NFTDescription_box_profile_biding_box_price}>
+                <div
+                  className={
+                    Style.NFTDescription_box_profile_biding_box_price_bid
+                  }
+                >
+                  <small>Current Bid</small>
+                  <p>
+                    1.000 ETH <span>( ≈ $3,221.22)</span>
+                  </p>
+                </div>
+            </div>
+              )}
+            {btnAddtoCart && (
               <div
-                className={
-                  Style.NFTDescription_box_profile_biding_box_price_bid
-                }
+                className={Style.NFTDescription_box_profile_biding_box_button}
               >
-                <small>Current Bid</small>
-                <p>
-                  1.000 ETH <span>( ≈ $3,221.22)</span>
-                </p>
+                <Button
+                  btnName="Add to Cart"
+                  handleClick={() => {}}
+                  classStyle={Style.button}
+                />
               </div>
-            </div>
-            <div className={Style.NFTDescription_box_profile_biding_box_button}>
-              <Button
-                btnName="Add to Cart"
-                handleClick={() => {}}
-                classStyle={Style.button}
-              />
-            </div>
+            )}
 
             <div className="mt-5">
               <LineChart />

@@ -30,6 +30,7 @@ export const connectMetaMaskService = async () => {
   try {
     // install metamask - turn on modal
     if (!window.ethereum) {
+      alert('Plesae install metamask before connecting')
       return {
         error: 'install',
         openError: true,

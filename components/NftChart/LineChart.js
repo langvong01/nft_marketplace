@@ -23,6 +23,7 @@ ChartJS.register(
 );
 
 const LineChart = () => {
+  
   const MONTHS = [
     'January',
     'February',

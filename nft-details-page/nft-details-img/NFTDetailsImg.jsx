@@ -8,12 +8,13 @@ import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import Style from './NFTDetailsImg.module.css';
 import images from '../../img';
 
-const NFTDetailsImg = () => {
-  const [description, setDescription] = useState(true);
+const NFTDetailsImg = ({ nft }) => {
+  const [isdescription, setDescription] = useState(true);
   const [details, setDetails] = useState(true);
 
+  // console.log(nft)
   const openDescription = () => {
-    if (!description) {
+    if (!isdescription) {
       setDescription(true);
     } else {
       setDescription(false);
@@ -34,7 +35,8 @@ const NFTDetailsImg = () => {
         <div className={Style.NFTDetailsImg_box_NFT}>
           <div className={Style.NFTDetailsImg_box_NFT_img}>
             <Image
-              src={images.nft_image_1}
+              loader={() => nft.mediaFileUrl}
+              src={nft?.mediaFileUrl}
               className={Style.NFTDetailsImg_box_NFT_img_img}
               alt="NFT image"
               width={1000}
@@ -49,17 +51,12 @@ const NFTDetailsImg = () => {
           onClick={() => openDescription()}
         >
           <p>Description</p>
-          {description ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
+          {isdescription ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
         </div>
 
-        {description && (
+        {isdescription && (
           <div className={Style.NFTDetailsImg_box_description_box}>
-            <p>
-              Tattooed Kitty Gang (“TKG”) is a collection of 666 badass kitty
-              gangsters, with symbol of tattoos, living in the Proud Kitty Gang
-              (“PKG”) metaverse. Each TKG is an 1/1 ID as gangster member & all
-              the joint rights.
-            </p>
+            <p>{nft.description}</p>
           </div>
         )}
 
@@ -75,12 +72,19 @@ const NFTDetailsImg = () => {
           <div className={Style.NFTDetailsImg_box_details_box}>
             <div className={Style.NFTDetailsImg_box_details_row}>
               Contract Address
-              <span>0xf4910c763ed4e47a585e2d34baa9a4b611ae448c</span>
+              <span>
+                {' '}
+                {nft.walletAddress
+                  ? nft.walletAddress
+                  : 0xf4910c763ed4e47a585e2d34baa9a4b611ae448c}
+              </span>
             </div>
             <div className={Style.NFTDetailsImg_box_details_row}>
               TokenID
               <span>
-                26776806034831086110511202867227999346767805661781029920799572850214803875600
+                {nft.tokenId
+                  ? nft.tokenId
+                  : 26776806034831086110511202867227999346767805661781029920799572850214803875600}
               </span>
             </div>
             <div className={Style.NFTDetailsImg_box_details_row}>
@@ -89,7 +93,7 @@ const NFTDetailsImg = () => {
             </div>
             <div className={Style.NFTDetailsImg_box_details_row}>
               Creator Fee
-              <span>0%</span>
+              <span>5%</span>
             </div>
           </div>
         )}
