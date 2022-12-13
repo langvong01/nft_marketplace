@@ -26,6 +26,7 @@ import HelpCenter from './help-center/HelpCenter';
 import Discover from './discover/Discover';
 import Search from '../search/Search';
 import SideBar from './side-bar/SideBar';
+import { cartState } from 'global-state/cart';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
@@ -37,6 +38,7 @@ const NavBar = () => {
   const [isOpenModalMetaMask, setIsOpenModalMetaMask] =
     useRecoilState(modalNotifyMetaMask);
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
+  const [cart, setCart] = useRecoilState(cartState);
 
   const handleOpenMeta = () => {
     setIsOpenModalMetaMask((prev) => {
@@ -122,7 +124,7 @@ const NavBar = () => {
               }
             >
               <MdShoppingCart className={Style.cart_icons}></MdShoppingCart>
-              <SubTotalCart></SubTotalCart>
+              <SubTotalCart number={cart.idItemSelected.length}></SubTotalCart>
             </div>
 
             {/* CREATE Meta mask */}

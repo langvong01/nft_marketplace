@@ -7,9 +7,11 @@ import { MdWarning, MdClose } from 'react-icons/md';
 import useOnClickOutside from '../../hook/useClickOutSide';
 import { modalCartState } from '../../global-state/modal';
 import CartDetails from './cart-details/CartDetails';
+import { cartState } from 'global-state/cart';
 
 const Cart = () => {
   const [openCart, setOpenCart] = useRecoilState(modalCartState);
+  const [cart, setCart] = useRecoilState(cartState);
   const refCart = useRef();
 
   const handleCloseModalCart = () => {
@@ -47,15 +49,24 @@ const Cart = () => {
         </div>
 
         <hr className={Style.line} color="#eee" />
+        {cart.items.length > 0 ? (
+          <>
+            <div className={Style.cart_content}>
+              <CartDetails></CartDetails>
+            </div>
 
+            <div className={Style.cart_btn}>
+              <button className={Style.cart_btn_submit}>Payment</button>
+            </div>
+          </>
+        ) : (
+          <div className="w-full h-full px-3 flex justify-center items-center">
+            <p className="text-2xl -translate-y-12">
+              You need add item in cart
+            </p>
+          </div>
+        )}
         {/* cart-details-content */}
-        <div className={Style.cart_content}>
-          <CartDetails></CartDetails>
-        </div>
-
-        <div className={Style.cart_btn}>
-          <button className={Style.cart_btn_submit}>Payment</button>
-        </div>
       </motion.div>
     </>
   );

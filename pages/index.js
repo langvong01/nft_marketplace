@@ -1,7 +1,7 @@
 // import Category from '@/components/category/Category';
 
 import Collections from '@/components/collections/Collections';
-import Category from '@/components/follower-tab/Category';
+import Category from '@/components/category/Category';
 import Question from '@/components/questions/Question';
 import Slider from '@/components/slider/Slider';
 

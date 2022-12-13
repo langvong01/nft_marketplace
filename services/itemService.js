@@ -28,3 +28,16 @@ export const getItemDetails = async (itemId, isLogin = false ) => {
 
   } catch (error) {}
 };
+
+export const getItemsInCollectionName = async (nameCollection = null) => {
+  const response = await axiosClient.post('/item/filter', {
+    collection: { collection_name_like: nameCollection },
+
+    sort_by: ['listed_at', 'created_at'],
+    order: ['DESC'],
+    page: 1,
+    size: 1000,
+  });
+
+  return await response.data?.body?.content;
+};

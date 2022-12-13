@@ -20,5 +20,5 @@ export const getAllCollectionInCategory = async (id) => {
     size: 1000,
   });
 
-  return await response.data.body.content;
+  return await response.data?.body.content;
 };

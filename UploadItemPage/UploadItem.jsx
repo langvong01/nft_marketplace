@@ -12,12 +12,11 @@ import { DropZone } from '../UploadItemPage/uploadItemIndex';
 import { useForm } from 'react-hook-form';
 import Input from '../CreateNftItem/FormControll/input';
 import TextArea from '../CreateNftItem/FormControll/TextArea/TextArea';
-import InputWithIcon from '../CreateNftItem/FormControll/InputWithIcon/inputIcon';
 import axiosClient from '../utils/axiosClient';
-import collection from 'pages/collection';
+
 import Web3Modal from 'web3modal';
-import {nftContractAbi, marketContractAbi, NFT, Market } from '../contractsABI.json';
-import {ethers } from 'ethers';
+import { nftContractAbi, NFT } from '../contractsABI.json';
+import { ethers } from 'ethers';
 
 const UploadItem = () => {
   const router = useRouter();
@@ -42,7 +41,7 @@ const UploadItem = () => {
       return;
     }
 
-    const { itemName,description } = data;
+    const { itemName, description } = data;
     let itemId = 0;
     try {
       const formData = new FormData();
@@ -62,25 +61,29 @@ const UploadItem = () => {
       const signer = provider.getSigner();
       let contract = new ethers.Contract(NFT, nftContractAbi, signer);
       let transaction = await contract.createToken(metaDataURI);
-      let tx = await transaction.wait()
-      let event = tx.events[0]
-      let value = event.args[2]
+      let tx = await transaction.wait();
+      let event = tx.events[0];
+      let value = event.args[2];
       let tokenId = value.toNumber();
       let transactionHash = tx.transactionHash;
-      const r = await axiosClient.post(`/item/set-minted`, {
-        tokenId : tokenId,
-        itemId : itemId,
-        txnHashLink : "https://mumbai.polygonscan.com/tx/" + transactionHash
-      }, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
+      const r = await axiosClient.post(
+        `/item/set-minted`,
+        {
+          tokenId: tokenId,
+          itemId: itemId,
+          txnHashLink: 'https://mumbai.polygonscan.com/tx/' + transactionHash,
+        },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      );
       console.log(tokenId);
 
       router.push(`/NFT-details/${itemId}`)
     } catch (error) {
       console.log(error);
-      if(itemId) {
+      if (itemId) {
         await axiosClient.delete('/item/' + itemId);
       }
     }
