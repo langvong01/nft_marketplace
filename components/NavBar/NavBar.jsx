@@ -124,7 +124,7 @@ const NavBar = () => {
               }
             >
               <MdShoppingCart className={Style.cart_icons}></MdShoppingCart>
-              <SubTotalCart number={cart.itemSelected.length}></SubTotalCart>
+              <SubTotalCart number={cart.idItemSelected.length}></SubTotalCart>
             </div>
 
             {/* CREATE Meta mask */}

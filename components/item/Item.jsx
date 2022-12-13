@@ -44,23 +44,32 @@ const ItemStyles = styled.div`
 const Item = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
 
-  const handleAddItem = (id) => {
+  const handleAddItem = (item) => {
     setCart((prev) => {
-      const newArray = [...new Set([...prev.itemSelected, id])];
-      return { ...prev, itemSelected: newArray };
+      const newArray = [...new Set([...prev.idItemSelected, item.itemId])];
+      let newArrayItem = [...new Set([...prev.items, item])];
+
+      return { ...prev, idItemSelected: newArray, items: newArrayItem };
     });
   };
 
-  const handleRemoveCart = (id) => {
+  const handleRemoveCart = (item) => {
     setCart((prev) => {
-      let newArray = [...new Set([...prev.itemSelected, id])];
-      newArray = newArray.filter((item) => {
-        return item !== id;
+      let newArrayId = [...new Set([...prev.idItemSelected, item.itemId])];
+
+      //delete id
+      newArrayId = newArrayId.filter((id) => {
+        return id !== item.itemId;
       });
-      console.log(newArray);
-      return { ...prev, itemSelected: newArray };
+
+      const newArrayItem = prev.items.filter((itemMap) => {
+        return item.itemId !== itemMap.itemId;
+      });
+
+      return { ...prev, idItemSelected: newArrayId, items: newArrayItem };
     });
   };
+
   return (
     <ItemStyles>
       <div className=" item-img w-full h-[270px] overflow-hidden ">
@@ -83,9 +92,9 @@ const Item = ({ item }) => {
       </div>
 
       <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
-        {!cart.itemSelected.includes(item.itemId) ? (
+        {!cart.idItemSelected.includes(item.itemId) ? (
           <button
-            onClick={() => handleAddItem(item.itemId)}
+            onClick={() => handleAddItem(item)}
             className="w-full"
             suppressHydrationWarning
           >
@@ -94,7 +103,7 @@ const Item = ({ item }) => {
         ) : (
           <button
             className="w-full"
-            onClick={() => handleRemoveCart(item.itemId)}
+            onClick={() => handleRemoveCart(item)}
             suppressHydrationWarning
           >
             Remove Cart
