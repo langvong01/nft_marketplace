@@ -49,7 +49,7 @@ const author = () => {
 
   return (
     <div className={Style.author}>
-      <Banner bannerImage={images.creatorbackground2} />
+      <Banner bannerImage="https://i.seadn.io/gcs/files/381417af5d37fe69e6ac2b275c3004c4.png?auto=format&w=3840" />
       <AuthorProfileCard />
       <AuthorTaps
         setCollectiables={setCollectiables}
