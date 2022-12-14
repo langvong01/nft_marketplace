@@ -1,6 +1,8 @@
 import { cartState } from 'global-state/cart';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useRef } from 'react';
+import { toast } from 'react-toastify';
+
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -45,8 +47,9 @@ const ItemStyles = styled.div`
 
 const Item = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
-  const router = useRouter();
 
+  const router = useRouter();
+  const notify = () => toast('Wow so easy!');
   const handleAddItem = (item) => {
     setCart((prev) => {
       const newArray = [...new Set([...prev.idItemSelected, item.itemId])];
@@ -74,46 +77,47 @@ const Item = ({ item }) => {
   };
 
   return (
-    <ItemStyles onClick={() => router.push(`/NFT-details/${item.itemId}`)}>
-      <div className=" item-img w-full h-[270px] overflow-hidden ">
-        <img
-          className=" w-full  object-cover h-full bg-center"
-          alt=""
-          src={item.mediaFileUrl}
-        />
-      </div>
+    <>
+      <ItemStyles onClick={() => router.push(`/NFT-details/${item.itemId}`)}>
+        <div className=" item-img w-full h-[270px] overflow-hidden ">
+          <img
+            className=" w-full  object-cover h-full bg-center"
+            alt=""
+            src={item.mediaFileUrl}
+          />
+        </div>
 
-      <div className="w-full p-2 mt-3">
-        <p className="font-bold text-xl ">
-          {item.itemName} <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
-        </p>
-        <p className="font-bold text-xl ">
-          {item.price} <span className="ml-1 w-[50px] text-right">Meta</span>
-        </p>
+        <div className="w-full p-2 mt-3">
+          <p className="font-bold text-xl ">
+            {item.itemName} <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
+          </p>
+          <p className="font-bold text-xl ">
+            {item.price} <span className="ml-1 w-[50px] text-right">Meta</span>
+          </p>
 
-        <p className="text-base mt-2">End in 7 days</p>
-      </div>
-
-      <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
-        {!cart.idItemSelected.includes(item.itemId) ? (
-          <button
-            onClick={() => handleAddItem(item)}
-            className="w-full"
-            suppressHydrationWarning
-          >
-            Add Cart
-          </button>
-        ) : (
-          <button
-            className="w-full"
-            onClick={() => handleRemoveCart(item)}
-            suppressHydrationWarning
-          >
-            Remove Cart
-          </button>
-        )}
-      </div>
-    </ItemStyles>
+          <p className="text-base mt-2">End in 7 days</p>
+        </div>
+        <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
+          {!cart.idItemSelected.includes(item.itemId) ? (
+            <button
+              onClick={() => handleAddItem(item)}
+              className="btn-item w-full"
+              suppressHydrationWarning
+            >
+              Add Cart
+            </button>
+          ) : (
+            <button
+              className="btn-item w-full"
+              onClick={() => handleRemoveCart(item)}
+              suppressHydrationWarning
+            >
+              Remove Cart
+            </button>
+          )}
+        </div>
+      </ItemStyles>
+    </>
   );
 };
 

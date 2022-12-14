@@ -18,43 +18,58 @@ const Question = () => {
           </div>
         </div>
 
-        <div className="questions-bottom mt-4 flex items-center justify-between gap-y-8 flex-wrap">
-          <div className="category-item cursor-pointer   rounded-lg overflow-hidden shadow-md w-[30%]">
+        <div className="questions-bottom mt-4 grid grid-cols-4 justify-between gap-8 ">
+          <div className="category-item cursor-pointer   rounded-lg overflow-hidden shadow-md w-full h-[400px]">
             <div className="category-image ">
               <img
                 src="https://opensea.io/static/images/learn-center//how-to-create-nft.png"
                 alt="arts"
-                className="w-full h-full object-cover"
+                className="w-full  h-[250px] object-cover"
               />
             </div>
-            <div className="category-text text-center">
-              <h2 className="p-8 text-2xl">How to create an NFT?</h2>
+            <div className="category-text text-center flex justify-center items-center h-[150px]">
+              <h2 className="p-8 text-2xl text-center">
+                How to create an NFT?
+              </h2>
             </div>
           </div>
 
-          <div className="category-item cursor-pointer   rounded-lg overflow-hidden shadow-md w-[30%]">
+          <div className="category-item cursor-pointer   rounded-lg overflow-hidden shadow-md w-full h-[400px]">
             <div className="category-image ">
               <img
                 src="https://opensea.io/static/images/learn-center//how-to-sell-nft.png"
                 alt="arts"
-                className="w-full h-full object-cover"
+                className="w-full  h-[250px] object-cover"
               />
             </div>
-            <div className="category-text text-center">
-              <h2 className="p-8 text-2xl">How to sell an NFT?</h2>
+            <div className="category-text text-center flex justify-center items-center h-[150px]">
+              <h2 className="p-8 text-2xl text-center">How to sell an NFT?</h2>
             </div>
           </div>
 
-          <div className="category-item cursor-pointer   rounded-lg overflow-hidden shadow-md w-[30%]">
+          <div className="category-item cursor-pointer   rounded-lg overflow-hidden shadow-md w-full h-[400px]">
             <div className="category-image ">
               <img
                 src="https://opensea.io/static/images/learn-center//what-is-minting.png"
                 alt="arts"
-                className="w-full h-full object-cover"
+                className="w-full h-[250px] object-cover "
               />
             </div>
-            <div className="category-text text-center">
-              <h2 className="p-8 text-2xl">What is minting</h2>
+            <div className="category-text text-center flex justify-center items-center h-[150px]">
+              <h2 className="p-8 text-2xl text-center">What is minting</h2>
+            </div>
+          </div>
+
+          <div className="category-item cursor-pointer   rounded-lg overflow-hidden shadow-md w-full h-[400px]">
+            <div className="category-image ">
+              <img
+                src="https://opensea.io/static/images/learn-center//what-is-minting.png"
+                alt="arts"
+                className="w-full h-[250px] object-cover "
+              />
+            </div>
+            <div className="category-text text-center flex justify-center items-center h-[150px]">
+              <h2 className="p-8 text-2xl text-center">Why use NFT</h2>
             </div>
           </div>
         </div>

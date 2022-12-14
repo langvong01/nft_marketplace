@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-const DesciptionCollection = ({ collection }) => {
+const DesciptionCollection = ({ collection, items }) => {
   const [isSeeMore, setIsSeeMore] = useState(false);
 
   return (
@@ -32,7 +32,8 @@ const DesciptionCollection = ({ collection }) => {
 
         <div className="desc-col-text">
           <p className="text-xl font-normal">
-            Items : <span className="font-bold text-base ml-1">7.330</span>
+            Items :{' '}
+            <span className="font-bold text-base ml-1">{items.length}</span>
           </p>
 
           <p className="text-base mt-2 font-normal w-[60%]">

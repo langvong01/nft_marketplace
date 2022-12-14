@@ -22,3 +22,15 @@ export const getAllCollectionInCategory = async (id) => {
 
   return await response.data?.body.content;
 };
+
+export const getDetailCollectionByName = async (name) => {
+  const response = await axiosClient.post('/collection/filter', {
+    collection_name_like: name,
+    sort_by: ['total_value', 'created_at'],
+    order: ['DESC'],
+    page: 1,
+    size: 1000,
+  });
+
+  return await response.data?.body.content;
+};
