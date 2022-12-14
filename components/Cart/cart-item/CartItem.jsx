@@ -4,11 +4,14 @@ import Image from 'next/image';
 import { MdDelete } from 'react-icons/md';
 import { useRecoilState } from 'recoil';
 import { cartState } from 'global-state/cart';
+import { useRouter } from 'next/router';
 
 const CartItem = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
+  const router = useRouter();
 
-  const handleRemoveCart = (itemInCart) => {
+  const handleRemoveCart = (e, itemInCart) => {
+    e.stopPropagation();
     setCart((prev) => {
       let newArrayId = [
         ...new Set([...prev.idItemSelected, itemInCart.itemId]),
@@ -29,7 +32,10 @@ const CartItem = ({ item }) => {
 
   return (
     <>
-      <div className={Style.cart_details_item}>
+      <div
+        className={Style.cart_details_item}
+        onClick={() => router.push(`/NFT-details/${item.itemId}`)}
+      >
         <div className={Style.cart_img_container}>
           <Image
             src={item.mediaFileUrl}
@@ -51,7 +57,7 @@ const CartItem = ({ item }) => {
         <div className={Style.cart_price_container}>
           <button
             className={Style.cart_btn_delete}
-            onClick={() => handleRemoveCart(item)}
+            onClick={(e) => handleRemoveCart(e, item)}
             type="button"
           >
             <MdDelete></MdDelete>

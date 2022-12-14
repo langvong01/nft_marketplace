@@ -32,7 +32,7 @@ const DesciptionCollection = ({ collection, items }) => {
 
         <div className="desc-col-text">
           <p className="text-xl font-normal">
-            Items :{' '}
+            Items :
             <span className="font-bold text-base ml-1">{items.length}</span>
           </p>
 
@@ -79,7 +79,7 @@ const DesciptionCollection = ({ collection, items }) => {
 
         <div className="desc-col-value w-[60%] mt-2">
           <p className="text-2xl text-left">
-            <span>{collection.totalValue}</span>
+            <span>{collection.totalValue || 0}</span>
             <span className="text-base font-normal block">total volume</span>
           </p>
         </div>
