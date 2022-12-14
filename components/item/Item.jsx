@@ -1,8 +1,8 @@
 import { cartState } from 'global-state/cart';
 import { useRouter } from 'next/router';
-import React, { useRef } from 'react';
-import { toast } from 'react-toastify';
-
+import React from 'react';
+import { useState } from 'react';
+import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -47,19 +47,30 @@ const ItemStyles = styled.div`
 
 const Item = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
-
+  const [toast, setToast] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'right',
+    message: null,
+  });
   const router = useRouter();
-  const notify = () => toast('Wow so easy!');
-  const handleAddItem = (item) => {
+
+  const handleAddItem = (e, item) => {
+    e.stopPropagation();
     setCart((prev) => {
       const newArray = [...new Set([...prev.idItemSelected, item.itemId])];
       let newArrayItem = [...new Set([...prev.items, item])];
 
       return { ...prev, idItemSelected: newArray, items: newArrayItem };
     });
+
+    setToast((prev) => {
+      return { ...prev, open: true, message: 'Added to cart' };
+    });
   };
 
-  const handleRemoveCart = (item) => {
+  const handleRemoveCart = (e, item) => {
+    e.stopPropagation();
     setCart((prev) => {
       let newArrayId = [...new Set([...prev.idItemSelected, item.itemId])];
 
@@ -74,11 +85,18 @@ const Item = ({ item }) => {
 
       return { ...prev, idItemSelected: newArrayId, items: newArrayItem };
     });
+
+    setToast((prev) => {
+      return { ...prev, open: true, message: 'Removed to cart' };
+    });
   };
 
+  const handleNavigatePage = (event) => {
+    router.push(`/NFT-details/${item.itemId}`);
+  };
   return (
     <>
-      <ItemStyles onClick={() => router.push(`/NFT-details/${item.itemId}`)}>
+      <ItemStyles onClick={(e) => handleNavigatePage(e)}>
         <div className=" item-img w-full h-[270px] overflow-hidden ">
           <img
             className=" w-full  object-cover h-full bg-center"
@@ -92,7 +110,7 @@ const Item = ({ item }) => {
             {item.itemName} <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
           </p>
           <p className="font-bold text-xl ">
-            {item.price} <span className="ml-1 w-[50px] text-right">Meta</span>
+            {item.price} <span className="ml-1 w-[50px] text-right">Matic</span>
           </p>
 
           <p className="text-base mt-2">End in 7 days</p>
@@ -100,7 +118,7 @@ const Item = ({ item }) => {
         <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
           {!cart.idItemSelected.includes(item.itemId) ? (
             <button
-              onClick={() => handleAddItem(item)}
+              onClick={(e) => handleAddItem(e, item)}
               className="btn-item w-full"
               suppressHydrationWarning
             >
@@ -109,7 +127,7 @@ const Item = ({ item }) => {
           ) : (
             <button
               className="btn-item w-full"
-              onClick={() => handleRemoveCart(item)}
+              onClick={(e) => handleRemoveCart(e, item)}
               suppressHydrationWarning
             >
               Remove Cart
@@ -117,6 +135,14 @@ const Item = ({ item }) => {
           )}
         </div>
       </ItemStyles>
+
+      <SnackBarSuccess
+        open={toast.open}
+        vertical={toast.vertical}
+        horizontal={toast.horizontal}
+        message={toast.message}
+        setToast={setToast}
+      ></SnackBarSuccess>
     </>
   );
 };

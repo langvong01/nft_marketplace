@@ -6,12 +6,13 @@ import { motion } from 'framer-motion';
 import { connectMetaMaskState } from '../../../global-state/connect-metamask';
 import Style from './ModalWallet.module.scss';
 import useOnClickOutside from '../../../hook/useClickOutSide';
-import { modalNotifyMetaMask } from '../../../global-state/modal';
+import { modalNotifyMetaMaskState } from '../../../global-state/modal';
 
 const ModalWallet = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
-  const [isOpenModalMetaMask, setIsOpenModalMetaMask] =
-    useRecoilState(modalNotifyMetaMask);
+  const [isOpenModalMetaMask, setIsOpenModalMetaMask] = useRecoilState(
+    modalNotifyMetaMaskState
+  );
 
   const refPayment = useRef();
 

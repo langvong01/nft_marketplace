@@ -57,7 +57,7 @@ const CartItem = ({ item }) => {
             <MdDelete></MdDelete>
           </button>
           <p className={Style.cart_item_price}>
-            {item.price} <span>ETH</span>
+            {item.price} <span>Matic</span>
           </p>
         </div>
       </div>

@@ -22,7 +22,6 @@ const ListItemInCollection = ({ items, collection }) => {
 
       {items.length > 0 ? (
         <>
-          <ListItem items={items}></ListItem>
           <div className="search-items w-[95%] mx-auto my-4 flex items-center">
             <div className="w-[50%] flex items-center border-2 border-slate-200  cursor-pointer rounded-lg overflow-hidden">
               <span className="w-[50px] ">
@@ -51,13 +50,14 @@ const ListItemInCollection = ({ items, collection }) => {
               Search
             </button>
           </div>
+          <ListItem items={items}></ListItem>
         </>
       ) : (
         <>
           <div className="w-[95%] mx-auto h-[200px] rounded-lg mt-4 shadow-lg mb-10 flex justify-center items-center">
             <div>
               <p className="text-2xl mb-2">
-                There are no items in the collection{' '}
+                There are no items in the collection
               </p>
               <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:opacity-95">
                 Create item

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { MdClose } from 'react-icons/md';
 
-import { modalNotifyMetaMask } from '../../../global-state/modal';
+import { modalNotifyMetaMaskState } from '../../../global-state/modal';
 import useOnClickOutside from '../../../hook/useClickOutSide';
 import Style from './ModalMetaMask.module.scss';
 import Image from 'next/image';
@@ -13,8 +13,9 @@ import Loading from '../../loading/Loading';
 import { connectMetaMaskService } from '../../../services/metaService';
 
 const ModalMetaMask = () => {
-  const [isOpenModalMetaMask, setIsOpenModalMetaMask] =
-    useRecoilState(modalNotifyMetaMask);
+  const [isOpenModalMetaMask, setIsOpenModalMetaMask] = useRecoilState(
+    modalNotifyMetaMaskState
+  );
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
   const [loading, setLoading] = useState(false);
 
