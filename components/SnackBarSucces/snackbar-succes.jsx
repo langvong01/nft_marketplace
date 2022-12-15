@@ -15,23 +15,34 @@ const SnackBarSuccess = ({ open, vertical, horizontal, message, setToast }) => {
       open: false,
       vertical: vertical,
       horizontal: horizontal,
-      messages : message
+      message: message,
     });
     
   };
   return (
     <Snackbar
       open={open}
-      autoHideDuration={2000}
-      onClose={handleClose}
+      autoHideDuration={1000}
       anchorOrigin={{ vertical, horizontal }}
+      onClose={handleClose}
       key={vertical + horizontal}
+      sx={{
+        borderRadius: '8px',
+        zIndex: '111111111111111111',
+      }}
     >
       <Alert
         severity="success"
         sx={{
-          width: '100%',
-          bgcolor: '#4c5773'
+          width: '300px',
+          padding: '24px',
+          textAlign: 'center',
+          fontSize: '1.2rem',
+          bgcolor: 'white',
+          color: '#4c5773',
+          ' & .css-1ytlwq5-MuiAlert-icon': {
+            color: 'green',
+          },
         }}
       >
         {message}

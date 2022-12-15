@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MdVerified } from 'react-icons/md';
 
@@ -11,7 +11,6 @@ import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 
 import axiosClient from 'utils/axiosClient';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 const NFTDescription = ({ nft }) => {
   const [btn, setBtn] = useState({
@@ -123,7 +122,7 @@ const NFTDescription = ({ nft }) => {
           </div>
 
           <div className={Style.NFTDescription_box_profile_biding}>
-            {btn.isOnSale === 1 && (
+            {btn.isOnSale  && (
               <div
                 className={Style.NFTDescription_box_profile_biding_box_price}
               >
@@ -139,6 +138,7 @@ const NFTDescription = ({ nft }) => {
                 </div>
               </div>
             )}
+              </div>
             {btnAddtoCart && (
               <div
                 className={Style.NFTDescription_box_profile_biding_box_button}
@@ -157,13 +157,12 @@ const NFTDescription = ({ nft }) => {
             </div>
           </div>
         </div>
-      </div>
-      <SnackBarSuccess
-        open={toast.open}
-        vertical={toast.vertical}
-        horizontal={toast.horizontal}
-        message={toast.message}
-        setToast={setToast}
+        <SnackBarSuccess
+          open={toast.open}
+          vertical={toast.vertical}
+          horizontal={toast.horizontal}
+          message={toast.message}
+          setToast={setToast}
       />
     </div>
   );

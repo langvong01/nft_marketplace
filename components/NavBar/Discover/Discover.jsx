@@ -46,7 +46,7 @@ const Discover = () => {
     <>
       {discover.map((el, i) => (
         <motion.li key={i + 1} className={Style.discover}>
-          <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
+          <Link href={`/${el.link}`}>{el.name}</Link>
         </motion.li>
       ))}
     </>

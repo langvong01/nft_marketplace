@@ -13,7 +13,11 @@ import Style from './NavBar.module.scss';
 import images from '../../img';
 import SubTotalCart from './sub-total-cart/SubTotalCart';
 import { useRecoilState } from 'recoil';
-import { modalCartState, modalNotifyMetaMask } from '../../global-state/modal';
+import {
+  modalCartState,
+  modalNotifyMetaMaskState,
+  modalPaymentState,
+} from '../../global-state/modal';
 import ModalBase from '../modal/ModalBase';
 import Cart from '../cart/Cart';
 import Link from 'next/link';
@@ -27,18 +31,23 @@ import Discover from './discover/Discover';
 import Search from '../search/Search';
 import SideBar from './side-bar/SideBar';
 import { cartState } from 'global-state/cart';
+import ModalPayment from '../modal/modal-payment/ModalPayment';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
-  const [profileRef, isProfileRef] = useHover(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-  const [openCart, setOpenCart] = useRecoilState(modalCartState);
+
+  const [profileRef, isProfileRef] = useHover(false);
   const [discoveryRef, isDiscoveryRef] = useHover();
   const [helpRef, isHelpRef] = useHover();
-  const [isOpenModalMetaMask, setIsOpenModalMetaMask] =
-    useRecoilState(modalNotifyMetaMask);
+
+  const [isOpenModalMetaMask, setIsOpenModalMetaMask] = useRecoilState(
+    modalNotifyMetaMaskState
+  );
+  const [openCart, setOpenCart] = useRecoilState(modalCartState);
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
   const [cart, setCart] = useRecoilState(cartState);
+  const [modalPayment, setModalPayment] = useRecoilState(modalPaymentState);
 
   const handleOpenMeta = () => {
     setIsOpenModalMetaMask((prev) => {
@@ -189,6 +198,16 @@ const NavBar = () => {
             ) : (
               <ModalWallet></ModalWallet>
             )}
+          </ModalBase>
+        ) : null}
+      </AnimatePresence>
+
+      {/* modal payment */}
+
+      <AnimatePresence>
+        {modalPayment.open ? (
+          <ModalBase selector="body">
+            <ModalPayment></ModalPayment>
           </ModalBase>
         ) : null}
       </AnimatePresence>

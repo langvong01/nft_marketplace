@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getAllCollectionInCategory } from 'services/collectionService';
 import { v4 as uuidv4 } from 'uuid';
 
 const ListCollectionCategory = ({ collections }) => {
   const router = useRouter();
+
+  useEffect(() => {
+    document.title = `Category-${collections[0].category.categoryName}`;
+  }, [collections]);
+
   return (
     <>
       <div className="category-collection-container">
@@ -71,10 +76,15 @@ const ListCollectionCategory = ({ collections }) => {
 };
 
 export async function getServerSideProps(context) {
+  context.res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+
   const { categoryId } = context.query;
   const data = await getAllCollectionInCategory(categoryId);
 
-  if (!data) {
+  if (data.length === 0) {
     return {
       notFound: true,
     };

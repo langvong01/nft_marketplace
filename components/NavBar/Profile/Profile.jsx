@@ -8,13 +8,13 @@ import { motion } from 'framer-motion';
 import Style from './Profile.module.scss';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { connectMetaMaskState } from '../../../global-state/connect-metamask';
-import { modalNotifyMetaMask } from '../../../global-state/modal';
+import { modalNotifyMetaMaskState } from '../../../global-state/modal';
 import axiosClient from 'utils/axiosClient';
 import { TbDownload } from 'react-icons/tb';
 
 const Profile = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
-  const [metaModal, setMetaModal] = useRecoilState(modalNotifyMetaMask);
+  const [metaModal, setMetaModal] = useRecoilState(modalNotifyMetaMaskState);
 
   const resetMetaMask = useResetRecoilState(connectMetaMaskState);
 

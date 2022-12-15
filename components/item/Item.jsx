@@ -1,5 +1,8 @@
 import { cartState } from 'global-state/cart';
+import { useRouter } from 'next/router';
 import React from 'react';
+import { useState } from 'react';
+import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -19,6 +22,7 @@ const ItemStyles = styled.div`
   overflow: hidden;
   transition: all 0.5s;
   cursor: pointer;
+  overflow: hidden;
 
   .item-btn {
     transition: all 0.2s;
@@ -43,17 +47,30 @@ const ItemStyles = styled.div`
 
 const Item = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
+  const [toast, setToast] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'right',
+    message: null,
+  });
+  const router = useRouter();
 
-  const handleAddItem = (item) => {
+  const handleAddItem = (e, item) => {
+    e.stopPropagation();
     setCart((prev) => {
       const newArray = [...new Set([...prev.idItemSelected, item.itemId])];
       let newArrayItem = [...new Set([...prev.items, item])];
 
       return { ...prev, idItemSelected: newArray, items: newArrayItem };
     });
+
+    setToast((prev) => {
+      return { ...prev, open: true, message: 'Added to cart' };
+    });
   };
 
-  const handleRemoveCart = (item) => {
+  const handleRemoveCart = (e, item) => {
+    e.stopPropagation();
     setCart((prev) => {
       let newArrayId = [...new Set([...prev.idItemSelected, item.itemId])];
 
@@ -68,49 +85,65 @@ const Item = ({ item }) => {
 
       return { ...prev, idItemSelected: newArrayId, items: newArrayItem };
     });
+
+    setToast((prev) => {
+      return { ...prev, open: true, message: 'Removed to cart' };
+    });
   };
 
+  const handleNavigatePage = (event) => {
+    router.push(`/NFT-details/${item.itemId}`);
+  };
   return (
-    <ItemStyles>
-      <div className=" item-img w-full h-[270px] overflow-hidden ">
-        <img
-          src="https://i.seadn.io/gae/4_58T7JRKZ6t2aX_FJ_m1JQJrauUvFlYgtSwKQdBERLktfsLUpUr_rfelfH-IH__wHD42qezGvL1X7vw6nmFC60z15YlEwx_AOSdYg?auto=format&w=750"
-          className=" w-full  object-cover h-full bg-center"
-          alt=""
-        />
-      </div>
+    <>
+      <ItemStyles onClick={(e) => handleNavigatePage(e)}>
+        <div className=" item-img w-full h-[270px] overflow-hidden ">
+          <img
+            className=" w-full  object-cover h-full bg-center"
+            alt=""
+            src={item.mediaFileUrl}
+          />
+        </div>
 
-      <div className="w-full p-2 mt-3">
-        <p className="font-bold text-xl ">
-          {item.itemName} <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
-        </p>
-        <p className="font-bold text-xl ">
-          {item.price} <span className="ml-1 w-[50px] text-right">Meta</span>
-        </p>
+        <div className="w-full p-2 mt-3">
+          <p className="font-bold text-xl ">
+            {item.itemName} <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
+          </p>
+          <p className="font-bold text-xl ">
+            {item.price} <span className="ml-1 w-[50px] text-right">Matic</span>
+          </p>
 
-        <p className="text-base mt-2">End in 7 days</p>
-      </div>
+          <p className="text-base mt-2">End in 7 days</p>
+        </div>
+        <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
+          {!cart.idItemSelected.includes(item.itemId) ? (
+            <button
+              onClick={(e) => handleAddItem(e, item)}
+              className="btn-item w-full"
+              suppressHydrationWarning
+            >
+              Add Cart
+            </button>
+          ) : (
+            <button
+              className="btn-item w-full"
+              onClick={(e) => handleRemoveCart(e, item)}
+              suppressHydrationWarning
+            >
+              Remove Cart
+            </button>
+          )}
+        </div>
+      </ItemStyles>
 
-      <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
-        {!cart.idItemSelected.includes(item.itemId) ? (
-          <button
-            onClick={() => handleAddItem(item)}
-            className="w-full"
-            suppressHydrationWarning
-          >
-            Add Cart
-          </button>
-        ) : (
-          <button
-            className="w-full"
-            onClick={() => handleRemoveCart(item)}
-            suppressHydrationWarning
-          >
-            Remove Cart
-          </button>
-        )}
-      </div>
-    </ItemStyles>
+      <SnackBarSuccess
+        open={toast.open}
+        vertical={toast.vertical}
+        horizontal={toast.horizontal}
+        message={toast.message}
+        setToast={setToast}
+      ></SnackBarSuccess>
+    </>
   );
 };
 

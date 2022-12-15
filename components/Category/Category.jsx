@@ -19,7 +19,7 @@ const Category = () => {
           <div className={Style.followerTab_title}>
             <h2 className="capitalize">Popular categories</h2>
           </div>
-          <div className="category flex items-center justify-between w-[95%] mx-auto gap-y-8 flex-wrap">
+          <div className="category flex items-center justify-between w-[95%] mx-auto gap-8 flex-wrap">
             <CategorySkeleton></CategorySkeleton>
           </div>
         </div>
@@ -32,73 +32,24 @@ const Category = () => {
       <div className={Style.followerTab_title}>
         <h2 className="capitalize">Popular categories</h2>
       </div>
-      <div className="category flex items-center justify-between w-[95%] mx-auto gap-y-8 flex-wrap">
-        <div className="category-item cursor-pointer rounded-lg overflow-hidden shadow-md  w-[30%]">
-          <div className="category-image ">
-            <img
-              src="https://opensea.io/static/images/categories/art.png"
-              alt="arts"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="category-text text-center">
-            <h2 className="p-8 text-2xl">Arts</h2>
-          </div>
-        </div>
-
-        <div className="category-item cursor-pointer  rounded-lg  overflow-hidden shadow-md w-[30%]">
-          <div className="category-image">
-            <img
-              src="	https://opensea.io/static/images/categories/collectibles.png"
-              alt="sports"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="category-text text-center">
-            <h2 className="p-8 text-2xl">Sports</h2>
-          </div>
-        </div>
-
-        <div className="category-item cursor-pointer   rounded-lg overflow-hidden shadow-md w-[30%]">
-          <div className="category-image ">
-            <img
-              src="https://opensea.io/static/images/categories/sports.png"
-              alt="arts"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="category-text text-center">
-            <h2 className="p-8 text-2xl">Photography</h2>
-          </div>
-        </div>
-
-        <div className="category-item cursor-pointer  rounded-lg overflow-hidden shadow-md w-[30%]">
-          <div className="category-image ">
-            <img
-              src="https://opensea.io/static/images/categories/sports.png"
-              alt="arts"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="category-text text-center">
-            <h2 className="p-8 text-2xl">Vitural Worlds</h2>
-          </div>
-        </div>
+      <div className="category grid grid-cols-4 gap-8 justify-between w-[95%] mx-auto gap-y-8 flex-wrap">
         {data.body.map((categori) => (
           <div
             key={uuidv4()}
-            className="category-item cursor-pointer  rounded-lg overflow-hidden shadow-md w-[30%]"
+            className="category-item  cursor-pointer  rounded-lg overflow-hidden shadow-md w-full h-[400px] "
             onClick={() => router.push(`/category/${categori.categoryId}`)}
           >
             <div className="category-image overflow-hidden ">
               <img
                 src="https://opensea.io/static/images/categories/sports.png"
                 alt="arts"
-                className="w-full h-full object-cover hover:scale-105 scale-100 transition-all"
+                className="w-full h-[250px] object-cover hover:scale-105 scale-100 transition-all"
               />
             </div>
-            <div className="category-text text-center">
-              <h2 className="p-8 text-2xl">{categori.categoryName}</h2>
+            <div className="category-text text-center h-[150px] flex items-center justify-center">
+              <h2 className="p-8 text-2xl h-ful text-center">
+                {categori.categoryName}
+              </h2>
             </div>
           </div>
         ))}

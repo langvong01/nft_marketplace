@@ -7,7 +7,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { getTopTenCollectionLatest } from 'services/collectionService';
-import { getTopTenItemLatest } from 'services/itemService';
+import { getTopTenItem } from 'services/itemService';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 
@@ -58,7 +58,7 @@ const Collections = () => {
         setData(data);
       });
     } else if (value === 'items') {
-      getTopTenItemLatest(filter).then((data) => {
+      getTopTenItem(filter).then((data) => {
         setData(data);
       });
     }
@@ -67,7 +67,7 @@ const Collections = () => {
   return (
     <>
       <CollectionStyles>
-        <h2 className="text-4xl text-center">Collections</h2>
+        <h2 className="text-4xl text-center">Top collections and items </h2>
         <TabContext value={value}>
           <Box
             sx={{

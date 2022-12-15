@@ -8,7 +8,7 @@ export const modalCartState = atom({
   }, // default value (aka initial value)
 });
 
-export const modalNotifyMetaMask = atom({
+export const modalNotifyMetaMaskState = atom({
   key: 'modalMetaMask',
   default: {
     open: false,
@@ -20,5 +20,12 @@ export const modalSearchState = atom({
   default: {
     open: false,
     isLoading: false,
+  },
+});
+
+export const modalPaymentState = atom({
+  key: 'modalPayment',
+  default: {
+    open: false,
   },
 });

@@ -62,7 +62,7 @@ const CartDetails = () => {
           <div className={Style.cart_details_payment_total}>
             <p>Total price</p>
             <p>
-              {totalPrice} <span>ETH</span>
+              {totalPrice} <span>Matic</span>
             </p>
           </div>
           <div className={Style.cart_details_payment_sender}>
