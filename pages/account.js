@@ -23,6 +23,7 @@ import { MdOutlineContentCopy, MdOutlineHttp } from 'react-icons/md';
 
 const account = ({}) => {
   const [fileUrl, setFileUrl] = useState(null);
+  const [file, setFile] = useState(null);
 
   const [profile, setProfile] = useState({
     avatar: null,
@@ -65,10 +66,7 @@ const account = ({}) => {
   const onDrop = useCallback(async (acceptedFile) => {
     const url = URL.createObjectURL(acceptedFile[0]);
     setFileUrl(url);
-    setProfile({
-      ...profile,
-      avatar: acceptedFile[0],
-    });
+    setFile(acceptedFile[0]);
   }, []);
 
   const onSubmitHandle = async (data) => {
@@ -81,7 +79,7 @@ const account = ({}) => {
       const formData = new FormData();
       formData.append('name', name);
       formData.append('email', email);
-      formData.append('avatar', profile.avatar);
+      formData.append('avatar',file);
       const respone = await axiosClient.post(`/profile`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
@@ -145,11 +143,7 @@ const account = ({}) => {
                 <div className={FormStyle.Form_box_input_box_icon}>
                   <MdOutlineHttp />
                 </div>
-                <input
-                  type="text"
-                  readOnly
-                  defaultValue={accountCurrent}
-                />
+                <input type="text" readOnly defaultValue={accountCurrent} />
                 <div className={FormStyle.Form_box_input_box_icon}>
                   <MdOutlineContentCopy />
                 </div>
