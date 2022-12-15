@@ -33,7 +33,7 @@ const DesciptionCollection = ({ collection, items }) => {
         <div className="desc-col-text">
           <p className="text-xl font-normal">
             Items :
-            <span className="font-bold text-base ml-1">{items.length}</span>
+            <span className="font-bold text-base ml-1">{items?.length}</span>
           </p>
 
           <p className="text-base mt-2 font-normal w-[60%]">

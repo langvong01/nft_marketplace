@@ -53,7 +53,7 @@ export const getItemBySort = async (
   nameCollection = null
 ) => {
   const response = await axiosClient.post('/item/filter', {
-    item_name_like: name,
+    item_name_like: `%${name}%`,
     collection: { collection_name_like: nameCollection },
     sort_by: [sortBy],
     order: [order],
