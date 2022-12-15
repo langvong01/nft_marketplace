@@ -1,25 +1,29 @@
-import React from "react";
-import formStyle from "../../AccountPage/Form/Form.module.css";
-import ErrorMsg from "./ErrorMessage/ErrorMessage";
-
+import React from 'react';
+import formStyle from '../../AccountPage/Form/Form.module.css';
+import ErrorMsg from './ErrorMessage/ErrorMessage';
 
 const Input = React.forwardRef(
-  ({ onChange, label, type, placeholder, register, errors }, ref) => {
-
+  (
+    { onChange, label, type, placeholder, register, errors, initialValue = '' },
+    ref
+  ) => {
     return (
       <div className={formStyle.Form_box_input}>
-        <label htmlFor="nft" className="text-capitalize">{label}</label>
+        <label htmlFor="nft" className="text-capitalize">
+          {label}
+        </label>
         <input
+          defaultValue={initialValue}
           ref={ref}
           type={type}
           placeholder={placeholder}
           className={formStyle.Form_box_input_userName}
           {...register(label, {
-            required: "This filed  is required.",
+            required: 'This filed  is required.',
             onChange: onChange,
             maxLength: {
-              value: 11,
-              message: "This input must maximum  characters",
+              value: 255,
+              message: 'This input must maximum  characters',
             },
           })}
         />

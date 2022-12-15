@@ -1,18 +1,18 @@
 
 .account{
     width: 100%;
-    margin-block: 6rem;
+    margin-bottom: 3rem;
 }
 
 .account_info{
     width: 50%;
     margin:  0 auto;
     border-bottom: 1px solid var(--shadow-dark-color);
+    margin-top: 2rem;
 }
 
 .account_info h1{
-    font-size: 4rem;
-    line-height: .5;
+    font-size: 2rem;
 }
 
 .account_info p{
@@ -25,7 +25,6 @@
 .account_box{
     width: 50%;
     margin:  0 auto;
-
     display: grid;
     grid-template-columns: 1fr 5fr;
     margin-top: 3rem;
@@ -49,6 +48,12 @@
     font-size: 1rem;
     line-height: 0;
 }
+
+.account_box_btn {
+    margin-top: 2rem;
+}
+
+
 
 @media screen and (max-width: 35em) {
     .account_info{

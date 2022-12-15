@@ -35,6 +35,8 @@ const UploadItem = () => {
     criteriaMode: 'all',
   });
 
+  
+
   const onSubmit = async (data) => {
     if (!image || !collectionUI) {
       alert('Please upload image and choose collection');
@@ -82,7 +84,6 @@ const UploadItem = () => {
 
       router.push(`/NFT-details/${itemId}`)
     } catch (error) {
-      console.log(error);
       if (itemId) {
         await axiosClient.delete('/item/' + itemId);
       }

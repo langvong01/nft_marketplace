@@ -12,6 +12,10 @@ import {
 
 import { Line } from 'react-chartjs-2';
 
+import { useRouter } from 'next/router';
+import axiosClient from 'utils/axiosClient';
+import { TableBody } from '@mui/material';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,9 +25,42 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+const dateStringList = ['01/10/2022', '01/11/2022', '01/12/2022', '01/01/2023'];
 
-const LineChart = () => {
-  
+const LineChart = ({ chartData }) => {
+  const router = useRouter();
+  const { itemId } = router.query;
+  const [prices, setPrices] = useState([]);
+
+  const getChartData = async () => {
+    try {
+      // body =[{01/12/2022 : priceValue},....]
+      const {
+        data: { body },
+      } = await axiosClient.post(`/item-activities-history`, {
+        itemId: +itemId,
+        dateStringList,
+      });
+
+      const pricesArray = [];
+
+      if (body.length) {
+        body.array.forEach((el) => {
+          for (const key in el) {
+            pricesArray.push(el[key]);
+          }
+        });
+      }
+      setPrices(pricesArray);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (!router.isReady) return;
+    getChartData();
+  }, [router.isReady, itemId]);
+
   const MONTHS = [
     'January',
     'February',
@@ -40,11 +77,11 @@ const LineChart = () => {
   ];
 
   var data = {
-    labels: MONTHS,
+    labels: dateStringList,
     datasets: [
       {
-        label: 'Price Historynf',
-        data: [65, 59, 80, 81, 56, 55, 40,50,60,70,80,90],
+        label: 'Price History',
+        data: prices,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',

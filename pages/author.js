@@ -58,21 +58,6 @@ const author = () => {
         setFollower={setFollower}
         setFollowing={setFollowing}
       />
-
-      {/* <AuthorNFTCardBox
-        collectiables={collectiables}
-        created={created}
-        like={like}
-        follower={follower}
-        following={following}
-      /> */}
-      <Title
-        heading="Popular Creators"
-        paragraph="Click on music icon and enjoy NTF music or audio
-"
-      />
-
-      <Brand />
     </div>
   );
 };

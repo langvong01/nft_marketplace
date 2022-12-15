@@ -7,30 +7,57 @@ import images from '../../img';
 
 import Button from '../../components/Button/Button';
 import LineChart from '@/components/NftChart/LineChart';
+import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
+
+import axiosClient from 'utils/axiosClient';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const NFTDescription = ({ nft }) => {
-  const [social, setSocial] = useState(false);
-  const [NFTMenu, setNFTMenu] = useState(false);
-  const btnAddtoCart = nft.isOwner !== 1 || nft.isOnSale === 1;
+  const [btn, setBtn] = useState({
+    isOnSale: null,
+    isOwner: null,
+  });
+  const [toast, setToast] = useState({
+    open: false,
+    vertical: 'bottom',
+    horizontal: 'center',
+    message: null,
+  });
+
+  const btnAddtoCart = btn.isOnSale && !btn.isOwner;
   const router = useRouter();
 
-  const openSocial = () => {
-    if (!social) {
-      setSocial(true);
-      setNFTMenu(false);
-    } else {
-      setSocial(false);
-    }
-  };
+  useEffect(() => {
+    const boolean = false;
 
-  const openNFTMenu = () => {
-    if (!NFTMenu) {
-      setNFTMenu(true);
-      setSocial(false);
-    } else {
-      setNFTMenu(false);
+    if (nft.isOnSale === 1) {
+      setBtn((prev) => {
+        return { ...prev, isOnSale: true };
+      });
     }
+    if (nft.isOwner === 1) {
+      setBtn((prev) => {
+        return { ...prev, isOwner: true };
+      });
+    }
+  }, [nft.isOnSale, nft.isOwner]);
+
+  const handleCancelListingClick = async () => {
+    try {
+      const { data } = await axiosClient.get(
+        `/item/cancel-listing?itemId=${nft.itemId}`
+      );
+      setBtn({
+        ...btn,
+        isOnSale: false,
+      });
+      setToast({
+        ...toast,
+        open: true,
+        message: 'Cancel Lising is successly',
+      });
+    } catch (error) {}
   };
 
   return (
@@ -39,15 +66,22 @@ const NFTDescription = ({ nft }) => {
         {/* //Part ONE */}
         <div className={Style.NFTDescription_box_share}>
           <p>Virtual Worlds</p>
-          <div className={Style.NFTDescription_box_share_box}>
-            {nft.isOwner === 1 && (
+          {btn.isOwner && (
+            <div className={Style.NFTDescription_box_share_box}>
               <Button
                 btnName="Sell"
                 handleClick={() => router.push(`/sell/${nft.itemId}`)}
                 classStyle={Style.button}
               />
-            )}
-          </div>
+              {btn.isOnSale && (
+                <Button
+                  btnName="Cancel Listing"
+                  classStyle={`${Style.button} mt-2`}
+                  handleClick={handleCancelListingClick}
+                ></Button>
+              )}
+            </div>
+          )}
         </div>
 
         {/* //Part TWO */}
@@ -89,8 +123,10 @@ const NFTDescription = ({ nft }) => {
           </div>
 
           <div className={Style.NFTDescription_box_profile_biding}>
-              {nft.isOnSale === 1 && (
-            <div className={Style.NFTDescription_box_profile_biding_box_price}>
+            {btn.isOnSale === 1 && (
+              <div
+                className={Style.NFTDescription_box_profile_biding_box_price}
+              >
                 <div
                   className={
                     Style.NFTDescription_box_profile_biding_box_price_bid
@@ -98,19 +134,20 @@ const NFTDescription = ({ nft }) => {
                 >
                   <small>Current Bid</small>
                   <p>
-                    1.000 ETH <span>( ≈ $3,221.22)</span>
+                    {nft.price} MATIC<span>( ≈ $3,221.22)</span>
                   </p>
                 </div>
-            </div>
-              )}
+              </div>
+            )}
             {btnAddtoCart && (
               <div
                 className={Style.NFTDescription_box_profile_biding_box_button}
+                s
               >
                 <Button
                   btnName="Add to Cart"
                   handleClick={() => {}}
-                  classStyle={Style.button}
+                  classStyle={`${Style.button} w-100`}
                 />
               </div>
             )}
@@ -121,6 +158,13 @@ const NFTDescription = ({ nft }) => {
           </div>
         </div>
       </div>
+      <SnackBarSuccess
+        open={toast.open}
+        vertical={toast.vertical}
+        horizontal={toast.horizontal}
+        message={toast.message}
+        setToast={setToast}
+      />
     </div>
   );
 };

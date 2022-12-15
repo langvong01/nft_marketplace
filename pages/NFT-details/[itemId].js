@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { connectMetaMaskState } from 'global-state/connect-metamask';
 import { getItemDetails } from '../../services/itemService';
 
-const NFTDetails = ({}) => {
+const NFTDetails = ({ itemsActivity }) => {
   const router = useRouter();
   const { itemId } = router.query;
   const [auth, setAuth] = useRecoilState(connectMetaMaskState);
@@ -19,14 +19,16 @@ const NFTDetails = ({}) => {
     itemId: '',
     walletAddress: ' ',
     tokenId: '',
-    isOnSale : 0
+    isOnSale: 0,
+    price: null,
   });
-  const [itemsActivity, setItemActivity] = useState([]);
+  // const [itemsActivity, setItemActivity] = useState([]);
 
   const fetchItemDetails = async () => {
     const data = await getItemDetails(itemId, auth.isLogin);
     if (data) {
       const {
+        price,
         isOnSale,
         mediaFileUrl,
         itemName,
@@ -45,29 +47,37 @@ const NFTDetails = ({}) => {
         itemId,
         walletAddress,
         tokenId,
-        isOnSale
+        isOnSale,
+        price,
       });
     }
-  };
-
-  const fetchItemActivity = async () => {
-    try {
-      if (!itemId) return;
-      const { data } = await axiosClient.get(
-        `/item-activities-history/${itemId}`
-      );
-      setItemActivity(data.body);
-    } catch (error) {}
   };
 
   useEffect(() => {
     fetchItemDetails();
   }, [itemId]);
 
-  useEffect(() => {
-    fetchItemActivity();
-  }, [itemId]);
   return <NFTDetailsPage nft={nft} itemsActivity={itemsActivity} />;
 };
 
 export default NFTDetails;
+
+export async function getServerSideProps(context) {
+  const { itemId } = context.query;
+
+  const {
+    data: { body: itemsActivity },
+  } = await axiosClient.get(`/item-activities-history/${itemId}`);
+
+  if (!itemsActivity) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      itemsActivity,
+    },
+  };
+}

@@ -13,14 +13,16 @@ const SnackBarSuccess = ({ open, vertical, horizontal, message, setToast }) => {
     }
     setToast({
       open: false,
-      vertical: 'bottom',
-      horizontal: 'center',
+      vertical: vertical,
+      horizontal: horizontal,
+      messages : message
     });
+    
   };
   return (
     <Snackbar
       open={open}
-      autoHideDuration={1000}
+      autoHideDuration={2000}
       onClose={handleClose}
       anchorOrigin={{ vertical, horizontal }}
       key={vertical + horizontal}

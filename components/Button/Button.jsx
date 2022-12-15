@@ -9,7 +9,10 @@ const Button = ({ btnName, handleClick, icon, classStyle , isDisabled }) => {
       <button
         disabled = {isDisabled}
         className={`${Style.button} ${classStyle}`}
-        onClick={() => handleClick()}
+        onClick={(e) =>{
+          // e.preventDefault();
+          handleClick()
+        }}
       >
         {icon} {btnName}
       </button>

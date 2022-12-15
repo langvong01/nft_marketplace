@@ -129,20 +129,6 @@ const AuthorProfileCard = () => {
               </p>
             </div>
           )}
-          {/* <BsThreeDots
-            onClick={() => openReport()}
-            className={Style.AuthorProfileCard_box_share_icon}
-          />
-
-          {report && (
-            <p className={Style.AuthorProfileCard_box_share_report}>
-              <span>
-                <MdOutlineReportProblem />
-              </span>{' '}
-              {''}
-              Report abouse
-            </p>
-          )} */}
         </div>
       </div>
     </div>

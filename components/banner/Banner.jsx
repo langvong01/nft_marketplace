@@ -27,4 +27,5 @@ const Banner = ({ bannerImage, collection }) => {
   );
 };
 
+
 export default Banner;

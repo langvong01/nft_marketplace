@@ -11,31 +11,31 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const columns = [
-  { id: 'event', align: 'right', label: 'Event', minWidth: 100 },
-  { id: 'price', align: 'right', label: 'Price', minWidth: 100 },
+  { id: 'event', align: 'center', label: 'Event', minWidth: 100 },
+  { id: 'price', align: 'center', label: 'Price', minWidth: 100 },
   {
     id: 'from',
     label: 'From',
     minWidth: 100,
-    align: 'right',
+    align: 'center',
   },
   {
     id: 'to',
     label: 'TO',
     minWidth: 100,
-    align: 'right',
+    align: 'center',
   },
   {
     id: 'date',
     label: 'Date',
     minWidth: 100,
-    align: 'right',
+    align: 'center',
   },
   {
     id: 'scanLink',
     label: 'ScanLink',
     minWidth: 300,
-    align: 'right',
+    align: 'center',
   },
 ];
 
@@ -48,8 +48,8 @@ const NFTActivity = ({ itemsActivity }) => {
       id: item.activityId,
       event: item.operation,
       price: item.price,
-      from: item.from,
-      to: item.to.username,
+      from: item.from ? item.from.username : null,
+      to: item.to ? item.to.username : null,
       date: item.createdAt,
       scanLink: item.txnScanLink,
     };
@@ -85,7 +85,7 @@ const NFTActivity = ({ itemsActivity }) => {
           aria-label="sticky table"
           sx={{
             // style for table header
-            '& .css-i02g0k-MuiTableCell-root': {
+            '& .css-dwuj3p-MuiTableCell-root': {
               color: 'white',
               bgcolor: '#4c5773',
             },
@@ -93,7 +93,7 @@ const NFTActivity = ({ itemsActivity }) => {
             '& .css-177gid-MuiTableCell-root': {
               color: '#4c5773',
             },
-            '& .css-177gid-MuiTableCell-root a': {
+            '& .css-1yhpg23-MuiTableCell-root a': {
               color: 'rgb(32, 129, 226)',
               textDecoration: 'underline',
             },
@@ -123,7 +123,7 @@ const NFTActivity = ({ itemsActivity }) => {
                       if (column.id === 'scanLink') {
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            <Link href={value}>Link</Link>
+                            {value && <Link href={value}>Link</Link>}
                           </TableCell>
                         );
                       } else {

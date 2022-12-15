@@ -29,6 +29,7 @@
 .Form_box_input::placeholder{
     font-size: 1.2rem;
     color: var(--icons-color);
+    background-color: transparent;
 }
 
 .Form_box_input_box{
