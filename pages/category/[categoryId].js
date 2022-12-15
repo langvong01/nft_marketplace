@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getAllCollectionInCategory } from 'services/collectionService';
 import { v4 as uuidv4 } from 'uuid';
+import axiosClient from 'utils/axiosClient';
 
-const ListCollectionCategory = ({ collections }) => {
+const ListCollectionCategory = ({ collections , category }) => {
   const router = useRouter();
-
+  console.log(category);
   useEffect(() => {
-    document.title = `Category-${collections[0].category.categoryName}`;
+    document.title = `Category-${category.categoryName}`;
   }, [collections]);
 
   return (
@@ -22,10 +23,10 @@ const ListCollectionCategory = ({ collections }) => {
 
         <div className="description w-[95%] mx-auto mb-10">
           <h1 className="text-4xl font-semibold">
-            Explore {collections[0].category.categoryName}
+            Explore {category.categoryName}
           </h1>
           <p className="text-base font-normal">
-            <span>{collections[0].category.categoryName}</span> are taking the
+            <span>{category.categoryName}</span> are taking the
             NFT world by storm, and we've got a selection of breathtaking
             collections from a growing and increasingly global community of
             creators right here on underground.
@@ -81,18 +82,23 @@ export async function getServerSideProps(context) {
     'public, s-maxage=10, stale-while-revalidate=59'
   );
 
+
   const { categoryId } = context.query;
+  const response = await axiosClient.get(`/category/${categoryId}`);
+  const category = await response.data.body;
   const data = await getAllCollectionInCategory(categoryId);
 
-  if (data.length === 0) {
+  if (response.data.status === 404) {
     return {
       notFound: true,
     };
   }
-  
+  // console.log({ a : category})
+  // console.log({b : response})
   return {
     props: {
       collections: data,
+      category :category
     },
   };
 }
