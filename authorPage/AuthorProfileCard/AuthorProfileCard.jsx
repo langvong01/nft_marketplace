@@ -15,7 +15,7 @@ import images from '../../img';
 import Button from '../../components/Button/Button';
 import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 
-const AuthorProfileCard = () => {
+const AuthorProfileCard = ({ profile }) => {
   const [share, setShare] = useState(false);
 
   const [toast, setToast] = useState({
@@ -44,7 +44,8 @@ const AuthorProfileCard = () => {
       <div className={Style.AuthorProfileCard_box}>
         <div className={Style.AuthorProfileCard_box_img}>
           <Image
-            src={images.nft_image_1}
+            loader={() => profile.avatar}
+            src={profile?.avatar}
             className={Style.AuthorProfileCard_box_img_img}
             alt="NFT IMAGES"
             width={220}
@@ -54,14 +55,12 @@ const AuthorProfileCard = () => {
 
         <div className={Style.AuthorProfileCard_box_info}>
           <div className={Style.AuthorProfileCard_box_info_name}>
-            <h2>Dony Herrera</h2>
+            <h2>{profile?.name}</h2>
             <MdVerified className={Style.AuthorProfileCard_box_info_icon} />
           </div>
 
           <div className={Style.AuthorProfileCard_box_info_address}>
-            <span id="myWalletAdress">
-              0xf4910c763ed4e47a585e2d34baa9a4b611ae448c
-            </span>
+            <span id="myWalletAdress">{profile?.walletAddress}</span>
             <FiCopy
               onClick={() => copyAddress()}
               className={Style.AuthorProfileCard_box_info_icon}
@@ -71,7 +70,14 @@ const AuthorProfileCard = () => {
               vertical={toast.vertical}
               horizontal={toast.horizontal}
               message="Copy is success"
-              setToast = {setToast}
+              setToast={setToast}
+            />
+          </div>
+          <div className={Style.AuthorProfileCard_box_info_address}>
+            <span id="myWalletAdress">{profile?.email}</span>
+            <FiCopy
+              onClick={() => copyAddress()}
+              className={Style.AuthorProfileCard_box_info_icon}
             />
           </div>
           <div className={Style.AuthorProfileCard_box_info_social}>

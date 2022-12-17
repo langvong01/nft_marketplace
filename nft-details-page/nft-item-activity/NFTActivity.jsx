@@ -9,6 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useState } from 'react';
 import Link from 'next/link';
+import moment from 'moment/moment';
 
 const columns = [
   { id: 'event', align: 'center', label: 'Event', minWidth: 100 },
@@ -43,13 +44,15 @@ const NFTActivity = ({ itemsActivity }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowPerPage] = useState(10);
 
+  console.log(moment('2022-12-15T17:16:38').startOf('days').fromNow());
+
   const activitys = itemsActivity.map((item) => {
     return {
       id: item.activityId,
       event: item.operation,
       price: item.price,
-      from: item.from ? item.from.username : null,
-      to: item.to ? item.to.username : null,
+      from: item.from ? item.from : null,
+      to: item.to ? item.to : null,
       date: item.createdAt,
       scanLink: item.txnScanLink,
     };
@@ -123,18 +126,37 @@ const NFTActivity = ({ itemsActivity }) => {
                       if (column.id === 'scanLink') {
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {value && <Link href={value}>Link</Link>}
-                          </TableCell>
-                        );
-                      } else {
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {typeof value === 'number'
-                              ? `${value} MATIC`
-                              : value}
+                            {value && (
+                              <Link href={value}>
+                                <a target="_blank">Go To PolgonScan</a>
+                              </Link>
+                            )}
                           </TableCell>
                         );
                       }
+                      if (column.id === 'date') {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {value && moment(value).startOf('day').fromNow()}
+                          </TableCell>
+                        );
+                      }
+                      if (column.id === 'from' || column.id === 'to') {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {value?.name && (
+                              <Link href={`/account/${value.walletAddress}`}>
+                                {value?.name}
+                              </Link>
+                            )}
+                          </TableCell>
+                        );
+                      }
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {typeof value === 'number' ? `${value} MATIC` : value}
+                        </TableCell>
+                      );
                     })}
                   </TableRow>
                 );

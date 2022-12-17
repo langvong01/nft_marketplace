@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+
 //INTERNAL IMPORT
 import Style from './Discover.module.css';
 
@@ -18,7 +19,7 @@ const Discover = () => {
     },
     {
       name: 'Author Profile',
-      link: 'author',
+      link: 'account',
     },
     {
       name: 'NFT Details',
@@ -26,7 +27,7 @@ const Discover = () => {
     },
     {
       name: 'Account Setting',
-      link: 'account',
+      link: 'account-setting',
     },
     {
       name: 'Upload NFT',

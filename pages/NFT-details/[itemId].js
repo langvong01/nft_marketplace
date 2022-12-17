@@ -17,10 +17,12 @@ const NFTDetails = ({ itemsActivity }) => {
     description: '',
     isOwner: 0,
     itemId: '',
-    walletAddress: ' ',
     tokenId: '',
     isOnSale: 0,
     price: null,
+    collectionName : '',
+    creator : {},
+    ownedBy : {}
   });
   // const [itemsActivity, setItemActivity] = useState([]);
 
@@ -28,6 +30,7 @@ const NFTDetails = ({ itemsActivity }) => {
     const data = await getItemDetails(itemId, auth.isLogin);
     if (data) {
       const {
+        collection: { collectionName },
         price,
         isOnSale,
         mediaFileUrl,
@@ -36,7 +39,8 @@ const NFTDetails = ({ itemsActivity }) => {
         isOwner,
         itemId,
         tokenId,
-        creator: { walletAddress },
+        creator,
+        ownedBy
       } = data;
       setNft({
         ...nft,
@@ -45,10 +49,12 @@ const NFTDetails = ({ itemsActivity }) => {
         description,
         isOwner,
         itemId,
-        walletAddress,
         tokenId,
         isOnSale,
         price,
+        collectionName,
+        creator,
+        ownedBy
       });
     }
   };

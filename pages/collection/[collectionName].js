@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 //INTRNAL IMPORT
 import Style from '../../styles/searchPage.module.css';
 import SearchIcon from '@mui/icons-material/Search';
-
 import images from '../../img';
 import Banner from '@/components/banner/Banner';
 import DesciptionCollection from '@/components/collections/DesciptionCollection';

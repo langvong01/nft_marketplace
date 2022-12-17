@@ -17,6 +17,7 @@ const NFTDescription = ({ nft }) => {
     isOnSale: null,
     isOwner: null,
   });
+
   const [toast, setToast] = useState({
     open: false,
     vertical: 'bottom',
@@ -28,7 +29,6 @@ const NFTDescription = ({ nft }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const boolean = false;
 
     if (nft.isOnSale === 1) {
       setBtn((prev) => {
@@ -64,14 +64,25 @@ const NFTDescription = ({ nft }) => {
       <div className={Style.NFTDescription_box}>
         {/* //Part ONE */}
         <div className={Style.NFTDescription_box_share}>
-          <p>Virtual Worlds</p>
+          {nft.collectionName && (
+            <div className="">
+              <button
+                onClick={() => router.push(`/collection/${nft.collectionName}`)}
+                className="text-primary text-capitalize fs-5"
+              >
+                {nft.collectionName}
+              </button>
+            </div>
+          )}
           {btn.isOwner && (
             <div className={Style.NFTDescription_box_share_box}>
-              <Button
-                btnName="Sell"
-                handleClick={() => router.push(`/sell/${nft.itemId}`)}
-                classStyle={Style.button}
-              />
+              {!btn.isOnSale && (
+                <Button
+                  btnName="Sell"
+                  handleClick={() => router.push(`/sell/${nft.itemId}`)}
+                  classStyle={Style.button}
+                />
+              )}
               {btn.isOnSale && (
                 <Button
                   btnName="Cancel Listing"
@@ -89,8 +100,9 @@ const NFTDescription = ({ nft }) => {
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
               <Image
-                src={images.user1}
-                alt="profile"
+                loader={() => nft.creator?.avatar}
+                src={nft.creator.avatar}
+                alt="creatorProFile"
                 width={40}
                 height={40}
                 className={Style.NFTDescription_box_profile_box_left_img}
@@ -98,31 +110,32 @@ const NFTDescription = ({ nft }) => {
               <div className={Style.NFTDescription_box_profile_box_left_info}>
                 <small>Creator</small> <br />
                 <span>
-                  Karli Costa <MdVerified />
+                  {nft.creator.name} <MdVerified />
                 </span>
               </div>
             </div>
 
             <div className={Style.NFTDescription_box_profile_box_right}>
               <Image
-                src={images.user2}
-                alt="profile"
+                loader={() => nft.ownedBy?.avatar}
+                src={nft.ownedBy?.avatar}
+                alt="Ownedprofile"
                 width={40}
                 height={40}
                 className={Style.NFTDescription_box_profile_box_left_img}
               />
 
               <div className={Style.NFTDescription_box_profile_box_right_info}>
-                <small>Creator</small> <br />
+                <small>Owner</small> <br />
                 <span>
-                  Karli Costa <MdVerified />
+                  {nft.ownedBy.name} <MdVerified />
                 </span>
               </div>
             </div>
           </div>
 
           <div className={Style.NFTDescription_box_profile_biding}>
-            {btn.isOnSale  && (
+            {btn.isOnSale && (
               <div
                 className={Style.NFTDescription_box_profile_biding_box_price}
               >
@@ -131,38 +144,38 @@ const NFTDescription = ({ nft }) => {
                     Style.NFTDescription_box_profile_biding_box_price_bid
                   }
                 >
-                  <small>Current Bid</small>
+                  <small>Current Price</small>
                   <p>
                     {nft.price} MATIC<span>( ≈ $3,221.22)</span>
                   </p>
                 </div>
               </div>
             )}
-              </div>
-            {btnAddtoCart && (
-              <div
-                className={Style.NFTDescription_box_profile_biding_box_button}
-                s
-              >
-                <Button
-                  btnName="Add to Cart"
-                  handleClick={() => {}}
-                  classStyle={`${Style.button} w-100`}
-                />
-              </div>
-            )}
-
-            <div className="mt-5">
-              <LineChart />
+          </div>
+          {btnAddtoCart && (
+            <div
+              className={Style.NFTDescription_box_profile_biding_box_button}
+              s
+            >
+              <Button
+                btnName="Add to Cart"
+                handleClick={() => {}}
+                classStyle={`${Style.button} w-100`}
+              />
             </div>
+          )}
+
+          <div className="mt-5">
+            <LineChart />
           </div>
         </div>
-        <SnackBarSuccess
-          open={toast.open}
-          vertical={toast.vertical}
-          horizontal={toast.horizontal}
-          message={toast.message}
-          setToast={setToast}
+      </div>
+      <SnackBarSuccess
+        open={toast.open}
+        vertical={toast.vertical}
+        horizontal={toast.horizontal}
+        message={toast.message}
+        setToast={setToast}
       />
     </div>
   );

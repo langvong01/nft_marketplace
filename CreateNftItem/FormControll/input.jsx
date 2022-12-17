@@ -4,7 +4,7 @@ import ErrorMsg from './ErrorMessage/ErrorMessage';
 
 const Input = React.forwardRef(
   (
-    { onChange, label, type, placeholder, register, errors, initialValue = '' },
+    { onChange, label, type, placeholder, register, errors,  },
     ref
   ) => {
     return (
@@ -13,7 +13,6 @@ const Input = React.forwardRef(
           {label}
         </label>
         <input
-          defaultValue={initialValue}
           ref={ref}
           type={type}
           placeholder={placeholder}

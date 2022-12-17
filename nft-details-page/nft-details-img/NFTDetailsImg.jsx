@@ -72,12 +72,7 @@ const NFTDetailsImg = ({ nft }) => {
           <div className={Style.NFTDetailsImg_box_details_box}>
             <div className={Style.NFTDetailsImg_box_details_row}>
               Contract Address
-              <span>
-                {' '}
-                {nft.walletAddress
-                  ? nft.walletAddress
-                  : 0xf4910c763ed4e47a585e2d34baa9a4b611ae448c}
-              </span>
+              <span>0xCA72f0Ce5e5d21B4bb5f3EF1C0dCF6d4f68d6cbC</span>
             </div>
             <div className={Style.NFTDetailsImg_box_details_row}>
               TokenID

@@ -7,6 +7,7 @@ import * as cookie from 'cookie';
 import Style from '../styles/account.module.css';
 import FormStyle from '../AccountPage/Form/Form.module.css';
 
+
 import images from '../img';
 import Banner from '@/components/banner/Banner';
 import Input from 'CreateNftItem/FormControll/input';
@@ -21,45 +22,40 @@ import { HiOutlineMail } from 'react-icons/hi';
 import { useRouter } from 'next/router';
 import { MdOutlineContentCopy, MdOutlineHttp } from 'react-icons/md';
 
-const account = ({}) => {
+const accountSetting = ({}) => {
   const [fileUrl, setFileUrl] = useState(null);
   const [file, setFile] = useState(null);
-
-  const [profile, setProfile] = useState({
-    avatar: null,
-    name: '',
-    email: '',
-  });
-
   const router = useRouter();
 
   //fetch gloal state
   const [recoil, setRecoil] = useRecoilState(connectMetaMaskState);
   const { accountCurrent } = recoil;
 
-  const fetchAccountProfile = async () => {
-    try {
-      const {
-        data: {
-          body: { avatar, name, email },
-        },
-      } = await axiosClient.get(`/profile/${accountCurrent}`);
-
-      setProfile({
-        ...profile,
-        name,
-        email,
-      });
-      setFileUrl(avatar);
-    } catch (error) {}
-  };
   useEffect(() => {
-    fetchAccountProfile();
+    const fetchAccountProfile = async () => {
+      try {
+        const {
+          data: {
+            body: { avatar, name, email },
+          },
+        } = await axiosClient.get(`/profile/${accountCurrent}`);
+
+        return { avatar, name, email };
+      } catch (error) {
+      }
+    };
+
+    fetchAccountProfile().then(({ avatar, name, email }) => {
+      setFileUrl(avatar);
+      setValue('name', name);
+      setValue('email', email);
+    });
   }, [accountCurrent]);
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({});
 
@@ -79,7 +75,10 @@ const account = ({}) => {
       const formData = new FormData();
       formData.append('name', name);
       formData.append('email', email);
-      formData.append('avatar',file);
+      if (file) {
+        formData.append('avatar', file);
+      }
+
       const respone = await axiosClient.post(`/profile`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
@@ -121,14 +120,14 @@ const account = ({}) => {
           </div>
           <div className={Style.account_box_form}>
             <Input
-              initialValue={profile.name}
+              
               label="name"
               register={register}
               type="text"
               errors={errors}
             />
             <InputWithIcon
-              initialValue={profile.email}
+              
               label="email"
               register={register}
               type="text"
@@ -163,7 +162,7 @@ const account = ({}) => {
   );
 };
 
-export default account;
+export default accountSetting;
 
 export async function getServerSideProps(context) {
   const parsedCookies = cookie.parse(context.req.headers.cookie);

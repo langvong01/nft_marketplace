@@ -37,22 +37,20 @@ const SellNFT = () => {
 
   const handleChangePrice = (e) => {
     setPrice(e.target.value);
-
     if (+e.target.value > 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
   };
+  
 
   const handleListingOnclick = async () => {
     try {
       setOpenBackDrop(true);
-
-      const totalPrice = caculateTotalPrice(price);
       const req = {
         itemId: +ItemId,
-        price: totalPrice.toString(),
+        price: price.toString(),
       };
       const { data } = await axiosClient.post(`/item/set-sale`, req);
       setOpenBackDrop(false);
@@ -108,7 +106,7 @@ const SellNFT = () => {
                   ),
                 }}
                 inputProps={{
-                  inputMode: 'numeric',
+                  // inputMode: 'numeric',
                   pattern: '[0-9]*',
                   maxLength: '10',
                 }}
@@ -118,7 +116,9 @@ const SellNFT = () => {
               <h2>Summary</h2>
               <div className={Style.SellNftPage_box_form_summary_row}>
                 Listing price
-                <span>{+price ? `${price} MATIC` : `--MATIC`}</span>
+                <span>
+                  {+price >= 0 && price ? `${price} MATIC` : `--MATIC`}
+                </span>
               </div>
               <div className={Style.SellNftPage_box_form_summary_row}>
                 Service Fee
@@ -132,7 +132,9 @@ const SellNFT = () => {
             <div className={Style.SellNftPage_box_form_total}>
               Total Potential Earning
               <span>
-                {+price ? `${caculateTotalPrice(price)} MATIC` : `--MATIC`}
+                {+price >= 0 && +price
+                  ? `${caculateTotalPrice(price)} MATIC`
+                  : `--MATIC`}
               </span>
             </div>
             <Button

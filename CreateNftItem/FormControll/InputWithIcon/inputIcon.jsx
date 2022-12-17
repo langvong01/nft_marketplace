@@ -8,7 +8,7 @@ import formStyle from '../../../AccountPage/Form/Form.module.css';
 import ErrorMsg from '../ErrorMessage/ErrorMessage';
 
 const InputWithIcon = React.forwardRef(
-  ({ onChange, label, type, placeholder, register, errors, icon, initialValue ='' }, ref) => {
+  ({ onChange, label, type, placeholder, register, errors, icon, }, ref) => {
     return (
       <div className={formStyle.Form_box_input}>
         <label htmlFor={label} className="text-capitalize">
@@ -17,7 +17,7 @@ const InputWithIcon = React.forwardRef(
         <div className={formStyle.Form_box_input_box}>
           <div className={formStyle.Form_box_input_box_icon}>{icon}</div>
           <input
-            defaultValue={initialValue}
+            // defaultValue={initialValue}
             ref={ref}
             type={type}
             placeholder={placeholder}
