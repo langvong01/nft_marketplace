@@ -1,6 +1,6 @@
 import { cartState } from 'global-state/cart';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 import { useRecoilState } from 'recoil';
@@ -47,6 +47,8 @@ const ItemStyles = styled.div`
 `;
 
 const Item = ({ item }) => {
+  const [open, setOpen] = useState(false);
+
   const [cart, setCart] = useRecoilState(cartState);
   const [account, setCount] = useRecoilState(connectMetaMaskState);
   const [toast, setToast] = useState({
@@ -97,52 +99,56 @@ const Item = ({ item }) => {
     router.push(`/NFT-details/${item.itemId}`);
   };
 
-  console.log(item);
-  console.log(account);
-
+  useEffect(() => {
+    setOpen(true);
+  }, []);
   return (
     <>
-      <ItemStyles onClick={(e) => handleNavigatePage(e)}>
-        <div className=" item-img w-full h-[270px] overflow-hidden ">
-          <img
-            className=" w-full  object-cover h-full bg-center"
-            alt=""
-            src={item.mediaFileUrl}
-          />
-        </div>
-
-        <div className="w-full p-2 mt-3">
-          <p className="font-bold text-xl ">
-            {item.itemName} <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
-          </p>
-          <p className="font-bold text-xl ">
-            {item.price} <span className="ml-1 w-[50px] text-right">Matic</span>
-          </p>
-
-          <p className="text-base mt-2">End in 7 days</p>
-        </div>
-        {item.ownedBy.walletAddress !== account.accountCurrent ? (
-          <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
-            {!cart.idItemSelected.includes(item.itemId) ? (
-              <button
-                onClick={(e) => handleAddItem(e, item)}
-                className="btn-item w-full"
-                suppressHydrationWarning
-              >
-                Add Cart
-              </button>
-            ) : (
-              <button
-                className="btn-item w-full"
-                onClick={(e) => handleRemoveCart(e, item)}
-                suppressHydrationWarning
-              >
-                Remove Cart
-              </button>
-            )}
+      {open ? (
+        <ItemStyles onClick={(e) => handleNavigatePage(e)}>
+          <div className=" item-img w-full h-[270px] overflow-hidden ">
+            <img
+              className=" w-full  object-cover h-full bg-center"
+              alt=""
+              src={item.mediaFileUrl}
+            />
           </div>
-        ) : null}
-      </ItemStyles>
+
+          <div className="w-full p-2 mt-3">
+            <p className="font-bold text-xl ">
+              {item.itemName}{' '}
+              <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
+            </p>
+            <p className="font-bold text-xl ">
+              {item.price}{' '}
+              <span className="ml-1 w-[50px] text-right">Matic</span>
+            </p>
+
+            <p className="text-base mt-2">End in 7 days</p>
+          </div>
+          {item.ownedBy.walletAddress !== account.accountCurrent ? (
+            <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
+              {!cart.idItemSelected.includes(item.itemId) ? (
+                <button
+                  onClick={(e) => handleAddItem(e, item)}
+                  className="btn-item w-full"
+                  suppressHydrationWarning
+                >
+                  Add Cart
+                </button>
+              ) : (
+                <button
+                  className="btn-item w-full"
+                  onClick={(e) => handleRemoveCart(e, item)}
+                  suppressHydrationWarning
+                >
+                  Remove Cart
+                </button>
+              )}
+            </div>
+          ) : null}
+        </ItemStyles>
+      ) : null}
 
       <SnackBarSuccess
         open={toast.open}
