@@ -113,7 +113,7 @@ const Collections = () => {
             )}
           </TabPanel>
           <TabPanel value="items">
-            {data.length > 0 ? (
+            {data && data?.length > 0 ? (
               <ListItem data={data}></ListItem>
             ) : (
               <>
@@ -192,7 +192,7 @@ const ListCollection = React.memo(({ data }) => {
 });
 
 const ListItem = React.memo(({ data }) => {
-  console.log(data);
+  const router = useRouter();
   return (
     <>
       <div className="list-collection-container flex items-center justify-between ">
@@ -206,6 +206,7 @@ const ListItem = React.memo(({ data }) => {
               <div
                 className="list-collection-item w-full flex items-center justify-between mb-4 cursor-pointer hover:bg-slate-100 p-2"
                 key={uuidv4()}
+                onClick={() => router.push(`/NFT-details/${item.itemId}`)}
               >
                 <div className="flex-1 flex items-center gap-x-8">
                   <p>{index + 1}</p>

@@ -30,8 +30,7 @@ const ListItemInCollection = ({ items, collection }) => {
 
   const handleSearchNameItem = async (data) => {
     const { name, type } = data;
-    console.log(name);
-    console.log(type);
+
     if (type !== 'DESC' && type !== 'ASC') {
       const dataItemsSearch = await getItemBySort(
         name,
@@ -81,7 +80,7 @@ const ListItemInCollection = ({ items, collection }) => {
               type="text"
               placeholder="Search by name item"
               className=" w-full h-full bg-none px-4 py-3"
-              name="name"
+              name="name "
               id="name"
               {...register('name')}
             />
@@ -167,6 +166,7 @@ export async function getServerSideProps(context) {
     'Cache-Control',
     'public, s-maxage=10, stale-while-revalidate=59'
   );
+
   const { collectionName } = context.query;
   const data = await getItemsInCollectionName(collectionName);
   const collection = await getDetailCollectionByName(collectionName);

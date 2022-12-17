@@ -8,10 +8,8 @@ export const getTopTenCollectionLatest = async (order = 'DESC') => {
     size: 10,
   });
 
-  return await response.data.body.content;
+  return await response.data?.body.content;
 };
-
-
 
 export const getAllCollectionInCategory = async (id) => {
   const response = await axiosClient.post('/collection/filter', {
@@ -32,6 +30,17 @@ export const getDetailCollectionByName = async (name) => {
     order: ['DESC'],
     page: 1,
     size: 1000,
+  });
+
+  return await response.data?.body.content;
+};
+
+export const getAllCollections = async () => {
+  const response = await axiosClient.post('/collection/filter', {
+    sort_by: ['total_value', 'created_at'],
+    order: ['DESC'],
+    page: 1,
+    size: 1000000,
   });
 
   return await response.data?.body.content;

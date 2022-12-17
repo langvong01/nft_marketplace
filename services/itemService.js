@@ -63,3 +63,16 @@ export const getItemBySort = async (
 
   return await response.data?.body?.content;
 };
+
+export const getAllItems = async () => {
+  const response = await axiosClient.post('/item/filter', {
+    sort_by: ['price'],
+    order: ['DESC'],
+    page: 1,
+    size: 100000,
+  });
+
+  console.log(response);
+
+  return await response.data?.body.content;
+};

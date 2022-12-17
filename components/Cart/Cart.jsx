@@ -43,11 +43,13 @@ const Cart = () => {
         return { ...prev, open: true };
       });
 
-      setOpenCart((prev) => {
-        return { ...prev, open: false };
-      });
+      // setOpenCart((prev) => {
+      //   return { ...prev, open: false };
+      // });
 
       // gọi api thanh toán bằng metamask
+      
+
     }
   };
 
