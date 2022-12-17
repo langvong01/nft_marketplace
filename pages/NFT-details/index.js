@@ -1,11 +1,13 @@
+import Item from '@/components/item/Item';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { getAllItems } from 'services/itemService';
 import { v4 as uuidv4 } from 'uuid';
+import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
 
 const Index = ({ items }) => {
   const router = useRouter();
-  console.log(items);
 
   return (
     <div className="collection-page-container mb-10">
@@ -19,23 +21,7 @@ const Index = ({ items }) => {
 
       <div className="collection-list w-[95%] mx-auto grid grid-cols-4 relative gap-8">
         {items?.map((item) => (
-          <div
-            className="collection-item rounded-lg object-cover overflow-hidden shadow-lg cursor-pointer"
-            key={uuidv4()}
-            onClick={() => router.push(`/NFT-details/${item.itemId}`)}
-          >
-            <div className="col-img h-[250px] overflow-hidden ">
-              <img
-                src={item.mediaFileUrl}
-                className="w-full h-full object-cover hover:scale-105"
-                alt="img"
-              />
-            </div>
-
-            <div className="p-4">
-              <p className="capitalize text-center">{item.itemName}</p>
-            </div>
-          </div>
+          <Item key={uuidv4()} item={item}></Item>
         ))}
       </div>
     </div>
