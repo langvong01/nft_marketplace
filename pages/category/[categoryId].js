@@ -4,7 +4,7 @@ import { getAllCollectionInCategory } from 'services/collectionService';
 import { v4 as uuidv4 } from 'uuid';
 import axiosClient from 'utils/axiosClient';
 
-const ListCollectionCategory = ({ collections , category }) => {
+const ListCollectionCategory = ({ collections, category }) => {
   const router = useRouter();
   console.log(category);
   useEffect(() => {
@@ -26,10 +26,10 @@ const ListCollectionCategory = ({ collections , category }) => {
             Explore {category.categoryName}
           </h1>
           <p className="text-base font-normal">
-            <span>{category.categoryName}</span> are taking the
-            NFT world by storm, and we've got a selection of breathtaking
-            collections from a growing and increasingly global community of
-            creators right here on underground.
+            <span>{category.categoryName}</span> are taking the NFT world by
+            storm, and we've got a selection of breathtaking collections from a
+            growing and increasingly global community of creators right here on
+            underground.
           </p>
         </div>
 
@@ -82,7 +82,6 @@ export async function getServerSideProps(context) {
     'public, s-maxage=10, stale-while-revalidate=59'
   );
 
-
   const { categoryId } = context.query;
   const response = await axiosClient.get(`/category/${categoryId}`);
   const category = await response.data.body;
@@ -98,7 +97,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       collections: data,
-      category :category
+      category: category,
     },
   };
 }

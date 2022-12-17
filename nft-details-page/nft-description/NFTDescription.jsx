@@ -122,7 +122,7 @@ const NFTDescription = ({ nft }) => {
           </div>
 
           <div className={Style.NFTDescription_box_profile_biding}>
-            {btn.isOnSale  && (
+            {btn.isOnSale && (
               <div
                 className={Style.NFTDescription_box_profile_biding_box_price}
               >
@@ -138,31 +138,31 @@ const NFTDescription = ({ nft }) => {
                 </div>
               </div>
             )}
-              </div>
-            {btnAddtoCart && (
-              <div
-                className={Style.NFTDescription_box_profile_biding_box_button}
-                s
-              >
-                <Button
-                  btnName="Add to Cart"
-                  handleClick={() => {}}
-                  classStyle={`${Style.button} w-100`}
-                />
-              </div>
-            )}
-
-            <div className="mt-5">
-              <LineChart />
+          </div>
+          {btnAddtoCart && (
+            <div
+              className={Style.NFTDescription_box_profile_biding_box_button}
+              s
+            >
+              <Button
+                btnName="Add to Cart"
+                handleClick={() => {}}
+                classStyle={`${Style.button} w-100`}
+              />
             </div>
+          )}
+
+          <div className="mt-5">
+            <LineChart />
           </div>
         </div>
-        <SnackBarSuccess
-          open={toast.open}
-          vertical={toast.vertical}
-          horizontal={toast.horizontal}
-          message={toast.message}
-          setToast={setToast}
+      </div>
+      <SnackBarSuccess
+        open={toast.open}
+        vertical={toast.vertical}
+        horizontal={toast.horizontal}
+        message={toast.message}
+        setToast={setToast}
       />
     </div>
   );

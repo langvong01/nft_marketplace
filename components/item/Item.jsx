@@ -5,6 +5,7 @@ import { useState } from 'react';
 import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { connectMetaMaskState } from 'global-state/connect-metamask';
 
 const ItemStyles = styled.div`
   min-height: 450px;
@@ -47,6 +48,7 @@ const ItemStyles = styled.div`
 
 const Item = ({ item }) => {
   const [cart, setCart] = useRecoilState(cartState);
+  const [account, setCount] = useRecoilState(connectMetaMaskState);
   const [toast, setToast] = useState({
     open: false,
     vertical: 'top',
