@@ -96,6 +96,10 @@ const Item = ({ item }) => {
   const handleNavigatePage = (event) => {
     router.push(`/NFT-details/${item.itemId}`);
   };
+
+  console.log(item);
+  console.log(account);
+
   return (
     <>
       <ItemStyles onClick={(e) => handleNavigatePage(e)}>
@@ -117,25 +121,27 @@ const Item = ({ item }) => {
 
           <p className="text-base mt-2">End in 7 days</p>
         </div>
-        <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
-          {!cart.idItemSelected.includes(item.itemId) ? (
-            <button
-              onClick={(e) => handleAddItem(e, item)}
-              className="btn-item w-full"
-              suppressHydrationWarning
-            >
-              Add Cart
-            </button>
-          ) : (
-            <button
-              className="btn-item w-full"
-              onClick={(e) => handleRemoveCart(e, item)}
-              suppressHydrationWarning
-            >
-              Remove Cart
-            </button>
-          )}
-        </div>
+        {item.ownedBy.walletAddress !== account.accountCurrent ? (
+          <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
+            {!cart.idItemSelected.includes(item.itemId) ? (
+              <button
+                onClick={(e) => handleAddItem(e, item)}
+                className="btn-item w-full"
+                suppressHydrationWarning
+              >
+                Add Cart
+              </button>
+            ) : (
+              <button
+                className="btn-item w-full"
+                onClick={(e) => handleRemoveCart(e, item)}
+                suppressHydrationWarning
+              >
+                Remove Cart
+              </button>
+            )}
+          </div>
+        ) : null}
       </ItemStyles>
 
       <SnackBarSuccess
