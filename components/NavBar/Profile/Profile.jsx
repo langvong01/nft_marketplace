@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { FaUserAlt, FaRegImage } from 'react-icons/fa';
+
+import { FaUserAlt, FaRegImage, FaMagic,FaRegListAlt } from 'react-icons/fa';
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -53,13 +54,25 @@ const Profile = () => {
               <FaUserAlt />
               <p>
                 {metaMask.accountCurrent ? (
-                  <Link href="/my-profile">My Profile</Link>
+                  <Link href={`/account/${metaMask.accountCurrent}`}>My Account</Link>
                 ) : (
-                  'My Profile'
+                  'My Account'
                 )}
               </p>
             </div>
-
+            <div
+              className={Style.profile_menu_one_item}
+              onClick={handleClickNotLogin}
+            >
+              <FaMagic />
+              <p>
+                {metaMask.accountCurrent ? (
+                  <Link href={`/uploadItem`}>Create Item</Link>
+                ) : (
+                  'Create Item'
+                )}
+              </p>
+            </div>
             <div
               className={Style.profile_menu_one_item}
               onClick={handleClickNotLogin}
@@ -68,12 +81,27 @@ const Profile = () => {
 
               <p>
                 {metaMask.accountCurrent ? (
-                  <Link href={{ pathname: '/my-items' }}>My Items</Link>
+                  <Link href= "/account-setting">Setting</Link>
                 ) : (
-                  'My Items'
+                  'Setting'
                 )}
               </p>
             </div>
+            <div
+              className={Style.profile_menu_one_item}
+              onClick={handleClickNotLogin}
+            >
+              <FaRegListAlt />
+
+              <p>
+                {metaMask.accountCurrent ? (
+                  <Link href= "/uploadNFT">Create A Collection</Link>
+                ) : (
+                  'Create A Collection'
+                )}
+              </p>
+            </div>
+            
           </div>
 
           {metaMask.accountCurrent ? (

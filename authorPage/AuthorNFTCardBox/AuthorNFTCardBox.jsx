@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Style from './AuthorNFTCardBox.module.css';
 import images from '../../img';
 import ListItem from '@/components/collections/ListItem';
-
+import Item from '@/components/item/Item';
 const AuthorNFTCardBox = ({
   collectiables,
   created,
@@ -13,10 +13,20 @@ const AuthorNFTCardBox = ({
 }) => {
   return (
     <div className={Style.AuthorNFTCardBox}>
-      <div className={Style.AuthorNFTCardBox_box}>
-        {collectiables && <ListItem items={itemsOwned} />}
-        {created && <ListItem items={itemCreated} />}
-      </div>
+      {collectiables && (
+        <div className={Style.AuthorNFTCardBox_box}>
+          {itemsOwned.map((item) => (
+            <Item item={item} key={item.itemId} />
+          ))}
+        </div>
+      )}
+      {created && (
+        <div className={Style.AuthorNFTCardBox_box}>
+          {itemCreated.map((item) => (
+            <Item item={item} key={item.itemId} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
