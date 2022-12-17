@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import { getAllCollections } from 'services/collectionService';
+import { getAllItems } from 'services/itemService';
 import { v4 as uuidv4 } from 'uuid';
 
-const Index = ({ collections }) => {
+const Index = ({ items }) => {
   const router = useRouter();
+  console.log(items);
 
   return (
     <div className="collection-page-container mb-10">
@@ -17,26 +18,22 @@ const Index = ({ collections }) => {
       </div>
 
       <div className="collection-list w-[95%] mx-auto grid grid-cols-4 relative gap-8">
-        {collections.map((collection) => (
+        {items?.map((item) => (
           <div
-            key={uuidv4()}
             className="collection-item rounded-lg object-cover overflow-hidden shadow-lg cursor-pointer"
-            onClick={() =>
-              router.push(`/collection/${collection.collectionName}`)
-            }
+            key={uuidv4()}
+            onClick={() => router.push(`/NFT-details/${item.itemId}`)}
           >
             <div className="col-img h-[250px] overflow-hidden ">
               <img
-                src={collection.featuredImage}
+                src={item.mediaFileUrl}
                 className="w-full h-full object-cover hover:scale-105"
                 alt="img"
               />
             </div>
 
             <div className="p-4">
-              <p className="capitalize text-center">
-                {collection.collectionName}
-              </p>
+              <p className="capitalize text-center">{item.itemName}</p>
             </div>
           </div>
         ))}
@@ -51,11 +48,11 @@ export async function getServerSideProps(context) {
     'public, s-maxage=10, stale-while-revalidate=59'
   );
 
-  const data = await getAllCollections();
+  const data = await getAllItems();
 
   return {
     props: {
-      collections: data,
+      items: data,
     },
   };
 }

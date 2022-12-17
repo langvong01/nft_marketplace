@@ -11,11 +11,12 @@ import { connectMetaMaskState } from '../../../global-state/connect-metamask';
 import { modalNotifyMetaMaskState } from '../../../global-state/modal';
 import axiosClient from 'utils/axiosClient';
 import { TbDownload } from 'react-icons/tb';
+import { useRouter } from 'next/router';
 
 const Profile = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
   const [metaModal, setMetaModal] = useRecoilState(modalNotifyMetaMaskState);
-
+  const router = useRouter();
   const resetMetaMask = useResetRecoilState(connectMetaMaskState);
 
   const handleClickNotLogin = () => {
@@ -30,6 +31,7 @@ const Profile = () => {
   const handleLogout = async () => {
     const response = await axiosClient.get('/auth/logout');
     resetMetaMask();
+    router.push('/');
   };
 
   return (
@@ -79,12 +81,7 @@ const Profile = () => {
               <div className={Style.profile_menu_one_item}>
                 <TbDownload />
                 <p>
-                  <button
-                    onClick={handleLogout}
-                    href={{ pathname: '/disconnet' }}
-                  >
-                    Disconnet
-                  </button>
+                  <button onClick={handleLogout}>Disconnet</button>
                 </p>
               </div>
             </div>

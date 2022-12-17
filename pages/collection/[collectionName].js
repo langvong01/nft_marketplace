@@ -31,8 +31,7 @@ const ListItemInCollection = ({ items, collection }) => {
 
   const handleSearchNameItem = async (data) => {
     const { name, type } = data;
-    console.log(name);
-    console.log(type);
+
     if (type !== 'DESC' && type !== 'ASC') {
       const dataItemsSearch = await getItemBySort(
         name,
