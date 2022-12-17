@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 //INTRNAL IMPORT
 import Style from '../../styles/searchPage.module.css';
 import SearchIcon from '@mui/icons-material/Search';
 import images from '../../img';
+
 import Banner from '@/components/banner/Banner';
 import DesciptionCollection from '@/components/collections/DesciptionCollection';
 import ListItem from '@/components/collections/ListItem';
 import { getItemBySort, getItemsInCollectionName } from 'services/itemService';
 import { getDetailCollectionByName } from 'services/collectionService';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { Skeleton } from '@mui/material';
 
 const ListItemInCollection = ({ items, collection }) => {
@@ -18,14 +19,13 @@ const ListItemInCollection = ({ items, collection }) => {
     handleSubmit,
     getValues,
     watch,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { isSubmitting },
   } = useForm({
     defaultValues: {
       name: '',
       type: 'DESC',
     },
   });
-  const name = watch('name');
   const [itemsCollection, setItemsCollection] = useState(items);
 
   const handleSearchNameItem = async (data) => {
@@ -52,13 +52,7 @@ const ListItemInCollection = ({ items, collection }) => {
 
   useEffect(() => {
     document.title = `Collection-${collection[0].collectionName}`;
-  }, [collection]);
-
-  useEffect(() => {
-    if (name === '') {
-      setItemsCollection(items);
-    }
-  }, [name]);
+  }, []);
 
   return (
     <div className={Style.searchPage}>
@@ -191,4 +185,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default ListItemInCollection;
+export default React.memo(ListItemInCollection);
