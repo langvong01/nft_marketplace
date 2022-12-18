@@ -25,7 +25,20 @@ ChartJS.register(
   Legend
 );
 const dateStringList = ['01/10/2022', '01/11/2022', '01/12/2022', '01/01/2023'];
-
+var options = {
+  maintainAspectRatio: false,
+  scales: {
+    // yAxis: {
+    //   min: 0,
+    //   max: 1,
+    // },
+  },
+  legend: {
+    labels: {
+      fontSize: 25,
+    },
+  },
+};
 const LineChart = ({ chartData }) => {
   const router = useRouter();
   const { itemId } = router.query;
@@ -102,15 +115,7 @@ const LineChart = ({ chartData }) => {
     ],
   };
 
-  var options = {
-    maintainAspectRatio: false,
-    scales: {},
-    legend: {
-      labels: {
-        fontSize: 25,
-      },
-    },
-  };
+
 
   return (
     <div>
