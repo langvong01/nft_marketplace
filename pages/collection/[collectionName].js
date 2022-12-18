@@ -112,9 +112,6 @@ const ListItemInCollection = ({ items, collection }) => {
               <p className="text-2xl mb-2">
                 There are no items in the collection
               </p>
-              <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:opacity-95">
-                Create item
-              </button>
             </div>
           </div>
         </>

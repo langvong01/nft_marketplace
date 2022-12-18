@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 //----IMPORT ICON
 import { MdPayments, MdShoppingCart } from 'react-icons/md';
@@ -6,13 +6,16 @@ import { MdPayments, MdShoppingCart } from 'react-icons/md';
 import { CgMenuRight } from 'react-icons/cg';
 
 import { AnimatePresence, motion } from 'framer-motion';
-
+import {
+  connectMetaMaskService,
+  handleSignMessage,
+} from '../../services/metaService';
 //INTERNAL IMPORT
 import Style from './NavBar.module.scss';
 
 import images from '../../img';
 import SubTotalCart from './sub-total-cart/SubTotalCart';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import {
   modalCartState,
   modalNotifyMetaMaskState,
@@ -40,10 +43,12 @@ const NavBar = () => {
   const [profileRef, isProfileRef] = useHover(false);
   const [discoveryRef, isDiscoveryRef] = useHover();
   const [helpRef, isHelpRef] = useHover();
+  const resetMetaMask = useResetRecoilState(connectMetaMaskState);
 
   const [isOpenModalMetaMask, setIsOpenModalMetaMask] = useRecoilState(
     modalNotifyMetaMaskState
   );
+
   const [openCart, setOpenCart] = useRecoilState(modalCartState);
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
   const [cart, setCart] = useRecoilState(cartState);
@@ -54,6 +59,14 @@ const NavBar = () => {
       return { ...prev, open: true };
     });
   };
+
+  useEffect(() => {
+    window.ethereum.on('accountsChanged', async function (accounts) {
+      window.close();
+      resetMetaMask();
+      handleOpenMeta();
+    });
+  }, []);
 
   return (
     <>

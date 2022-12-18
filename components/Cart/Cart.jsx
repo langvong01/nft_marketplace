@@ -38,46 +38,53 @@ const Cart = () => {
 
   const handlePayment = async () => {
     if (!account.isLogin) {
-        setModalNotifyMetaMask((prev) => {
-          return { ...prev, open: true };
+      setModalNotifyMetaMask((prev) => {
+        return { ...prev, open: true };
+      });
+    } else {
+      setModalPayment((prev) => {
+        return { ...prev, open: true };
+      });
+    }
+
+    // setOpenCart((prev) => {
+    //   return { ...prev, open: false };
+    // });
+
+    // gọi api thanh toán bằng metamask
+    // console.log(cart.idItemSelected);
+    const res = await axiosClient.post(
+      '/item/sale/detail',
+      cart.idItemSelected
+    );
+    if (res.data.status == 200) {
+      const { saleIds, totalPrice, nftContract } = res.data.body;
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+
+      try {
+        let contract = new ethers.Contract(Market, marketContractAbi, signer);
+        const price = ethers.utils.parseUnits(totalPrice.toString(), 'ether');
+        let transaction = await contract.saleItems(nftContract, saleIds, {
+          value: price,
         });
-      } else {
-        setModalPayment((prev) => {
-          return { ...prev, open: true };
+        // thêm loading
+
+        let tx = await transaction.wait();
+        let transactionHash = tx.transactionHash;
+
+        const res1 = await axiosClient.post('/item/sale/buy', {
+          itemIds: cart.idItemSelected,
+          txnScanLink: transactionHash,
         });
+
+        //clear cart va tat loading ,hien thi thanh toan thanh cong chuyen trang profile
+      } catch (e) {
+        console.log(e);
       }
-
-      // setOpenCart((prev) => {
-      //   return { ...prev, open: false };
-      // });
-
-      // gọi api thanh toán bằng metamask
-      console.log(cart.idItemSelected);
-      const res = await axiosClient.post("/item/sale/detail", cart.idItemSelected);
-      if(res.data.status == 200) {
-        const {saleIds, totalPrice, nftContract} = res.data.body;
-        const web3Modal = new Web3Modal();
-        const connection = await web3Modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection);
-        const signer = provider.getSigner();
-          try {
-            let contract = new ethers.Contract(Market, marketContractAbi, signer);
-            const price = ethers.utils.parseUnits(totalPrice.toString(), 'ether');
-            let transaction = await contract.saleItems(nftContract, saleIds, {
-              value: price
-            });
-            let tx = await transaction.wait();
-            let transactionHash = tx.transactionHash;
-            const res1 = await axiosClient.post("/item/sale/buy", 
-            {
-              itemIds : cart.idItemSelected,
-              txnScanLink : transactionHash
-            });
-          } catch(e) {
-            console.log(e)
-          }
-
-      }
+    }
   };
 
   return (

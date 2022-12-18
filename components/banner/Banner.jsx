@@ -11,7 +11,7 @@ const Banner = ({ bannerImage, collection = null }) => {
         <img
           src={bannerImage || collection?.featuredImage}
           alt="background"
-          className="w-full object-cover h-[450px]"
+          className="w-full object-cover h-[350px]"
         />
 
         <div className="banner-sub p-2 bg-white rounded-md absolute w-[200px] h-[200px] -translate-y-2/4 translate-x-[40px] shadow-md overflow-hidden">

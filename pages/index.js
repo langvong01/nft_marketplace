@@ -25,4 +25,19 @@ const Home = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  context.res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+
+  const collectionSlider = await getTopTenCollectionLatest();
+
+  return {
+    props: {
+      collectionSlider: collectionSlider,
+    },
+  };
+}
+
 export default Home;
