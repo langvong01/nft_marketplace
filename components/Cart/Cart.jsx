@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Style from './Cart.module.css';
 import { motion } from 'framer-motion';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { MdWarning, MdClose } from 'react-icons/md';
 
 import useOnClickOutside from '../../hook/useClickOutSide';
@@ -9,6 +9,7 @@ import {
   modalCartState,
   modalNotifyMetaMaskState,
   modalPaymentState,
+  modalPaymentStateSuccess,
 } from '../../global-state/modal';
 import CartDetails from './cart-details/CartDetails';
 import { cartState } from 'global-state/cart';
@@ -17,15 +18,21 @@ import Web3Modal from 'web3modal';
 import { marketContractAbi, Market, NFT } from '../../contractsABI.json';
 import { ethers } from 'ethers';
 import axiosClient from '../../utils/axiosClient';
+import BackDrop from '../BackDrop/BackDrop';
 
 const Cart = () => {
   const [openCart, setOpenCart] = useRecoilState(modalCartState);
   const [account, setAccount] = useRecoilState(connectMetaMaskState);
+  const [openBackDrop, setOpenBackDrop] = useState(false);
+
   const [cart, setCart] = useRecoilState(cartState);
   const [modalNotifyMetaMask, setModalNotifyMetaMask] = useRecoilState(
     modalNotifyMetaMaskState
   );
   const [modalPayment, setModalPayment] = useRecoilState(modalPaymentState);
+  const [modalPaymentSuccess, setModalPaymentSuccess] = useRecoilState(
+    modalPaymentStateSuccess
+  );
 
   const refCart = useRef();
 
@@ -42,24 +49,20 @@ const Cart = () => {
       setModalNotifyMetaMask((prev) => {
         return { ...prev, open: true };
       });
-    } else {
-      setModalPayment((prev) => {
-        return { ...prev, open: true };
-      });
+      return;
     }
 
-    // setOpenCart((prev) => {
-    //   return { ...prev, open: false };
-    // });
-
-    // gọi api thanh toán bằng metamask
-    // console.log(cart.idItemSelected);
+    //goi api de sale
     const res = await axiosClient.post(
       '/item/sale/detail',
       cart.idItemSelected
     );
 
-    if (res.data.status == 200) {
+    if (res.data.status === 200) {
+      setModalPayment((prev) => {
+        return { ...prev, open: true };
+      });
+
       const { saleIds, totalPrice, nftContract } = res.data.body;
       const web3Modal = new Web3Modal();
       const connection = await web3Modal.connect();
@@ -67,14 +70,19 @@ const Cart = () => {
       const signer = provider.getSigner();
 
       try {
+        setModalPayment((prev) => {
+          return { ...prev, open: false };
+        });
+
+        setOpenBackDrop(true);
         let contract = new ethers.Contract(Market, marketContractAbi, signer);
         const price = ethers.utils.parseUnits(totalPrice.toString(), 'ether');
         let transaction = await contract.saleItems(nftContract, saleIds, {
           value: price,
         });
-        // thêm loading
 
         let tx = await transaction.wait();
+
         let transactionHash = tx.transactionHash;
 
         const res1 = await axiosClient.post('/item/sale/buy', {
@@ -82,9 +90,16 @@ const Cart = () => {
           txnScanLink: transactionHash,
         });
 
-        //clear cart va tat loading ,hien thi thanh toan thanh cong chuyen trang profile
+        if (res1.status === 200) {
+          setOpenBackDrop(false);
+          setModalPaymentSuccess((prev) => {
+            return { ...prev, open: true };
+          });
+        }
       } catch (e) {
         console.log(e);
+
+        return;
       }
     }
   };
@@ -135,14 +150,10 @@ const Cart = () => {
             </p>
           </div>
         )}
-        {/* cart-details-content */}
       </motion.div>
+      <BackDrop openBackDrop={openBackDrop}></BackDrop>
     </>
   );
-};
-
-const CartDetailsEmpty = () => {
-  return <p className={Style.cart_content_empty}>Add items to get started</p>;
 };
 
 export default Cart;

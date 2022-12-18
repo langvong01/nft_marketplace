@@ -29,3 +29,10 @@ export const modalPaymentState = atom({
     open: false,
   },
 });
+
+export const modalPaymentStateSuccess = atom({
+  key: 'modalPaymentSuccess',
+  default: {
+    open: false,
+  },
+});

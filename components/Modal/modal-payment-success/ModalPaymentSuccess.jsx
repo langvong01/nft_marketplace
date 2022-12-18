@@ -1,17 +1,23 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import useOnClickOutside from 'hook/useClickOutSide';
-import { useRecoilState } from 'recoil';
-import { modalPaymentState } from '../../../global-state/modal';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+import { modalPaymentStateSuccess } from '../../../global-state/modal';
+import { connectMetaMaskState } from '../../../global-state/connect-metamask';
 import { MdClose } from 'react-icons/md';
 import { cartState } from '../../../global-state/cart';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/router';
 
-const ModalPayment = () => {
-  const [modalPayment, setModalPayment] = useRecoilState(modalPaymentState);
+const ModalPaymentSuccess = () => {
+  const router = useRouter();
+  const [account, setAccount] = useRecoilState(connectMetaMaskState);
+  const [modalPayment, setModalPayment] = useRecoilState(
+    modalPaymentStateSuccess
+  );
   const [cart, setCart] = useRecoilState(cartState);
 
-  const refModalPayment = useRef();
+  const refModalPaymentSuccess = useRef();
 
   const handleCloseModal = () => {
     setModalPayment((prev) => {
@@ -19,16 +25,17 @@ const ModalPayment = () => {
     });
   };
 
-  useOnClickOutside(refModalPayment, handleCloseModal);
+  useOnClickOutside(refModalPaymentSuccess, handleCloseModal);
+  const resetCart = useResetRecoilState(cartState);
 
   return (
     <>
       <motion.div
         className="modal-payment-container w-[600px]  bg-white rounded-lg  absolute left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2 py-3"
-        ref={refModalPayment}
+        ref={refModalPaymentSuccess}
       >
         <div className="modal-payment-header w-full px-3 flex items-center justify-between">
-          <p className="text-center flex-1 text-2xl">Approve purchase</p>
+          <p className="text-center flex-1 text-2xl">Preview</p>
           <button
             className="text-2xl hover:opacity-85 text-inherit"
             onClick={handleCloseModal}
@@ -56,7 +63,7 @@ const ModalPayment = () => {
                   </p>
 
                   <p>
-                    Chain : <span className="ml-1">Matic</span>
+                    Chain : <span className="ml-1">MATIC</span>
                   </p>
                 </div>
 
@@ -71,15 +78,23 @@ const ModalPayment = () => {
         </div>
         <div className="line w-full h-[2px] bg-gray-100 my-2"></div>
 
-        <div className="px-4 mt-3">
-          <p className="font-bold text-xl">Go to your wallet</p>
-          <p className="text-base font-normal">
-            You'll be asked to approve this purchase from your wallet
-          </p>
+        <div className="px-4 mt-3 flex justify-center items-center">
+          <button
+            className="text-base font-bold py-3 px-4 text-white rounded-lg w-full bg-blue-500"
+            onClick={() => {
+              setModalPayment((prev) => {
+                return { ...prev, open: false };
+              });
+              resetCart();
+              router.push(`/account/${account.accountCurrent}`);
+            }}
+          >
+            PREVIEW
+          </button>
         </div>
       </motion.div>
     </>
   );
 };
 
-export default ModalPayment;
+export default ModalPaymentSuccess;

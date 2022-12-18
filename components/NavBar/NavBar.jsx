@@ -13,6 +13,7 @@ import {
   modalCartState,
   modalNotifyMetaMaskState,
   modalPaymentState,
+  modalPaymentStateSuccess,
 } from '../../global-state/modal';
 import ModalBase from '../modal/ModalBase';
 import Cart from '../cart/Cart';
@@ -31,6 +32,7 @@ import ModalPayment from '../modal/modal-payment/ModalPayment';
 import { useCallback } from 'react';
 import axiosClient from 'utils/axiosClient';
 import { useRouter } from 'next/router';
+import ModalPaymentSuccess from '../modal/modal-payment-success/ModalPaymentSuccess';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
@@ -40,12 +42,11 @@ const NavBar = () => {
   //set AvatarDefault
   const [avatar, setAvatar] = useState(undefined);
   const [domLoad, setDomLoad] = useState(false);
-
-  const [profileRef, isProfileRef] = useHover(false);
+  const [profileRef, isProfileRef] = useHover();
   const [discoveryRef, isDiscoveryRef] = useHover();
   const [helpRef, isHelpRef] = useHover();
   const resetMetaMask = useResetRecoilState(connectMetaMaskState);
-
+  
   const [isOpenModalMetaMask, setIsOpenModalMetaMask] = useRecoilState(
     modalNotifyMetaMaskState
   );
@@ -56,7 +57,7 @@ const NavBar = () => {
   const [modalPayment, setModalPayment] = useRecoilState(modalPaymentState);
 
   const fetchProfileDetail = useCallback(async () => {
-    if(metaMask.accountCurrent) {
+    if (metaMask.accountCurrent) {
       const {
         data: { body },
       } = await axiosClient.get(`/profile/${metaMask.accountCurrent}`);
@@ -77,6 +78,9 @@ const NavBar = () => {
       }
     });
   }, [fetchProfileDetail]);
+  const [modalPaymentSuccess, setModalPaymentSuccess] = useRecoilState(
+    modalPaymentStateSuccess
+  );
 
   const handleOpenMeta = () => {
     setIsOpenModalMetaMask((prev) => {
@@ -86,9 +90,9 @@ const NavBar = () => {
 
   useEffect(() => {
     window.ethereum.on('accountsChanged', async function (accounts) {
-      window.close();
       resetMetaMask();
       handleOpenMeta();
+
       router.push('/');
     });
   }, []);
@@ -256,6 +260,15 @@ const NavBar = () => {
             {modalPayment.open ? (
               <ModalBase selector="body">
                 <ModalPayment></ModalPayment>
+              </ModalBase>
+            ) : null}
+          </AnimatePresence>
+
+          {/* modal-payment-success */}
+          <AnimatePresence>
+            {modalPaymentSuccess.open ? (
+              <ModalBase selector="body">
+                <ModalPaymentSuccess></ModalPaymentSuccess>
               </ModalBase>
             ) : null}
           </AnimatePresence>
