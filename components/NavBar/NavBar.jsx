@@ -28,9 +28,11 @@ import Search from '../search/Search';
 import SideBar from './side-bar/SideBar';
 import { cartState } from 'global-state/cart';
 import ModalPayment from '../modal/modal-payment/ModalPayment';
+import { useRouter } from 'next/router';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
+  const router = useRouter();
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
   const [profileRef, isProfileRef] = useHover(false);
@@ -58,6 +60,7 @@ const NavBar = () => {
       window.close();
       resetMetaMask();
       handleOpenMeta();
+      router.push('/');
     });
   }, []);
 

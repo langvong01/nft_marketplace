@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 //INTERNAL IMPORT
 import 'swiper/css';
@@ -36,28 +36,7 @@ const Slider = ({ cols }) => {
           navigation={true}
         >
           {cols.map((col, index) => (
-            <SwiperSlide key={index}>
-              <div
-                className={`${Style.slider_item} overflow-hidden rounded-lg w-full h-[400px transition-all`}
-                onClick={() => router.push(`/collection/${col.collectionName}`)}
-              >
-                <img
-                  className="h-full w-full object-cover rounded-lg hover:scale-105"
-                  src={col.featuredImage}
-                  alt="slider-1"
-                />
-                <div
-                  className={`absolute bottom-0 -translate-x-3 bg-black py-2 bg-opacity-50 w-[110%] text-center`}
-                >
-                  <h3 className="capitalize -translate-x-3">
-                    {col.collectionName}
-                  </h3>
-                  <p className="text-center m-0 -translate-x-3">
-                    Total : <span>{col.totalValue}</span> MATIC
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
+            <SwiperSlide key={index}></SwiperSlide>
           ))}
         </Swiper>
       </div>
