@@ -8,12 +8,6 @@ const uploadNFT = () => {
   return (
     <div className={Style.uploadNFT}>
       <div className={Style.uploadNFT_box}>
-        {/* <div className={Style.uploadNFT_box_heading}>
-        </div>
-
-        <div className={Style.uploadNFT_box_title}>
-        </div> */}
-
         <div className={Style.uploadNFT_box_form}>
           <UploadNFT />
         </div>

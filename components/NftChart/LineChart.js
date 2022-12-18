@@ -14,7 +14,6 @@ import { Line } from 'react-chartjs-2';
 
 import { useRouter } from 'next/router';
 import axiosClient from 'utils/axiosClient';
-import { TableBody } from '@mui/material';
 
 ChartJS.register(
   CategoryScale,
@@ -45,7 +44,7 @@ const LineChart = ({ chartData }) => {
       const pricesArray = [];
 
       if (body.length) {
-        body.array.forEach((el) => {
+        body.forEach((el) => {
           for (const key in el) {
             pricesArray.push(el[key]);
           }

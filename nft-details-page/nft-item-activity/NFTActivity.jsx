@@ -44,8 +44,6 @@ const NFTActivity = ({ itemsActivity }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowPerPage] = useState(10);
 
-  console.log(moment('2022-12-15T17:16:38').startOf('days').fromNow());
-
   const activitys = itemsActivity.map((item) => {
     return {
       id: item.activityId,
@@ -137,7 +135,7 @@ const NFTActivity = ({ itemsActivity }) => {
                       if (column.id === 'date') {
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {value && moment(value).startOf('day').fromNow()}
+                            {value && moment(value).startOf('second').fromNow()}
                           </TableCell>
                         );
                       }

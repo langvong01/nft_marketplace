@@ -15,13 +15,23 @@ import AuthorNFTCardBox from 'authorPage/AuthorNFTCardBox/AuthorNFTCardBox';
 
 const AccountPage = ({}) => {
   const [profile, setProfile] = useState();
+
   const [itemsOwned, setItemOwned] = useState([]);
   const [itemCreated, setItemCreated] = useState([]);
+  const [collections, setCollections] = useState([]);
+
+  const [collectiables, setCollectiables] = useState(true);
+  const [created, setCreated] = useState(false);
+  const [collectionOwned, setCollectionOwned] = useState(false);
 
   const router = useRouter();
   const { wlAdress } = router.query;
 
   useEffect(() => {
+    const fetchAllCollection = async () => {
+      const { data } = await axiosClient.get(`/collection/personal`);
+      return data.body;
+    };
     const fetchProfileDetail = async () => {
       const {
         data: { body },
@@ -58,8 +68,10 @@ const AccountPage = ({}) => {
     };
 
     if (router.isReady) {
+      fetchAllCollection()
+        .then((data) => setCollections(data))
+        .catch((err) => console.log(err));
       fetchProfileDetail().then((data) => {
-        console.log(data);
         const { name } = data;
         fetchItemsOwned(name).then((data) => setItemOwned(data));
         fetchItemsCreated(name).then((data) => setItemCreated(data));
@@ -67,18 +79,24 @@ const AccountPage = ({}) => {
       });
     }
   }, [router.isReady]);
-  const [collectiables, setCollectiables] = useState(true);
-  const [created, setCreated] = useState(false);
 
   return (
     <div className={Style.author}>
-      <Banner bannerImage={profile?.avatar} />
+      <Banner
+        bannerImage={profile?.avatar ? profile?.avatar : images.imgDefault.src}
+      />
       <AuthorProfileCard profile={profile} />
-      <AuthorTaps setCollectiables={setCollectiables} setCreated={setCreated} />
+      <AuthorTaps
+        setCollectiables={setCollectiables}
+        setCreated={setCreated}
+        setCollectionOwned={setCollectionOwned}
+      />
 
       <AuthorNFTCardBox
+        collectionOwned={collectionOwned}
         collectiables={collectiables}
         created={created}
+        collections={collections}
         itemCreated={itemCreated}
         itemsOwned={itemsOwned}
       />

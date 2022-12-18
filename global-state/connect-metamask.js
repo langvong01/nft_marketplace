@@ -6,9 +6,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil';
-// import { ethers } from 'ethers';
-// import Web3 from 'web3';
-// import axios from 'axios';
+
 import { recoilPersist } from 'recoil-persist';
 const { persistAtom } = recoilPersist();
 

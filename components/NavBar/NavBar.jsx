@@ -77,11 +77,6 @@ const NavBar = () => {
           {/* right */}
           {/* //END OF LEFT SECTION */}
           <div className={Style.navbar_container_right}>
-            {/* Collection meny*/}
-            <div className={Style.navbar_container_right_collection}>
-              <Link href="/collection">Collection</Link>
-            </div>
-
             {/* DISCOVER MENU */}
             <div
               className={Style.navbar_container_right_discover}

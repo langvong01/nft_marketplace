@@ -11,6 +11,13 @@ import Button from '../components/Button/Button';
 
 import Style from '../styles/upload-nft.module.css';
 import btnStyle from './Upload.module.css';
+import BackDrop from '@/components/BackDrop/BackDrop';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { connectMetaMaskState } from 'global-state/connect-metamask';
+
+
+
 
 const BASE_API = 'http://localhost:8080/api/v1';
 
@@ -19,7 +26,10 @@ const UloadNFT = () => {
   const [featuredImage, setFeaturedImage] = useState(null);
   const [logoImage, setLogoImage] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
+  const [openBackDrop,setOpenBackDrop] = useState(false);
+  const [recoilState,setRecoilState] = useRecoilState(connectMetaMaskState)
 
+  const router= useRouter();
   const {
     register,
     handleSubmit,
@@ -36,9 +46,8 @@ const UloadNFT = () => {
       alert('Please upload all images and try again.');
       return;
     }
-
+    setOpenBackDrop(true)
     const { name, description, categoryId } = data;
-    console.log(data);
 
     try {
       const formData = new FormData();
@@ -53,7 +62,8 @@ const UloadNFT = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
-      console.log('response: ', response);
+      setOpenBackDrop(false)
+      router.push(`/account/${recoilState.accountCurrent}`)
     } catch (error) {
       console.log('error: ', error);
     }
@@ -93,24 +103,18 @@ const UloadNFT = () => {
                 title="Drag & drop featuredImage here"
                 heading="or Browse media on your device"
                 image={images.upload}
-                register={register}
-                label="featuredImage"
                 setImage={setFeaturedImage}
               />
               <DropZone
                 title="Drag & drop logoImage here"
                 heading="or Browse media on your device"
                 image={images.upload}
-                register={register}
-                label="logoImage"
                 setImage={setLogoImage}
               />
               <DropZone
                 title="Drag & drop file bannerImage"
                 heading="or Browse media on your device"
                 image={images.upload}
-                register={register}
-                label="bannerImage"
                 setImage={setBannerImage}
               />
               <div className={Style.upload_box}>
@@ -161,51 +165,8 @@ const UloadNFT = () => {
           </div>
         </div>
       </div>
+      <BackDrop openBackDrop={openBackDrop} />
     </div>
-
-    // <div clasName='format lg:format-lg'>
-    //   <div className='container mx-auto my-12 mt-4'>
-    //     <h2 className='text-4xl text-center my-8 font-bold gap-5'>Create collections</h2>
-    //     <Box className='flex justify-center items-center gap-5'>
-    //       <TextField id="outlined-basic" label="name" variant="outlined" className='w-1/3' error={!!errors.name} {...register('name', { required: true })} />
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5'>
-    //       {errors.name && <span>Can not be empty!</span>}
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5 mt-3.5'>
-    //       <TextField id="outlined-basic" type="file" variant="outlined" className='w-1/3' error={!!errors.featuredImage}  {...register('featuredImage', { required: true })} />
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5'>
-    //       {errors.featuredImage && <span>Can not be empty!</span>}
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5 mt-3.5'>
-    //       <TextField id="outlined-basic" type="file" variant="outlined" className='w-1/3' error={!!errors.logoImage}  {...register('logoImage', { required: true })} />
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5'>
-    //       {errors.logoImage && <span>Can not be empty!</span>}
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5 mt-3.5'>
-    //       <TextField id="outlined-basic" type="file" variant="outlined" className='w-1/3' error={!!errors.bannerImage}  {...register('bannerImage', { required: true })} />
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5'>
-    //       {errors.bannerImage && <span>Can not be empty!</span>}
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5 mt-3.5'>
-    //       <TextField id="outlined-basic" label="description" variant="outlined" className='w-1/3' error={!!errors.description}  {...register('description', { required: true })} />
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5'>
-    //       {errors.description && <span>Can not be empty!</span>}
-    //     </Box>
-    //     {/* <Box className='flex justify-center items-center gap-5 mt-3.5'>
-    //       <TextField id="outlined-basic" label="categoryId" variant="outlined" className='w-1/3' error={!!errors.categoryId}  {...register('categoryId', { required: true })} />
-    //     </Box>
-    //     <Box className='flex justify-center items-center gap-5'>
-    //       {errors.categoryId && <span>Can not be empty!</span>}
-    //     </Box> */}
-
-    //     <Box className='flex justify-center'> <Button onClick={handleSubmit(connectCreateCollectService)} className="text-white mt-4 bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300  font-medium rounded-lg text-sm px-10 py-3 text-center mr-2 mb-2">submit</Button></Box>
-    //   </div>
-    // </div>
   );
 };
 

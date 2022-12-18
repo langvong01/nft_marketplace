@@ -72,13 +72,21 @@
   display: flex;
   justify-content: space-between;
 }
-.NFTDetailsImg_box_details_row span {
+.NFTDetailsImg_box_contract_address {
+  display: flex;
+}
+.NFTDetailsImg_box_contract_address span {
   max-width: 170px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 400;
   margin-bottom: 0.5rem;
+}
+
+.NFTDetailsImg_box_icon {
+  cursor: pointer;
+  font-size: 1.4rem;
 }
 
 

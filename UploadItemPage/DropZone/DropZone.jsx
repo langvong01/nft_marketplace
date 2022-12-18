@@ -13,8 +13,6 @@ const DropZone = React.forwardRef(
       title,
       heading,
       subHeading,
-      register,
-      label,
       setImage,
     },
     ref
@@ -38,7 +36,7 @@ const DropZone = React.forwardRef(
     return (
       <div className={Style.DropZone}>
         <div className={Style.DropZone_box} {...getRootProps()}>
-          <input {...getInputProps()} ref={ref} {...register(label)} />
+          <input {...getInputProps()}  />
           <div className={Style.DropZone_box_input}>
             <p>{title}</p>
             <div className={Style.DropZone_box_input_img}>

@@ -4,19 +4,54 @@ import { MdVerified } from 'react-icons/md';
 
 import Style from './NFTDescription.module.css';
 import images from '../../img';
-
 import Button from '../../components/Button/Button';
 import LineChart from '@/components/NftChart/LineChart';
 import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
-
 import axiosClient from 'utils/axiosClient';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { cartState } from 'global-state/cart';
+import Link from 'next/link';
 
 const NFTDescription = ({ nft }) => {
   const [btn, setBtn] = useState({
     isOnSale: null,
     isOwner: null,
   });
+  const [cart, setCart] = useRecoilState(cartState);
+
+  const handleAddItem = (item) => {
+    setCart((prev) => {
+      const newArray = [...new Set([...prev.idItemSelected, item.itemId])];
+      let newArrayItem = [...new Set([...prev.items, item])];
+
+      return { ...prev, idItemSelected: newArray, items: newArrayItem };
+    });
+
+    setToast((prev) => {
+      return { ...prev, open: true, message: 'Added to cart' };
+    });
+  };
+  const handleRemoveCart = (item) => {
+    setCart((prev) => {
+      let newArrayId = [...new Set([...prev.idItemSelected, item.itemId])];
+
+      //delete id
+      newArrayId = newArrayId.filter((id) => {
+        return id !== item.itemId;
+      });
+
+      const newArrayItem = prev.items.filter((itemMap) => {
+        return item.itemId !== itemMap.itemId;
+      });
+
+      return { ...prev, idItemSelected: newArrayId, items: newArrayItem };
+    });
+
+    setToast((prev) => {
+      return { ...prev, open: true, message: 'Removed to cart' };
+    });
+  };
 
   const [toast, setToast] = useState({
     open: false,
@@ -29,7 +64,6 @@ const NFTDescription = ({ nft }) => {
   const router = useRouter();
 
   useEffect(() => {
-
     if (nft.isOnSale === 1) {
       setBtn((prev) => {
         return { ...prev, isOnSale: true };
@@ -99,37 +133,44 @@ const NFTDescription = ({ nft }) => {
           <h1 className="text-capitalize">{nft.itemName}</h1>
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
-              <Image
-                loader={() => nft.creator?.avatar}
-                src={nft.creator.avatar}
-                alt="creatorProFile"
-                width={40}
-                height={40}
-                className={Style.NFTDescription_box_profile_box_left_img}
-              />
+              {nft?.creator?.avatar && (
+                <Image
+                  loader={() => nft.creator?.avatar}
+                  src={nft.creator.avatar}
+                  alt="creatorProFile"
+                  width={40}
+                  height={40}
+                  className={Style.NFTDescription_box_profile_box_left_img}
+                />
+              )}
               <div className={Style.NFTDescription_box_profile_box_left_info}>
                 <small>Creator</small> <br />
-                <span>
-                  {nft.creator.name} <MdVerified />
-                </span>
+                <Link href={`/account/${nft.creator.walletAddress}`}>
+                  <span className="text-primary" style={{ cursor: 'pointer' }}>
+                    {nft.creator.name}
+                  </span>
+                </Link>
               </div>
             </div>
 
             <div className={Style.NFTDescription_box_profile_box_right}>
-              <Image
-                loader={() => nft.ownedBy?.avatar}
-                src={nft.ownedBy?.avatar}
-                alt="Ownedprofile"
-                width={40}
-                height={40}
-                className={Style.NFTDescription_box_profile_box_left_img}
-              />
-
+              {nft?.ownedBy?.avatar && (
+                <Image
+                  loader={() => nft.ownedBy?.avatar}
+                  src={nft.ownedBy?.avatar}
+                  alt="Ownedprofile"
+                  width={40}
+                  height={40}
+                  className={Style.NFTDescription_box_profile_box_left_img}
+                />
+              )}
               <div className={Style.NFTDescription_box_profile_box_right_info}>
                 <small>Owner</small> <br />
-                <span>
-                  {nft.ownedBy.name} <MdVerified />
-                </span>
+                <Link href={`/account/${nft.ownedBy.walletAddress}`}>
+                  <span className="text-primary" style={{ cursor: 'pointer' }}>
+                    {nft.ownedBy.name}
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
@@ -157,11 +198,19 @@ const NFTDescription = ({ nft }) => {
               className={Style.NFTDescription_box_profile_biding_box_button}
               s
             >
-              <Button
-                btnName="Add to Cart"
-                handleClick={() => {}}
-                classStyle={`${Style.button} w-100`}
-              />
+              {!cart.idItemSelected.includes(nft.itemId) ? (
+                <Button
+                  btnName="Add to Cart"
+                  handleClick={() => handleAddItem(nft)}
+                  classStyle={`${Style.button} w-100`}
+                />
+              ) : (
+                <Button
+                  btnName="Remove from Cart"
+                  handleClick={() => handleRemoveCart(nft)}
+                  classStyle={`${Style.button} w-100`}
+                />
+              )}
             </div>
           )}
 
