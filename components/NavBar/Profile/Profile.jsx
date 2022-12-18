@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FaUserAlt, FaRegImage, FaMagic, FaRegListAlt } from 'react-icons/fa';
 
@@ -12,6 +12,7 @@ import { modalNotifyMetaMaskState } from '../../../global-state/modal';
 import axiosClient from 'utils/axiosClient';
 import { TbDownload } from 'react-icons/tb';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Profile = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);

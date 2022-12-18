@@ -46,7 +46,7 @@ const NavBar = () => {
   const [discoveryRef, isDiscoveryRef] = useHover();
   const [helpRef, isHelpRef] = useHover();
   const resetMetaMask = useResetRecoilState(connectMetaMaskState);
-  
+
   const [isOpenModalMetaMask, setIsOpenModalMetaMask] = useRecoilState(
     modalNotifyMetaMaskState
   );
@@ -92,11 +92,11 @@ const NavBar = () => {
     window.ethereum.on('accountsChanged', async function (accounts) {
       resetMetaMask();
       handleOpenMeta();
-
       router.push('/');
     });
   }, []);
 
+  console.log(domLoad);
   return (
     <>
       {domLoad && (
