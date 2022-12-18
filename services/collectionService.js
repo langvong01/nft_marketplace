@@ -14,7 +14,7 @@ export const getTopTenCollectionLatest = async (order = 'DESC') => {
 export const getAllCollectionInCategory = async (id) => {
   const response = await axiosClient.post('/collection/filter', {
     category: { category_id: id },
-    sort_by: ['total_value', 'created_at'],
+    sort_by: ['created_at'],
     order: ['DESC'],
     page: 1,
     size: 1000,

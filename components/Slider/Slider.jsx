@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 //INTERNAL IMPORT
 import 'swiper/css';
@@ -49,12 +49,9 @@ const Slider = ({ cols }) => {
                 <div
                   className={`absolute bottom-0 -translate-x-3 bg-black py-2 bg-opacity-50 w-[110%] text-center`}
                 >
-                  <h3 className="capitalize -translate-x-3">
+                  <h3 className="capitalize -translate-x-3 p-2">
                     {col.collectionName}
                   </h3>
-                  <p className="text-center m-0 -translate-x-3">
-                    Total : <span>{col.totalValue}</span> MATIC
-                  </p>
                 </div>
               </div>
             </SwiperSlide>

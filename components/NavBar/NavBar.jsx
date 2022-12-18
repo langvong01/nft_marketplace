@@ -30,9 +30,11 @@ import { cartState } from 'global-state/cart';
 import ModalPayment from '../modal/modal-payment/ModalPayment';
 import { useCallback } from 'react';
 import axiosClient from 'utils/axiosClient';
+import { useRouter } from 'next/router';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
+  const router = useRouter();
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
   //set AvatarDefault
@@ -87,6 +89,7 @@ const NavBar = () => {
       window.close();
       resetMetaMask();
       handleOpenMeta();
+      router.push('/');
     });
   }, []);
 

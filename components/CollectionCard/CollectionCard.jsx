@@ -7,7 +7,7 @@ const CollectionCard = ({ collection }) => {
   return (
     <>
       <div
-        className="collection-item w-full shadow-md rounded-lg overflow-hidden relative cursor-pointer "
+        className="collection-item w-full h-full shadow-md rounded-lg overflow-hidden relative cursor-pointer "
         key={collection.collectionId}
         onClick={() => router.push(`/collection/${collection.collectionName}`)}
       >
@@ -26,7 +26,9 @@ const CollectionCard = ({ collection }) => {
           />
         </div>
         <div className="collection-text p-4 ">
-          <h2 className="text-center capitalize">{collection.collectionName}</h2>
+          <h2 className="text-center capitalize">
+            {collection.collectionName}
+          </h2>
         </div>
       </div>
     </>

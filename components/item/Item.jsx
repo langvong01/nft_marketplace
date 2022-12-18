@@ -114,17 +114,22 @@ const Item = ({ item }) => {
             />
           </div>
 
-          <div className="w-full p-2 mt-3">
-            <p className="font-bold text-xl ">
-              {item.itemName}{' '}
-              <spa className="ml-1 w-[50px]"># {item.itemId}</spa>
+          <div className="w-full flex-1 p-2 mt-3">
+            <p className="font-semibold text-xl flex justify-between mb-2 ">
+              <p>
+                <span className="mr-1">Item name :</span>
+                {item.itemName}
+              </p>
+              <span className="ml-1 w-[50px]"># {item.itemId}</span>
             </p>
             <p className="font-bold text-xl ">
-              {item.price}{' '}
-              <span className="ml-1 w-[50px] text-right">Matic</span>
+              {item.price}
+              <span className="ml-1 w-[50px] text-right uppercase text-base">
+                Matic
+              </span>
             </p>
 
-            <p className="text-base mt-2">End in 7 days</p>
+            {/* <p className="text-base mt-2">End in 7 days</p> */}
           </div>
           {item.ownedBy.walletAddress !== account.accountCurrent ? (
             <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
