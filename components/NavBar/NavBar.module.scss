@@ -7,6 +7,7 @@
   z-index: 111111111;
 }
 
+
 .navbar_container {
   width: 100%;
   margin: 0 auto;
@@ -144,13 +145,17 @@
 }
 
 .logo p {
-  margin: 0;
+margin: 0;
 }
 
 .logo img {
   width: 50px;
   height: 50px;
   object-fit: cover;
+}
+
+.navbar_right_profile_icon_box {
+  font-size: 1.75rem;
 }
 
 @media screen and (min-device-width: 320px) and (max-device-width: 768px) {

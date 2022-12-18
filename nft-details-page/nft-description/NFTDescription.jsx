@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { MdVerified } from 'react-icons/md';
 
 import Style from './NFTDescription.module.css';
 import images from '../../img';
@@ -133,10 +132,18 @@ const NFTDescription = ({ nft }) => {
           <h1 className="text-capitalize">{nft.itemName}</h1>
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
-              {nft?.creator?.avatar && (
+              {nft?.creator?.avatar ? (
                 <Image
                   loader={() => nft.creator?.avatar}
                   src={nft.creator.avatar}
+                  alt="creatorProFile"
+                  width={40}
+                  height={40}
+                  className={Style.NFTDescription_box_profile_box_left_img}
+                />
+              ) : (
+                <Image
+                  src={images.imgDefault}
                   alt="creatorProFile"
                   width={40}
                   height={40}
@@ -154,11 +161,19 @@ const NFTDescription = ({ nft }) => {
             </div>
 
             <div className={Style.NFTDescription_box_profile_box_right}>
-              {nft?.ownedBy?.avatar && (
+            {nft?.ownedBy?.avatar ? (
                 <Image
                   loader={() => nft.ownedBy?.avatar}
-                  src={nft.ownedBy?.avatar}
-                  alt="Ownedprofile"
+                  src={nft.ownedBy.avatar}
+                  alt="ownedProFile"
+                  width={40}
+                  height={40}
+                  className={Style.NFTDescription_box_profile_box_left_img}
+                />
+              ) : (
+                <Image
+                  src={images.imgDefault}
+                  alt="ownedProFile"
                   width={40}
                   height={40}
                   className={Style.NFTDescription_box_profile_box_left_img}

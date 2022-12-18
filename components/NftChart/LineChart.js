@@ -27,11 +27,8 @@ ChartJS.register(
 const dateStringList = ['01/10/2022', '01/11/2022', '01/12/2022', '01/01/2023'];
 var options = {
   maintainAspectRatio: false,
-  scales: {
-    // yAxis: {
-    //   min: 0,
-    //   max: 1,
-    // },
+  y: {
+    min : 0,
   },
   legend: {
     labels: {
