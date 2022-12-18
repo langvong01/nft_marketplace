@@ -13,6 +13,7 @@ import {
   modalCartState,
   modalNotifyMetaMaskState,
   modalPaymentState,
+  modalPaymentStateSuccess,
 } from '../../global-state/modal';
 import ModalBase from '../modal/ModalBase';
 import Cart from '../cart/Cart';
@@ -29,6 +30,7 @@ import SideBar from './side-bar/SideBar';
 import { cartState } from 'global-state/cart';
 import ModalPayment from '../modal/modal-payment/ModalPayment';
 import { useRouter } from 'next/router';
+import ModalPaymentSuccess from '../modal/modal-payment-success/ModalPaymentSuccess';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
@@ -48,6 +50,9 @@ const NavBar = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
   const [cart, setCart] = useRecoilState(cartState);
   const [modalPayment, setModalPayment] = useRecoilState(modalPaymentState);
+  const [modalPaymentSuccess, setModalPaymentSuccess] = useRecoilState(
+    modalPaymentStateSuccess
+  );
 
   const handleOpenMeta = () => {
     setIsOpenModalMetaMask((prev) => {
@@ -57,9 +62,9 @@ const NavBar = () => {
 
   useEffect(() => {
     window.ethereum.on('accountsChanged', async function (accounts) {
-      window.close();
       resetMetaMask();
       handleOpenMeta();
+
       router.push('/');
     });
   }, []);
@@ -212,6 +217,15 @@ const NavBar = () => {
         {modalPayment.open ? (
           <ModalBase selector="body">
             <ModalPayment></ModalPayment>
+          </ModalBase>
+        ) : null}
+      </AnimatePresence>
+
+      {/* modal-payment-success */}
+      <AnimatePresence>
+        {modalPaymentSuccess.open ? (
+          <ModalBase selector="body">
+            <ModalPaymentSuccess></ModalPaymentSuccess>
           </ModalBase>
         ) : null}
       </AnimatePresence>

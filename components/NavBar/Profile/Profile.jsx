@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-import { FaUserAlt, FaRegImage, FaMagic,FaRegListAlt } from 'react-icons/fa';
+import { FaUserAlt, FaRegImage, FaMagic, FaRegListAlt } from 'react-icons/fa';
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -54,7 +53,9 @@ const Profile = () => {
               <FaUserAlt />
               <p>
                 {metaMask.accountCurrent ? (
-                  <Link href={`/account/${metaMask.accountCurrent}`}>My Account</Link>
+                  <Link href={`/account/${metaMask.accountCurrent}`}>
+                    My Account
+                  </Link>
                 ) : (
                   'My Account'
                 )}
@@ -81,7 +82,7 @@ const Profile = () => {
 
               <p>
                 {metaMask.accountCurrent ? (
-                  <Link href= "/account-setting">Setting</Link>
+                  <Link href="/account-setting">Setting</Link>
                 ) : (
                   'Setting'
                 )}
@@ -95,13 +96,12 @@ const Profile = () => {
 
               <p>
                 {metaMask.accountCurrent ? (
-                  <Link href= "/uploadNFT">Create A Collection</Link>
+                  <Link href="/uploadNFT">Create A Collection</Link>
                 ) : (
                   'Create A Collection'
                 )}
               </p>
             </div>
-            
           </div>
 
           {metaMask.accountCurrent ? (

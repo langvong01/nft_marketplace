@@ -49,9 +49,6 @@ const CartItem = ({ item }) => {
         <div className={Style.cart_content_container}>
           <p className={Style.cart_item_id}>{item.itemId}</p>
           <p className={Style.cart_item_author}>{item.itemName}</p>
-          <p className={Style.cart_item_voucher}>
-            Creator fee : <span>4%</span>
-          </p>
         </div>
 
         <div className={Style.cart_price_container}>

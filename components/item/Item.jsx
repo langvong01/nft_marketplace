@@ -116,10 +116,7 @@ const Item = ({ item }) => {
 
           <div className="w-full flex-1 p-2 mt-3">
             <p className="font-semibold text-xl flex justify-between mb-2 ">
-              <p>
-                <span className="mr-1">Item name :</span>
-                {item.itemName}
-              </p>
+              <p className="w-[90%]">{item.itemName}</p>
               <span className="ml-1 w-[50px]"># {item.itemId}</span>
             </p>
             <p className="font-bold text-xl ">
