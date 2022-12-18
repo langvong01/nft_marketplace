@@ -2,17 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 //----IMPORT ICON
 import { MdPayments, MdShoppingCart } from 'react-icons/md';
-
 import { CgMenuRight } from 'react-icons/cg';
-
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  connectMetaMaskService,
-  handleSignMessage,
-} from '../../services/metaService';
 //INTERNAL IMPORT
 import Style from './NavBar.module.scss';
-
 import images from '../../img';
 import SubTotalCart from './sub-total-cart/SubTotalCart';
 import { useRecoilState, useResetRecoilState } from 'recoil';

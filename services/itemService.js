@@ -72,7 +72,5 @@ export const getAllItems = async () => {
     size: 100000,
   });
 
-  console.log(response);
-
   return await response.data?.body.content;
 };

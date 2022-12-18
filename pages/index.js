@@ -9,15 +9,16 @@ import React, { useEffect } from 'react';
 
 //INTERNAL IMPORT
 import Style from '../styles/index.module.css';
+import { getTopTenCollectionLatest } from 'services/collectionService';
 
-const Home = () => {
+const Home = ({ collectionSlider }) => {
   useEffect(() => {
     document.title = 'NFT';
   }, []);
 
   return (
     <div className={Style.homePage}>
-      <Slider></Slider>
+      <Slider cols={collectionSlider}></Slider>
       <Collections></Collections>
       <Category />
       <Question></Question>
@@ -31,11 +32,11 @@ export async function getServerSideProps(context) {
     'public, s-maxage=10, stale-while-revalidate=59'
   );
 
-  const collectionSlider = await getTopTenCollectionLatest();
+  const topTenCollectionLatest = await getTopTenCollectionLatest();
 
   return {
     props: {
-      collectionSlider: collectionSlider,
+      collectionSlider: topTenCollectionLatest,
     },
   };
 }

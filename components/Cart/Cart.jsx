@@ -17,6 +17,7 @@ import Web3Modal from 'web3modal';
 import { marketContractAbi, Market, NFT } from '../../contractsABI.json';
 import { ethers } from 'ethers';
 import axiosClient from '../../utils/axiosClient';
+
 const Cart = () => {
   const [openCart, setOpenCart] = useRecoilState(modalCartState);
   const [account, setAccount] = useRecoilState(connectMetaMaskState);
@@ -57,6 +58,7 @@ const Cart = () => {
       '/item/sale/detail',
       cart.idItemSelected
     );
+
     if (res.data.status == 200) {
       const { saleIds, totalPrice, nftContract } = res.data.body;
       const web3Modal = new Web3Modal();
