@@ -19,7 +19,7 @@ const nextConfig = {
   //   domains: ['https://img.seadn.io/'],
   // },
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['res.cloudinary.com', 'http://res.cloudinary.com'],
   },
 };
 

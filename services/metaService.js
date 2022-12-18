@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import Web3 from 'web3';
 import axiosClient from '../utils/axiosClient';
 
-const handleSignMessage = async (publicAddress, nonce) => {
+export const handleSignMessage = async (publicAddress, nonce) => {
   try {
     const web3 = new Web3(window.ethereum);
     const signature = await web3.eth.personal.sign(
@@ -18,19 +18,11 @@ const handleSignMessage = async (publicAddress, nonce) => {
   }
 };
 
-// export const connectCreateCollectService = async () => {
-//   console.log()
-//   await axiosClient.post(`/v1/collection`, {
-//     walletAddress: publicAddress,
-//     signature,
-//   });
-// }
-
 export const connectMetaMaskService = async () => {
   try {
     // install metamask - turn on modal
     if (!window.ethereum) {
-      alert('Plesae install metamask before connecting')
+      alert('Plesae install metamask before connecting');
       return {
         error: 'install',
         openError: true,

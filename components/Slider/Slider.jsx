@@ -6,28 +6,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Style from './Slider.module.scss';
-import Image from 'next/image';
 
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { vs as uuidv4 } from 'uuid';
+import { useRouter } from 'next/router';
 
-const loaderImageSlider1 = () => {
-  return 'https://img.seadn.io/files/37e2cbd2ea293e429d2bc9b5f2371571.png?auto=format&fit=max&w=750';
-};
+const Slider = ({ cols }) => {
+  const router = useRouter();
 
-const loaderImageSlider2 = () => {
-  return 'https://i.seadn.io/gae/Ph9rmCCAMp7mciaCF1Q9EkfdSDrkJZQaQ-xqB47bMXCeVG61mjT3nlk5SNHnpSUC5CM9KqkB-QlWQOxE3KBFI2Di_IyHtvwIwu-Cbg?auto=format&w=750';
-};
-
-const loaderImageSlider3 = () => {
-  return 'https://i.seadn.io/gae/CTwQGGvYJCBqIycAbWSyRrcoXKWhKihzr6Mh5VCVNUCuCK-JcQgwg1RkZZKxFCbhb7HLms2ITleIOoEAdcy3-mjaCu1BGb7YCJyDws8?auto=format&w=750';
-};
-
-const loaderImageSlider4 = () => {
-  return 'https://i.seadn.io/gae/XI-ymLP5F25VKTgkEH3QGLAdTfxtFNjY_1k7bYz7vPBRfxO90gjM0P1cbk-veItcf0kfHmBAo7aoThkYGeWziz579uoGF_BkR0ER6A?auto=format&w=1000';
-};
-
-const Slider = () => {
   return (
     <>
       <div className={Style.slider_container}>
@@ -48,100 +35,30 @@ const Slider = () => {
           onSwiper={(swiper) => {}}
           navigation={true}
         >
-          <SwiperSlide>
-            <div className={Style.slider_item}>
-              <Image
-                className={Style.slider_img}
-                height={100}
-                width={100}
-                src="https://i.seadn.io/gae/a8T_eqh02zJDY0dag7bG8PrQyds…svbge0i2tqTNcmcZgd7yT7bfkHWHfQ?auto=format&w=3840"
-                alt="slider-1"
-                loader={loaderImageSlider1}
-              />
-              <div className={Style.slider_desc}>
-                <h3>Origamasks</h3>
-                <p>
-                  Floor : <span>0,02</span> ETH
-                </p>
+          {cols.map((col, index) => (
+            <SwiperSlide key={index}>
+              <div
+                className={`${Style.slider_item} overflow-hidden rounded-lg w-full h-[400px transition-all`}
+                onClick={() => router.push(`/collection/${col.collectionName}`)}
+              >
+                <img
+                  className="h-full w-full object-cover rounded-lg hover:scale-105"
+                  src={col.featuredImage}
+                  alt="slider-1"
+                />
+                <div
+                  className={`absolute bottom-0 -translate-x-3 bg-black py-2 bg-opacity-50 w-[110%] text-center`}
+                >
+                  <h3 className="capitalize -translate-x-3">
+                    {col.collectionName}
+                  </h3>
+                  <p className="text-center m-0 -translate-x-3">
+                    Total : <span>{col.totalValue}</span> MATIC
+                  </p>
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className={Style.slider_item}>
-              <Image
-                className={Style.slider_img}
-                height={100}
-                width={100}
-                src="https://i.seadn.io/gae/a8T_eqh02zJDY0dag7bG8PrQyds…svbge0i2tqTNcmcZgd7yT7bfkHWHfQ?auto=format&w=3840"
-                alt="slider-1"
-                loader={loaderImageSlider2}
-              />
-              <div className={Style.slider_desc}>
-                <h3>Origamasks</h3>
-                <p>
-                  Floor : <span>0,02</span> ETH
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className={Style.slider_item}>
-              <Image
-                className={Style.slider_img}
-                height={100}
-                width={100}
-                src="https://i.seadn.io/gae/a8T_eqh02zJDY0dag7bG8PrQyds…svbge0i2tqTNcmcZgd7yT7bfkHWHfQ?auto=format&w=3840"
-                alt="slider-1"
-                loader={loaderImageSlider3}
-              />
-              <div className={Style.slider_desc}>
-                <h3>Origamasks</h3>
-                <p>
-                  Floor : <span>0,02</span> ETH
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className={Style.slider_item}>
-              <Image
-                className={Style.slider_img}
-                height={100}
-                width={100}
-                src="https://i.seadn.io/gae/a8T_eqh02zJDY0dag7bG8PrQyds…svbge0i2tqTNcmcZgd7yT7bfkHWHfQ?auto=format&w=3840"
-                alt="slider-1"
-                loader={loaderImageSlider4}
-              />
-              <div className={Style.slider_desc}>
-                <h3>Origamasks</h3>
-                <p>
-                  Floor : <span>0,02</span> ETH
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className={Style.slider_item}>
-              <Image
-                className={Style.slider_img}
-                height={100}
-                width={100}
-                src="https://i.seadn.io/gae/a8T_eqh02zJDY0dag7bG8PrQyds…svbge0i2tqTNcmcZgd7yT7bfkHWHfQ?auto=format&w=3840"
-                alt="slider-1"
-                loader={loaderImageSlider1}
-              />
-              <div className={Style.slider_desc}>
-                <h3>Origamasks</h3>
-                <p>
-                  Floor : <span>0,02</span> ETH
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </>

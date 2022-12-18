@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { useRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
@@ -7,13 +7,24 @@ import { connectMetaMaskState } from '../../../global-state/connect-metamask';
 import Style from './ModalWallet.module.scss';
 import useOnClickOutside from '../../../hook/useClickOutSide';
 import { modalNotifyMetaMaskState } from '../../../global-state/modal';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import FlipToFrontSharpIcon from '@mui/icons-material/FlipToFrontSharp';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 
 const ModalWallet = () => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
   const [isOpenModalMetaMask, setIsOpenModalMetaMask] = useRecoilState(
     modalNotifyMetaMaskState
   );
-
+  const [copyState, setCoppyState] = useState(false);
+  const [toast, setToast] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+    message: null,
+  });
   const refPayment = useRef();
 
   useOnClickOutside(refPayment, () => {
@@ -22,6 +33,12 @@ const ModalWallet = () => {
     });
   });
 
+  const handleCoppy = () => {
+    setCoppyState(true);
+    setToast((prev) => {
+      return { ...prev, open: true, message: 'Copied' };
+    });
+  };
   return (
     <>
       <motion.div
@@ -31,16 +48,29 @@ const ModalWallet = () => {
         exit={{ x: '107%', opacity: 0 }}
         ref={refPayment}
       >
-        <div className={Style.modal_wallet_header}>
+        <div className={`${Style.modal_wallet_header} flex items-center mb-2`}>
           <div className={Style.modal_wallet_info}>
             <span>
               <FaUser></FaUser>
             </span>
-            <p>My wallet</p>
+            <p className="m-0">My wallet</p>
           </div>
 
-          <div className={Style.modal_wallet_token}>
-            <p>{metaMask.accountCurrent}</p>
+          <div className={`${Style.modal_wallet_token} flex items-center`}>
+            <p className="relative mr-1">
+              {metaMask.accountCurrent.substring(-1, 10)}
+            </p>
+            <CopyToClipboard
+              text={metaMask.accountCurrent}
+              onCopy={handleCoppy}
+              className="flex"
+            >
+              <Tooltip title="copy">
+                <IconButton>
+                  <FlipToFrontSharpIcon></FlipToFrontSharpIcon>
+                </IconButton>
+              </Tooltip>
+            </CopyToClipboard>
           </div>
         </div>
 
@@ -58,6 +88,14 @@ const ModalWallet = () => {
           <button className={Style.modal_wallet_btn_fund}>add funds</button>
         </div>
       </motion.div>
+
+      <SnackBarSuccess
+        open={toast.open}
+        vertical={toast.vertical}
+        horizontal={toast.horizontal}
+        message={toast.message}
+        setToast={setToast}
+      ></SnackBarSuccess>
     </>
   );
 };
