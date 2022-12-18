@@ -7,7 +7,6 @@ import * as cookie from 'cookie';
 import Style from '../styles/account.module.css';
 import FormStyle from '../AccountPage/Form/Form.module.css';
 
-
 import images from '../img';
 import Banner from '@/components/banner/Banner';
 import Input from 'CreateNftItem/FormControll/input';
@@ -41,8 +40,7 @@ const accountSetting = ({}) => {
         } = await axiosClient.get(`/profile/${accountCurrent}`);
 
         return { avatar, name, email };
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchAccountProfile().then(({ avatar, name, email }) => {
@@ -66,10 +64,6 @@ const accountSetting = ({}) => {
   }, []);
 
   const onSubmitHandle = async (data) => {
-    if (!fileUrl) {
-      alert('Please upload avatar image ');
-      return;
-    }
     const { name, email } = data;
     try {
       const formData = new FormData();
@@ -98,7 +92,9 @@ const accountSetting = ({}) => {
   return (
     <div className={Style.account}>
       <div className={Style.account_banner}>
-        <Banner bannerImage={fileUrl ? fileUrl : images.upload}></Banner>
+        <Banner
+          bannerImage={fileUrl ? fileUrl : images.imgDefault.src}
+        ></Banner>
       </div>
       <div className={Style.account_info}>
         <h1>Account Details</h1>
@@ -107,27 +103,36 @@ const accountSetting = ({}) => {
         <div className={Style.account_box}>
           <div className={Style.account_box_img} {...getRootProps()}>
             <input {...getInputProps()} />
-            <Image
-              loader={() => fileUrl}
-              src={fileUrl ? fileUrl : images.upload}
-              alt="account upload"
-              width={150}
-              height={150}
-              objectFit="cover"
-              className={Style.account_box_img_img}
-            />
+            {fileUrl ? (
+              <Image
+                loader={() => fileUrl}
+                src={fileUrl}
+                alt="account upload"
+                width={150}
+                height={150}
+                objectFit="cover"
+                className={Style.account_box_img_img}
+              />
+            ) : (
+              <Image
+                src={images.imgDefault}
+                alt="account upload"
+                width={150}
+                height={150}
+                objectFit="cover"
+                className={Style.account_box_img_img}
+              />
+            )}
             <p className={Style.account_box_img_para}>Change Image</p>
           </div>
           <div className={Style.account_box_form}>
             <Input
-              
               label="name"
               register={register}
               type="text"
               errors={errors}
             />
             <InputWithIcon
-              
               label="email"
               register={register}
               type="text"

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { getAllCollectionInCategory } from 'services/collectionService';
 import { v4 as uuidv4 } from 'uuid';
 import axiosClient from 'utils/axiosClient';
+import CollectionCard from '@/components/CollectionCard/CollectionCard';
 
 const ListCollectionCategory = ({ collections, category }) => {
   const router = useRouter();
@@ -38,35 +39,7 @@ const ListCollectionCategory = ({ collections, category }) => {
           <div className="collection-list my-6 grid grid-cols-4 gap-12">
             {collections
               ? collections.map((col) => (
-                  <>
-                    <div
-                      className="collection-item w-full shadow-md rounded-lg overflow-hidden relative cursor-pointer "
-                      key={uuidv4()}
-                      onClick={() =>
-                        router.push(`/collection/${col.collectionName}`)
-                      }
-                    >
-                      <div className="collection-item-img z-10">
-                        <img
-                          src={col.featuredImage}
-                          alt="alt"
-                          className="w-full object-cover h-[300px]"
-                        />
-                      </div>
-                      <div className="sub-img p-2 shadow-lg rounded-lg overflow-hidden z-[50] absolute bottom-9 left-5 bg-slate-100">
-                        <img
-                          src={col.logoImage}
-                          alt="sub-alt"
-                          className="w-[70px] h-[70px] object-cover rounded-lg "
-                        />
-                      </div>
-                      <div className="collection-text p-4 ">
-                        <h2 className="text-center capitalize">
-                          {col.collectionName}
-                        </h2>
-                      </div>
-                    </div>
-                  </>
+                <CollectionCard collection={col} />
                 ))
               : null}
           </div>

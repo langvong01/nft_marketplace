@@ -6,7 +6,16 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const SnackBarSuccess = ({ open, vertical, horizontal, message, setToast }) => {
+const SnackBarSuccess = ({
+  open,
+  vertical,
+  horizontal,
+  message,
+  setToast,
+  type = 'success',
+}) => {
+  const colorAlert = type === 'success' ? 'green' : 'red';
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -17,7 +26,6 @@ const SnackBarSuccess = ({ open, vertical, horizontal, message, setToast }) => {
       horizontal: horizontal,
       message: message,
     });
-    
   };
   return (
     <Snackbar
@@ -32,16 +40,16 @@ const SnackBarSuccess = ({ open, vertical, horizontal, message, setToast }) => {
       }}
     >
       <Alert
-        severity="success"
+        severity={type}
         sx={{
           width: '300px',
-          padding: '24px',
+          padding: '1rem',
           textAlign: 'center',
-          fontSize: '1.2rem',
+          fontSize: '0.9rem',
           bgcolor: 'white',
           color: '#4c5773',
           ' & .css-1ytlwq5-MuiAlert-icon': {
-            color: 'green',
+            color: colorAlert,
           },
         }}
       >

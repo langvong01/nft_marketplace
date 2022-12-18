@@ -8,11 +8,9 @@ import {
   TiSocialYoutube,
   TiSocialInstagram,
 } from 'react-icons/ti';
-
 //INTERNAL IMPORT
 import Style from './AuthorProfileCard.module.css';
 import images from '../../img';
-import Button from '../../components/Button/Button';
 import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 
 const AuthorProfileCard = ({ profile }) => {
@@ -24,35 +22,36 @@ const AuthorProfileCard = ({ profile }) => {
     horizontal: 'center',
   });
 
-  //copyAddress function
+  //copyAddress functionp
   const copyAddress = () => {
     const copyText = document.getElementById('myWalletAdress');
     navigator.clipboard.writeText(copyText.innerText);
     setToast({ ...toast, open: true });
   };
 
-  const openShare = () => {
-    if (!share) {
-      setShare(true);
-    } else {
-      setShare(false);
-    }
-  };
-
   return (
     <div className={Style.AuthorProfileCard}>
       <div className={Style.AuthorProfileCard_box}>
         <div className={Style.AuthorProfileCard_box_img}>
-          <Image
-            loader={() => profile.avatar}
-            src={profile?.avatar}
-            className={Style.AuthorProfileCard_box_img_img}
-            alt="NFT IMAGES"
-            width={220}
-            height={220}
-          />
+          {profile?.avatar ? (
+            <Image
+              loader={() => profile.avatar}
+              src={profile.avatar}
+              className={Style.AuthorProfileCard_box_img_img}
+              alt="NFT IMAGES"
+              width={220}
+              height={220}
+            />
+          ) : (
+            <Image
+              src={images.imgDefault}
+              className={Style.AuthorProfileCard_box_img_img}
+              alt="NFT IMAGES"
+              width={220}
+              height={220}
+            />
+          )}
         </div>
-
         <div className={Style.AuthorProfileCard_box_info}>
           <div className={Style.AuthorProfileCard_box_info_name}>
             <h2>{profile?.name}</h2>
@@ -73,68 +72,29 @@ const AuthorProfileCard = ({ profile }) => {
               setToast={setToast}
             />
           </div>
-          <div className={Style.AuthorProfileCard_box_info_address}>
-            <span id="myWalletAdress">{profile?.email}</span>
-            <FiCopy
-              onClick={() => copyAddress()}
-              className={Style.AuthorProfileCard_box_info_icon}
-            />
-          </div>
-          <div className={Style.AuthorProfileCard_box_info_social}>
-            <a href="#">
-              <TiSocialFacebook />
-            </a>
-            <a href="#">
-              <TiSocialInstagram />
-            </a>
-            <a href="#">
-              <TiSocialLinkedin />
-            </a>
-            <a href="#">
-              <TiSocialYoutube />
-            </a>
-          </div>
-        </div>
-
-        <div className={Style.AuthorProfileCard_box_share}>
-          <Button btnName="Follow" handleClick={() => {}} />
-          <MdCloudUpload
-            onClick={() => openShare()}
-            className={Style.AuthorProfileCard_box_share_icon}
-          />
-
-          {share && (
-            <div className={Style.AuthorProfileCard_box_share_upload}>
-              <p>
-                <span>
-                  <TiSocialFacebook />
-                </span>{' '}
-                {''}
-                Facebook
-              </p>
-              <p>
-                <span>
-                  <TiSocialInstagram />
-                </span>{' '}
-                {''}
-                Instragram
-              </p>
-              <p>
-                <span>
-                  <TiSocialLinkedin />
-                </span>{' '}
-                {''}
-                LinkedIn
-              </p>
-              <p>
-                <span>
-                  <TiSocialYoutube />
-                </span>{' '}
-                {''}
-                YouTube
-              </p>
+          {profile?.email && (
+            <div className={Style.AuthorProfileCard_box_info_address}>
+              <span id="myWalletAdress">{profile?.email}</span>
+              <FiCopy
+                onClick={() => copyAddress()}
+                className={Style.AuthorProfileCard_box_info_icon}
+              />
             </div>
           )}
+        </div>
+        <div className={Style.AuthorProfileCard_box_info_social}>
+          <a href="#">
+            <TiSocialFacebook />
+          </a>
+          <a href="#">
+            <TiSocialInstagram />
+          </a>
+          <a href="#">
+            <TiSocialLinkedin />
+          </a>
+          <a href="#">
+            <TiSocialYoutube />
+          </a>
         </div>
       </div>
     </div>

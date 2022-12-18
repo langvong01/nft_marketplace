@@ -11,6 +11,8 @@ const NFTDetails = ({ itemsActivity }) => {
   const { itemId } = router.query;
   const [auth, setAuth] = useRecoilState(connectMetaMaskState);
 
+  const [open, setOpen] = useState(false);
+
   const [nft, setNft] = useState({
     mediaFileUrl: '',
     itemName: '',
@@ -20,12 +22,14 @@ const NFTDetails = ({ itemsActivity }) => {
     tokenId: '',
     isOnSale: 0,
     price: null,
-    collectionName : '',
-    creator : {},
-    ownedBy : {}
+    collectionName: '',
+    creator: {},
+    ownedBy: {},
   });
-  // const [itemsActivity, setItemActivity] = useState([]);
 
+  useEffect(() => {
+    setOpen(true);
+  }, []);
   const fetchItemDetails = async () => {
     const data = await getItemDetails(itemId, auth.isLogin);
     if (data) {
@@ -40,7 +44,7 @@ const NFTDetails = ({ itemsActivity }) => {
         itemId,
         tokenId,
         creator,
-        ownedBy
+        ownedBy,
       } = data;
       setNft({
         ...nft,
@@ -54,7 +58,7 @@ const NFTDetails = ({ itemsActivity }) => {
         price,
         collectionName,
         creator,
-        ownedBy
+        ownedBy,
       });
     }
   };
@@ -63,7 +67,9 @@ const NFTDetails = ({ itemsActivity }) => {
     fetchItemDetails();
   }, [itemId]);
 
-  return <NFTDetailsPage nft={nft} itemsActivity={itemsActivity} />;
+  return open ? (
+    <NFTDetailsPage nft={nft} itemsActivity={itemsActivity} />
+  ) : null;
 };
 
 export default NFTDetails;

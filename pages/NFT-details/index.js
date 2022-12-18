@@ -36,9 +36,11 @@ export async function getServerSideProps(context) {
 
   const data = await getAllItems();
 
+  const itemWithPrice = data.filter((item) => item.price);
+
   return {
     props: {
-      items: data,
+      items: itemWithPrice,
     },
   };
 }

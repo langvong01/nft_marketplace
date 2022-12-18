@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { BsImages } from 'react-icons/bs';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillCopy } from 'react-icons/ai';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 
 //INTERNAL IMPORT
 import Style from './NFTDetailsImg.module.css';
 import images from '../../img';
+import SnackBarSuccess from '@/components/SnackBarSucces/snackbar-succes';
 
 const NFTDetailsImg = ({ nft }) => {
   const [isdescription, setDescription] = useState(true);
   const [details, setDetails] = useState(true);
 
-  // console.log(nft)
+  const [toast, setToast] = useState({
+    open: false,
+    vertical: 'bottom',
+    horizontal: 'center',
+  });
+  //copyAddress function
+  const copyAddress = () => {
+    const copyText = document.getElementById('contractAdresss');
+    navigator.clipboard.writeText(copyText.innerText);
+    setToast({ ...toast, open: true });
+  };
+
   const openDescription = () => {
     if (!isdescription) {
       setDescription(true);
@@ -71,20 +82,28 @@ const NFTDetailsImg = ({ nft }) => {
         {details && (
           <div className={Style.NFTDetailsImg_box_details_box}>
             <div className={Style.NFTDetailsImg_box_details_row}>
-              Contract Address
-              <span>0xCA72f0Ce5e5d21B4bb5f3EF1C0dCF6d4f68d6cbC</span>
+              Contract Adress
+              <div className={Style.NFTDetailsImg_box_contract_address}>
+                <span id="contractAdresss">
+                  0xCA72f0Ce5e5d21B4bb5f3EF1C0dCF6d4f68d6cbC
+                </span>
+                <AiFillCopy
+                  onClick={() => copyAddress()}
+                  className={Style.NFTDetailsImg_box_icon}
+                />
+              </div>
             </div>
             <div className={Style.NFTDetailsImg_box_details_row}>
               TokenID
               <span>
                 {nft.tokenId
                   ? nft.tokenId
-                  : 26776806034831086110511202867227999346767805661781029920799572850214803875600}
+                  : 1212121}
               </span>
             </div>
             <div className={Style.NFTDetailsImg_box_details_row}>
               Token Standard
-              <span>ERC-1155</span>
+              <span>ERC-721</span>
             </div>
             <div className={Style.NFTDetailsImg_box_details_row}>
               Creator Fee
@@ -93,6 +112,13 @@ const NFTDetailsImg = ({ nft }) => {
           </div>
         )}
       </div>
+      <SnackBarSuccess
+        open={toast.open}
+        vertical={toast.vertical}
+        horizontal={toast.horizontal}
+        message="Copy is success"
+        setToast={setToast}
+      />
     </div>
   );
 };

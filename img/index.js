@@ -53,8 +53,10 @@ import founder1 from "./founder1.jpg";
 import founder2 from "./founder2.jpg";
 import founder3 from "./founder3.jpg";
 import founder4 from "./founder4.jpg";
+import imgDefault from "./avatardefault_92824.png"
 
 export default {
+  imgDefault,
   hero2,
   founder1,
   founder2,
