@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import EmailIcon from '@mui/icons-material/Email';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -7,7 +7,14 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const DesciptionCollection = ({ collection, items }) => {
   const [isSeeMore, setIsSeeMore] = useState(false);
+  const totalPrice = useMemo(() => {
+    let total = 0;
+    items.forEach((item) => {
+      total += item.price;
+    });
 
+    return total;
+  }, [items]);
   return (
     <>
       <div className="desc-col-container w-[95%] mx-auto mt-[120px]">
@@ -79,7 +86,10 @@ const DesciptionCollection = ({ collection, items }) => {
 
         <div className="desc-col-value w-[60%] mt-2">
           <p className="text-2xl text-left">
-            <span>{collection.totalValue || 0}</span>
+            <p>
+              <span className="mr-1">{totalPrice || 0}</span>
+              MATIC
+            </p>
             <span className="text-base font-normal block">total volume</span>
           </p>
         </div>
