@@ -43,6 +43,7 @@ const AccountPage = ({}) => {
       const { data } = await axiosClient.get(`/collection/personal`);
       return data.body;
     };
+
     const fetchProfileDetail = async () => {
       const {
         data: { body },

@@ -82,7 +82,7 @@ const ModalWallet = () => {
             <p>
               <span>$</span>
               {metaMask.accountBalance}
-              <span>USD</span>
+              <span>MATIC</span>
             </p>
           </div>
           <button className={Style.modal_wallet_btn_fund}>add funds</button>

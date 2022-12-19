@@ -41,7 +41,7 @@ const Category = () => {
           >
             <div className="category-image overflow-hidden ">
               <img
-                src="https://opensea.io/static/images/categories/sports.png"
+                src={categori.categoryImage}
                 alt="arts"
                 className="w-full h-[250px] object-cover hover:scale-105 scale-100 transition-all"
               />

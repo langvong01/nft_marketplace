@@ -34,9 +34,11 @@ import { useCallback } from 'react';
 import axiosClient from 'utils/axiosClient';
 import { useRouter } from 'next/router';
 import ModalPaymentSuccess from '../modal/modal-payment-success/ModalPaymentSuccess';
+import { profileState } from 'global-state/profile';
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
+  const [profile, setProfile] = useRecoilState(profileState);
   const [nameAccount, setNameAccount] = useState(null);
   const router = useRouter();
   const [openSideMenu, setOpenSideMenu] = useState(false);
@@ -77,7 +79,7 @@ const NavBar = () => {
         setAvatar(images.imgDefault.src);
       }
     });
-  }, [fetchProfileDetail]);
+  }, [fetchProfileDetail, profile]);
   const [modalPaymentSuccess, setModalPaymentSuccess] = useRecoilState(
     modalPaymentStateSuccess
   );
@@ -97,178 +99,180 @@ const NavBar = () => {
   }, []);
 
   return (
-    <>
-      <NoSsr>
-        <div className={Style.navbar}>
-          <div className={Style.navbar_container}>
-            {/* left */}
+    <NoSsr>
+      <div className={Style.navbar}>
+        <div className={Style.navbar_container}>
+          {/* left */}
 
-            <div className={Style.navbar_container_left}>
-              <Link href="/" passHref>
-                <div className={Style.logo}>
-                  <img
-                    src="https://png.pngtree.com/png-clipart/20220729/original/pngtree-modern-box-nft-logo-png-vector-png-image_8424398.png"
-                    alt="logo"
-                  />
-                  <p className="font-title text-2xl">Underground</p>
-                </div>
-              </Link>
-              <Search></Search>
-            </div>
-
-            {/* right */}
-            {/* //END OF LEFT SECTION */}
-            <div className={Style.navbar_container_right}>
-              {/* DISCOVER MENU */}
-              <div
-                className={Style.navbar_container_right_discover}
-                ref={discoveryRef}
-              >
-                <p>Discover</p>
-                <AnimatePresence>
-                  {isDiscoveryRef && (
-                    <motion.ul
-                      className={Style.navbar_container_right_discover_box}
-                      initial={{ y: '-15px', opacity: 0 }}
-                      animate={{ y: '16px', opacity: 1 }}
-                      exit={{ y: '-15px', opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      type="spring"
-                    >
-                      <Discover />
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* HELP CENTER MENU */}
-              <div className={Style.navbar_container_right_help} ref={helpRef}>
-                <p>Help Center</p>
-                <AnimatePresence>
-                  {isHelpRef && (
-                    <motion.ul
-                      className={Style.navbar_container_right_help_box}
-                      initial={{ y: '-15px', opacity: 0 }}
-                      animate={{ y: '16px', opacity: 1 }}
-                      exit={{ y: '-15px', opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      type="spring"
-                    >
-                      <HelpCenter />
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Cart */}
-              <div
-                className={Style.navbar_container_right_cart}
-                onClick={() =>
-                  setOpenCart((prev) => {
-                    return { ...prev, open: true };
-                  })
-                }
-              >
-                <MdShoppingCart className={Style.cart_icons}></MdShoppingCart>
-                <SubTotalCart
-                  number={cart.idItemSelected.length}
-                ></SubTotalCart>
-              </div>
-
-              {/* CREATE Meta mask */}
-              {/* Cart */}
-              <div className={Style.navbar_container_right_metamask}>
-                <MdPayments
-                  className={Style.metamask}
-                  onClick={handleOpenMeta}
-                ></MdPayments>
-              </div>
-              {/* USER PROFILE */}
-
-              <div
-                className={Style.navbar_container_right_profile_box}
-                ref={profileRef}
-              >
-                <div className={Style.navbar_container_right_profile}>
-                  <div className={Style.navbar_right_profile_icon_box}>
-                    {!metaMask.isLogin ? (
-                      <MdAccountCircle />
-                    ) : (
-                      <img
-                        src={avatar}
-                        alt="Profile"
-                        width={40}
-                        height={40}
-                        className={Style.navbar_container_right_profile}
-                      />
-                    )}
-                  </div>
-                  <AnimatePresence>
-                    {isProfileRef && <Profile name={nameAccount} />}
-                  </AnimatePresence>
-                </div>
-              </div>
-
-              <div className={Style.navbar_container_right_menuBtn}>
-                <CgMenuRight
-                  className={Style.menuIcon}
-                  onClick={() => openSideBar()}
+          <div className={Style.navbar_container_left}>
+            <Link href="/" passHref>
+              <div className={Style.logo}>
+                <img
+                  src="https://png.pngtree.com/png-clipart/20220729/original/pngtree-modern-box-nft-logo-png-vector-png-image_8424398.png"
+                  alt="logo"
                 />
+                <p className="font-title text-2xl">Underground</p>
               </div>
-            </div>
+            </Link>
+            <Search></Search>
           </div>
 
-          {/* SIDBAR CPMPONE/NT */}
-          {openSideMenu && (
-            <div className={Style.sideBar}>
-              <SideBar setOpenSideMenu={setOpenSideMenu} />
+          {/* right */}
+          {/* //END OF LEFT SECTION */}
+          <div className={Style.navbar_container_right}>
+            {/* DISCOVER MENU */}
+            <div
+              className={Style.navbar_container_right_discover}
+              ref={discoveryRef}
+            >
+              <p>Discover</p>
+              <AnimatePresence>
+                {isDiscoveryRef && (
+                  <motion.ul
+                    className={Style.navbar_container_right_discover_box}
+                    initial={{ y: '-15px', opacity: 0 }}
+                    animate={{ y: '16px', opacity: 1 }}
+                    exit={{ y: '-15px', opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    type="spring"
+                  >
+                    <Discover />
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </div>
-          )}
+
+            {/* HELP CENTER MENU */}
+            <div className={Style.navbar_container_right_help} ref={helpRef}>
+              <p>Help Center</p>
+              <AnimatePresence>
+                {isHelpRef && (
+                  <motion.ul
+                    className={Style.navbar_container_right_help_box}
+                    initial={{ y: '-15px', opacity: 0 }}
+                    animate={{ y: '16px', opacity: 1 }}
+                    exit={{ y: '-15px', opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    type="spring"
+                  >
+                    <HelpCenter />
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Cart */}
+            <div
+              className={Style.navbar_container_right_cart}
+              onClick={() =>
+                setOpenCart((prev) => {
+                  return { ...prev, open: true };
+                })
+              }
+            >
+              <MdShoppingCart className={Style.cart_icons}></MdShoppingCart>
+              <SubTotalCart number={cart.idItemSelected.length}></SubTotalCart>
+            </div>
+
+            {/* CREATE Meta mask */}
+            {/* Cart */}
+            <div className={Style.navbar_container_right_metamask}>
+              <MdPayments
+                className={Style.metamask}
+                onClick={handleOpenMeta}
+              ></MdPayments>
+            </div>
+            {/* USER PROFILE */}
+
+            <div
+              className={Style.navbar_container_right_profile_box}
+              ref={profileRef}
+            >
+              <div className={Style.navbar_container_right_profile}>
+                <div className={Style.navbar_right_profile_icon_box}>
+                  {!metaMask.isLogin ? (
+                    <img
+                      src={avatar}
+                      alt="Profile"
+                      width={40}
+                      height={40}
+                      className={`${Style.navbar_container_right_profile} w-[50px] h-[50px]`}
+                    />
+                  ) : (
+                    <img
+                      src={avatar}
+                      alt="Profile"
+                      width={40}
+                      height={40}
+                      className={`${Style.navbar_container_right_profile} w-[50px] h-[50px]`}
+                    />
+                  )}
+                </div>
+                <AnimatePresence>
+                  {isProfileRef && <Profile name={nameAccount} />}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            <div className={Style.navbar_container_right_menuBtn}>
+              <CgMenuRight
+                className={Style.menuIcon}
+                onClick={() => openSideBar()}
+              />
+            </div>
+          </div>
         </div>
 
-        {/* modal cart */}
-        <AnimatePresence>
-          {openCart.open ? (
-            <ModalBase selector="body">
-              <Cart></Cart>
-            </ModalBase>
-          ) : null}
-        </AnimatePresence>
+        {/* SIDBAR CPMPONE/NT */}
+        {openSideMenu && (
+          <div className={Style.sideBar}>
+            <SideBar setOpenSideMenu={setOpenSideMenu} />
+          </div>
+        )}
+      </div>
 
-        {/* modal connect metamask */}
+      {/* modal cart */}
+      <AnimatePresence>
+        {openCart.open ? (
+          <ModalBase selector="body">
+            <Cart></Cart>
+          </ModalBase>
+        ) : null}
+      </AnimatePresence>
 
-        <AnimatePresence>
-          {isOpenModalMetaMask.open ? (
-            <ModalBase selector="body">
-              {!metaMask.accountCurrent ? (
-                <ModalMetaMask></ModalMetaMask>
-              ) : (
-                <ModalWallet></ModalWallet>
-              )}
-            </ModalBase>
-          ) : null}
-        </AnimatePresence>
+      {/* modal connect metamask */}
 
-        {/* modal payment */}
+      <AnimatePresence>
+        {isOpenModalMetaMask.open ? (
+          <ModalBase selector="body">
+            {!metaMask.accountCurrent ? (
+              <ModalMetaMask></ModalMetaMask>
+            ) : (
+              <ModalWallet></ModalWallet>
+            )}
+          </ModalBase>
+        ) : null}
+      </AnimatePresence>
 
-        <AnimatePresence>
-          {modalPayment.open ? (
-            <ModalBase selector="body">
-              <ModalPayment></ModalPayment>
-            </ModalBase>
-          ) : null}
-        </AnimatePresence>
+      {/* modal payment */}
 
-        {/* modal-payment-success */}
-        <AnimatePresence>
-          {modalPaymentSuccess.open ? (
-            <ModalBase selector="body">
-              <ModalPaymentSuccess></ModalPaymentSuccess>
-            </ModalBase>
-          ) : null}
-        </AnimatePresence>
-      </NoSsr>
-    </>
+      <AnimatePresence>
+        {modalPayment.open ? (
+          <ModalBase selector="body">
+            <ModalPayment></ModalPayment>
+          </ModalBase>
+        ) : null}
+      </AnimatePresence>
+
+      {/* modal-payment-success */}
+      <AnimatePresence>
+        {modalPaymentSuccess.open ? (
+          <ModalBase selector="body">
+            <ModalPaymentSuccess></ModalPaymentSuccess>
+          </ModalBase>
+        ) : null}
+      </AnimatePresence>
+    </NoSsr>
   );
 };
 

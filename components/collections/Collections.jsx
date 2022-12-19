@@ -10,6 +10,7 @@ import { getTopTenCollectionLatest } from 'services/collectionService';
 import { getTopTenItem } from 'services/itemService';
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
+import { Skeleton } from '@mui/material';
 
 const CollectionStyles = styled.div`
   width: 95%;
@@ -47,8 +48,9 @@ const Collections = () => {
   const [value, setValue] = React.useState('collections');
   const [filter, setFilter] = useState('DESC');
   const [data, setData] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (event, newValue) => {
+    setIsLoading(true);
     setValue(newValue);
   };
 
@@ -56,9 +58,11 @@ const Collections = () => {
     if (value === 'collections') {
       getTopTenCollectionLatest(filter).then((data) => {
         setData(data);
+        setIsLoading(false);
       });
     } else if (value === 'items') {
       getTopTenItem(filter).then((data) => {
+        setIsLoading(false);
         setData(data);
       });
     }
@@ -104,7 +108,7 @@ const Collections = () => {
           </Box>
           <div className="h-[1px] bg-gray-200 mt-2"></div>
           <TabPanel value="collections">
-            {data.length > 0 ? (
+            {!isLoading && data.length > 0 ? (
               <ListCollection data={data}></ListCollection>
             ) : (
               <>
@@ -113,7 +117,7 @@ const Collections = () => {
             )}
           </TabPanel>
           <TabPanel value="items">
-            {data && data?.length > 0 ? (
+            {!isLoading && data && data?.length > 0 ? (
               <ListItem data={data}></ListItem>
             ) : (
               <>
@@ -131,7 +135,7 @@ const ListCollection = React.memo(({ data }) => {
   const router = useRouter();
   return (
     <>
-      <div className="list-collection-container flex items-center justify-between ">
+      <div className="list-collection-container grid grid-flow-col mt-2">
         <div className="list-collection-left w-[45%]">
           <div className="list-collection-header flex justify-between mb-3">
             <p className="capitalize">Collection</p>
@@ -171,9 +175,12 @@ const ListCollection = React.memo(({ data }) => {
                 <div
                   className="list-collection-item w-full flex items-center justify-between mb-4 cursor-pointer hover:bg-slate-100 p-2"
                   key={uuidv4()}
+                  onClick={() =>
+                    router.push(`/collection/${collection.collectionName}`)
+                  }
                 >
                   <div className="flex-1 flex items-center gap-x-8">
-                    <p>{index + 1}</p>
+                    <p>{5 + index + 1}</p>
                     <img
                       src={collection.featuredImage}
                       alt="collection-img"
@@ -195,7 +202,7 @@ const ListItem = React.memo(({ data }) => {
   const router = useRouter();
   return (
     <>
-      <div className="list-collection-container flex items-center justify-between ">
+      <div className="list-collection-container flex items-center justify-between mt-2 ">
         <div className="list-collection-left w-[45%]">
           <div className="list-collection-header flex justify-between mb-3">
             <p className="capitalize">Item</p>
@@ -234,9 +241,10 @@ const ListItem = React.memo(({ data }) => {
                   <div
                     className="list-collection-item w-full flex items-center justify-between mb-4 cursor-pointer hover:bg-slate-100 p-2"
                     key={uuidv4()}
+                    onClick={() => router.push(`/NFT-details/${item.itemId}`)}
                   >
                     <div className="flex-1 flex items-center gap-x-8">
-                      <p>{index + 1}</p>
+                      <p>{5 + index + 1}</p>
                       <img
                         src={item.mediaFileUrl}
                         alt="collection-img"
@@ -256,7 +264,30 @@ const ListItem = React.memo(({ data }) => {
 });
 
 const ListCollectionSkeleton = () => {
-  return <></>;
+  return (
+    <>
+      <div className="grid grid-cols-2 gap-8">
+        <div>
+          <Skeleton height={60} width={150}></Skeleton>
+
+          <Skeleton height={60}></Skeleton>
+          <Skeleton height={60}></Skeleton>
+          <Skeleton height={60}></Skeleton>
+          <Skeleton height={60}></Skeleton>
+          <Skeleton height={60}></Skeleton>
+        </div>
+        <div>
+          <Skeleton height={60} width={150}></Skeleton>
+
+          <Skeleton height={60}></Skeleton>
+          <Skeleton height={60}></Skeleton>
+          <Skeleton height={60}></Skeleton>
+          <Skeleton height={60}></Skeleton>
+          <Skeleton height={60}></Skeleton>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Collections;
