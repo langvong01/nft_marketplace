@@ -9,9 +9,12 @@ import '../styles/globals.css';
 import Head from 'next/head';
 import Router from 'next/router';
 import NProgress from 'nprogress';
+import useScrollRestoration from 'hook/useScrollRestoration';
 //INTRNAL IMPORT
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps, router }) => {
+  useScrollRestoration(router);
+
   Router.events.on('routeChangeStart', () => {
     NProgress.start();
   });
