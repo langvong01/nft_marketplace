@@ -36,6 +36,7 @@ import ModalPaymentSuccess from '../modal/modal-payment-success/ModalPaymentSucc
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
+  const [nameAccount, setNameAccount] = useState(null);
   const router = useRouter();
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
@@ -72,6 +73,7 @@ const NavBar = () => {
 
   useEffect(() => {
     fetchProfileDetail().then((data) => {
+      setNameAccount(data.name);
       if (data?.avatar) {
         setAvatar(data.avatar);
       } else {
@@ -93,7 +95,6 @@ const NavBar = () => {
     window.ethereum.on('accountsChanged', async function (accounts) {
       resetMetaMask();
       handleOpenMeta();
-
       router.push('/');
     });
   }, []);
@@ -210,7 +211,7 @@ const NavBar = () => {
                       )}
                     </div>
                     <AnimatePresence>
-                      {isProfileRef && <Profile />}
+                      {isProfileRef && <Profile name={nameAccount} />}
                     </AnimatePresence>
                   </div>
                 </div>

@@ -135,7 +135,7 @@ const ListCollection = React.memo(({ data }) => {
         <div className="list-collection-left w-[45%]">
           <div className="list-collection-header flex justify-between mb-3">
             <p className="capitalize">Collection</p>
-            <p className="capitalize">Total</p>
+            {/* <p className="capitalize">Total</p> */}
           </div>
           {data.length > 0 &&
             data.slice(0, 5).map((collection, index) => (
@@ -155,7 +155,7 @@ const ListCollection = React.memo(({ data }) => {
                   />
                   <p className="capitalize">{collection.collectionName}</p>
                 </div>
-                <p>{collection.totalValue || 1}</p>
+                {/* <p>{collection.totalValue || 1}</p> */}
               </div>
             ))}
         </div>
@@ -163,7 +163,7 @@ const ListCollection = React.memo(({ data }) => {
           <div className="list-collection-right w-[45%]">
             <div className="list-collection-header flex justify-between mb-3">
               <p className="capitalize">Collection</p>
-              <p className="capitalize">Total</p>
+              {/* <p className="capitalize">Total</p> */}
             </div>
 
             {data.length > 5 &&
@@ -181,7 +181,7 @@ const ListCollection = React.memo(({ data }) => {
                     />
                     <p className="capitalize">{collection.collectionName}</p>
                   </div>
-                  <p>{collection.totalValue || 1}</p>
+                  {/* <p>{collection.totalValue || 1}</p> */}
                 </div>
               ))}
           </div>
@@ -199,7 +199,7 @@ const ListItem = React.memo(({ data }) => {
         <div className="list-collection-left w-[45%]">
           <div className="list-collection-header flex justify-between mb-3">
             <p className="capitalize">Item</p>
-            <p className="capitalize">Total</p>
+            <p className="capitalize">Price</p>
           </div>
           {data.length > 0 &&
             data.slice(0, 5).map((item, index) => (
@@ -226,14 +226,9 @@ const ListItem = React.memo(({ data }) => {
           <div className="list-collection-right w-[45%]">
             <div className="list-collection-header flex justify-between mb-3">
               <p className="capitalize">Item</p>
-              <p className="capitalize">Total</p>
+              <p className="capitalize">Price</p>
             </div>
-            <div className="list-collection-right w-[45%]">
-              <div className="list-collection-header flex justify-between mb-3">
-                <p className="capitalize">Collection</p>
-                <p className="capitalize">Total</p>
-              </div>
-
+            <div className="list-collection-right w-full">
               {data.length > 5 &&
                 data.slice(5, 10).map((item, index) => (
                   <div

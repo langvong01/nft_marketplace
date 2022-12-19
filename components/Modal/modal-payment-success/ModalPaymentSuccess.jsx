@@ -35,7 +35,7 @@ const ModalPaymentSuccess = () => {
         ref={refModalPaymentSuccess}
       >
         <div className="modal-payment-header w-full px-3 flex items-center justify-between">
-          <p className="text-center flex-1 text-2xl">Preview</p>
+          <p className="text-center flex-1 text-2xl">Payment Success</p>
           <button
             className="text-2xl hover:opacity-85 text-inherit"
             onClick={handleCloseModal}

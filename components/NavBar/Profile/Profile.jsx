@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FaUserAlt, FaRegImage, FaMagic, FaRegListAlt } from 'react-icons/fa';
 
@@ -12,8 +12,9 @@ import { modalNotifyMetaMaskState } from '../../../global-state/modal';
 import axiosClient from 'utils/axiosClient';
 import { TbDownload } from 'react-icons/tb';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-const Profile = () => {
+const Profile = ({ name }) => {
   const [metaMask, setMetaMask] = useRecoilState(connectMetaMaskState);
   const [metaModal, setMetaModal] = useRecoilState(modalNotifyMetaMaskState);
   const router = useRouter();
@@ -30,9 +31,13 @@ const Profile = () => {
 
   const handleLogout = async () => {
     const response = await axiosClient.get('/auth/logout');
-    resetMetaMask();
-    router.push('/');
+    if (response.status === 200) {
+      resetMetaMask();
+      router.push('/');
+    }
   };
+
+  console.log(name);
 
   return (
     <>
@@ -45,6 +50,15 @@ const Profile = () => {
         type="spring"
       >
         <div className={Style.profile_menu}>
+          {metaMask.accountCurrent.length > 0 && (
+            <div
+              className={`${Style.profile_menu_one_item} text-center `}
+              onClick={handleClickNotLogin}
+            >
+              <p>Name</p>
+              <p>{name || metaMask.accountCurrent.substring(-1, 10)}</p>
+            </div>
+          )}
           <div className={Style.profile_menu_one}>
             <div
               className={Style.profile_menu_one_item}
