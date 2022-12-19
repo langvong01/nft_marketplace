@@ -36,21 +36,22 @@ const ListCollectionCategory = ({ collections, category }) => {
 
         <div className="collection w-[95%] mx-auto">
           <h3 className="text-2xl">Collections</h3>
-          <div className="collection-list my-6 grid grid-cols-4 gap-12">
-            {collections
-              ? collections.map((col) => <CollectionCard collection={col} />)
-              : null}
-
-            {collections.length === 0 && (
-              <>
-                <div className="w-full flex items-center justify-center border-2 border-gray-200 rounded-lg">
-                  <p className="text-2xl">
-                    Not found collections in category {category.categoryName}
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
+          {collections.length > 0 && (
+            <div className="collection-list my-6 grid grid-cols-4 gap-12">
+              {collections
+                ? collections.map((col) => <CollectionCard collection={col} />)
+                : null}
+            </div>
+          )}
+          {collections.length === 0 && (
+            <>
+              <div className="w-full h-[300px] mb-8 flex items-center justify-center border-2 border-gray-200 rounded-lg">
+                <p className="text-2xl">
+                  Not found collections in category {category.categoryName}
+                </p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

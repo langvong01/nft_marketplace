@@ -37,8 +37,6 @@ const Profile = ({ name }) => {
     }
   };
 
-  console.log(name);
-
   return (
     <>
       <motion.div

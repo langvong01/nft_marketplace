@@ -192,14 +192,20 @@ const NavBar = () => {
                 <div className={Style.navbar_container_right_profile}>
                   <div className={Style.navbar_right_profile_icon_box}>
                     {!metaMask.isLogin ? (
-                      <MdAccountCircle />
+                      <img
+                        src={avatar}
+                        alt="Profile"
+                        width={40}
+                        height={40}
+                        className={`${Style.navbar_container_right_profile} w-[50px] h-[50px]`}
+                      />
                     ) : (
                       <img
                         src={avatar}
                         alt="Profile"
                         width={40}
                         height={40}
-                        className={Style.navbar_container_right_profile}
+                        className={`${Style.navbar_container_right_profile} w-[50px] h-[50px]`}
                       />
                     )}
                   </div>
