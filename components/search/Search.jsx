@@ -6,8 +6,6 @@ import { modalSearchState } from 'global-state/modal';
 import Loading from '../loading/Loading';
 import { AnimatePresence, motion } from 'framer-motion';
 import useDebounce from 'hook/useDebounce';
-import Link from 'next/link';
-import Image from 'next/image';
 import useOnClickOutside from 'hook/useClickOutSide';
 import { getAllItems } from 'services/itemService';
 import { getAllCollections } from 'services/collectionService';
@@ -15,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router';
 
 const Search = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const refSearch = useRef();
   const [searchText, setSearchText] = useState('');
   const [dataSearch, setDataSearch] = useState({
@@ -36,6 +35,7 @@ const Search = () => {
   });
 
   const handleOnChangeInput = (e) => {
+    setIsLoading(true);
     setSearchText(e.target.value);
   };
 
@@ -71,6 +71,8 @@ const Search = () => {
   }, [searchText]);
 
   useEffect(() => {
+    setIsLoading(false);
+
     setModalSearch((prev) => {
       return { ...prev, isLoading: true, open: true };
     });
@@ -104,13 +106,17 @@ const Search = () => {
   return (
     <>
       <div className={Style.search_container} ref={refSearch}>
-        <div className={Style.search_content}>
+        <div className={`${Style.search_content} flex`}>
           <input
             type="text"
-            placeholder="Search items, collections, and accounts"
+            placeholder="Search items, collections"
             onChange={handleOnChangeInput}
           />
-          <BsSearch onClick={() => {}} className={Style.search_icon} />
+          {isLoading ? (
+            <span className="border-2 h-[20px] w-[20px] border-blue-500 rounded-full border-r-transparent animate-spin"></span>
+          ) : (
+            <BsSearch onClick={() => {}} className={Style.search_icon} />
+          )}
         </div>
 
         <AnimatePresence>
@@ -174,7 +180,7 @@ const SearchFilter = ({
             <>
               {data.collections.length > 0 ? (
                 <div className={Style.search_collections}>
-                  <hr color="#eee"></hr>
+                  {/* <hr color="#eee"></hr> */}
                   <strong className="mt-2">Collections</strong>
                   <ul>
                     {data.collections.map((col) => (
@@ -196,19 +202,19 @@ const SearchFilter = ({
                               <div
                                 className={Style.search_collection_description}
                               >
-                                <p className="capitalize">
+                                <p className="capitalize font-semibold text-black">
                                   {col.collectionName}
                                 </p>
-                                <p>
+                                {/* <p>
                                   <span>{data.collections.length}</span> Items
-                                </p>
+                                </p> */}
                               </div>
-                              <div className={Style.search_collection_price}>
+                              {/* <div className={Style.search_collection_price}>
                                 <p>
                                   <span className="mr-1">{col.totalValue}</span>
                                   MATIC
                                 </p>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </li>

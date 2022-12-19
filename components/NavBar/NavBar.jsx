@@ -36,6 +36,7 @@ import ModalPaymentSuccess from '../modal/modal-payment-success/ModalPaymentSucc
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
+  const [nameAccount, setNameAccount] = useState(null);
   const router = useRouter();
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
@@ -57,11 +58,13 @@ const NavBar = () => {
   const [modalPayment, setModalPayment] = useRecoilState(modalPaymentState);
 
   const fetchProfileDetail = useCallback(async () => {
-    if (metaMask.accountCurrent) {
-      const {
-        data: { body },
-      } = await axiosClient.get(`/profile/${metaMask.accountCurrent}`);
-      return body;
+    if (metaMask?.accountCurrent) {
+      console.log('working');
+      const { data } = await axiosClient.get(
+        `/profile/${metaMask.accountCurrent}`
+      );
+
+      return data?.body;
     }
   }, [metaMask.accountCurrent]);
 
@@ -71,6 +74,7 @@ const NavBar = () => {
 
   useEffect(() => {
     fetchProfileDetail().then((data) => {
+      setNameAccount(data.name);
       if (data?.avatar) {
         setAvatar(data.avatar);
       } else {
@@ -96,7 +100,6 @@ const NavBar = () => {
     });
   }, []);
 
-  console.log(domLoad);
   return (
     <>
       {domLoad && (
@@ -209,7 +212,7 @@ const NavBar = () => {
                       )}
                     </div>
                     <AnimatePresence>
-                      {isProfileRef && <Profile />}
+                      {isProfileRef && <Profile name={nameAccount} />}
                     </AnimatePresence>
                   </div>
                 </div>
