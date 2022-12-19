@@ -9,11 +9,11 @@ const Discover = () => {
   //--------DISCOVER NAVIGATION MENU
   const discover = [
     {
-      name: 'All Collection',
+      name: 'All collections',
       link: 'collection',
     },
     {
-      name: 'ALl NFT',
+      name: 'All items',
       link: 'NFT-details',
     },
   ];
