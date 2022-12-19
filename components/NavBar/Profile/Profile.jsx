@@ -54,7 +54,11 @@ const Profile = ({ name }) => {
               onClick={handleClickNotLogin}
             >
               <p>Name</p>
-              <p>{name || metaMask.accountCurrent.substring(-1, 10)}</p>
+              <p>
+                {name === metaMask.accountCurrent
+                  ? metaMask.accountCurrent.substring(-1, 10)
+                  : name || metaMask.accountCurrent.substring(-1, 10)}
+              </p>
             </div>
           )}
           <div className={Style.profile_menu_one}>
