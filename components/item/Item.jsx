@@ -117,7 +117,7 @@ const Item = ({ item }) => {
           <div className="w-full flex-1 p-2 mt-3">
             <p className="font-semibold text-xl flex justify-between mb-2 ">
               <p className="w-[70%]">{item.itemName}</p>
-              <span className="ml-1 w-[50px]"># {item.itemId}</span>
+              <span className="ml-1"># {item.itemId}</span>
             </p>
             <p className="font-bold text-xl ">
               {item.price}

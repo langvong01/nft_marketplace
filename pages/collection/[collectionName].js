@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import NoSsr from '@mui/material/NoSsr';
 
 //INTRNAL IMPORT
 import Style from '../../styles/searchPage.module.css';
@@ -55,68 +56,70 @@ const ListItemInCollection = ({ items, collection }) => {
   }, []);
 
   return (
-    <div className={Style.searchPage}>
-      <Banner collection={collection[0]} />
-      <DesciptionCollection
-        collection={collection[0]}
-        items={itemsCollection}
-      ></DesciptionCollection>
-      {items?.length > 0 && (
-        <form
-          className="search-items w-[95%] mx-auto my-4 flex items-center"
-          onSubmit={handleSubmit(handleSearchNameItem)}
-        >
-          <div className="w-[50%] flex items-center border-2 border-slate-200  cursor-pointer rounded-lg overflow-hidden">
-            <span className="w-[50px] ">
-              <SearchIcon className="w-full"></SearchIcon>
-            </span>
-            <input
-              type="text"
-              placeholder="Search by name item"
-              className=" w-full h-full bg-none px-4 py-3"
-              name="name "
-              id="name"
-              {...register('name')}
-            />
-          </div>
-          <select
-            name="type"
-            id="type"
-            className="border-2 border-slate-200 rounded-lg ml-5 px-4 py-3 cursor-pointer"
-            {...register('type')}
+    <NoSsr>
+      <div className={Style.searchPage}>
+        <Banner collection={collection[0]} />
+        <DesciptionCollection
+          collection={collection[0]}
+          items={itemsCollection}
+        ></DesciptionCollection>
+        {items?.length > 0 && (
+          <form
+            className="search-items w-[95%] mx-auto my-4 flex items-center"
+            onSubmit={handleSubmit(handleSearchNameItem)}
           >
-            <option value="DESC">Price low to high</option>
-            <option value="ASC">Price high to low</option>
-            <option value="created_at">Recently created</option>
-            <option value="listed_at">Recently listed</option>
-          </select>
-
-          <button className="font-bold px-4 py-3 bg-blue-500 rounded-lg text-white ml-5 hover:opacity-95">
-            Search
-          </button>
-        </form>
-      )}
-
-      {itemsCollection?.length > 0 ? (
-        <>
-          {isSubmitting ? (
-            <ListSkeletonItem></ListSkeletonItem>
-          ) : (
-            <ListItem items={itemsCollection}></ListItem>
-          )}
-        </>
-      ) : (
-        <>
-          <div className="w-[95%] mx-auto h-[200px] rounded-lg mt-4 shadow-lg mb-10 flex justify-center items-center">
-            <div>
-              <p className="text-2xl mb-2">
-                There are no items in the collection
-              </p>
+            <div className="w-[50%] flex items-center border-2 border-slate-200  cursor-pointer rounded-lg overflow-hidden">
+              <span className="w-[50px] ">
+                <SearchIcon className="w-full"></SearchIcon>
+              </span>
+              <input
+                type="text"
+                placeholder="Search by name item"
+                className=" w-full h-full bg-none px-4 py-3"
+                name="name "
+                id="name"
+                {...register('name')}
+              />
             </div>
-          </div>
-        </>
-      )}
-    </div>
+            <select
+              name="type"
+              id="type"
+              className="border-2 border-slate-200 rounded-lg ml-5 px-4 py-3 cursor-pointer"
+              {...register('type')}
+            >
+              <option value="DESC">Price low to high</option>
+              <option value="ASC">Price high to low</option>
+              <option value="created_at">Recently created</option>
+              <option value="listed_at">Recently listed</option>
+            </select>
+
+            <button className="font-bold px-4 py-3 bg-blue-500 rounded-lg text-white ml-5 hover:opacity-95">
+              Search
+            </button>
+          </form>
+        )}
+
+        {itemsCollection?.length > 0 ? (
+          <>
+            {isSubmitting ? (
+              <ListSkeletonItem></ListSkeletonItem>
+            ) : (
+              <ListItem items={itemsCollection}></ListItem>
+            )}
+          </>
+        ) : (
+          <>
+            <div className="w-[95%] mx-auto h-[200px] rounded-lg mt-4 shadow-lg mb-10 flex justify-center items-center">
+              <div>
+                <p className="text-2xl mb-2">
+                  There are no items in the collection
+                </p>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </NoSsr>
   );
 };
 

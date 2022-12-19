@@ -66,8 +66,8 @@ const UloadNFT = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
-      setOpenBackDrop(false)
-      router.push(`/account/${recoilState.accountCurrent}`)
+      setOpenBackDrop(false);
+      router.push(`/account/${recoilState.accountCurrent}`);
     } catch (error) {
       console.log('error: ', error);
     }
@@ -145,12 +145,12 @@ const UloadNFT = () => {
                   >
                     <InputLabel>Category</InputLabel>
                     <Select
-                      name = "categoryId"
-                      id = "categoryId"
+                      name="categoryId"
+                      id="categoryId"
                       label="Category *"
                       onChange={handleChange}
-                      value={getValues('categoryId')}
-                      defaultValue={categories?.[0].categoryId || ''}
+                      // value={getValues('categoryId')}
+                      value={categories?.[0].categoryId || ''}
                     >
                       {categories?.map((item) => (
                         <MenuItem value={item.categoryId}>
@@ -158,7 +158,9 @@ const UloadNFT = () => {
                         </MenuItem>
                       ))}
                     </Select>
-                    {errors.categoryId && <FormHelperText error> Choose a category</FormHelperText>}
+                    {errors.categoryId && (
+                      <FormHelperText error> Choose a category</FormHelperText>
+                    )}
                   </FormControl>
                 </Box>
 

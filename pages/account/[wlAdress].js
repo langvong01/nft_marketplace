@@ -32,12 +32,14 @@ const AccountPage = ({}) => {
       const { data } = await axiosClient.get(`/collection/personal`);
       return data.body;
     };
+
     const fetchProfileDetail = async () => {
       const {
         data: { body },
       } = await axiosClient.get(`/profile/${wlAdress}`);
       return body;
     };
+
     const fetchItemsOwned = async (name) => {
       const {
         data: {
@@ -52,6 +54,7 @@ const AccountPage = ({}) => {
       });
       return content;
     };
+
     const fetchItemsCreated = async (name) => {
       const {
         data: {

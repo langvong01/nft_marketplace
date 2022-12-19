@@ -43,7 +43,6 @@ const SellNFT = () => {
       setIsDisabled(true);
     }
   };
-  
 
   const handleListingOnclick = async () => {
     try {
@@ -85,7 +84,7 @@ const SellNFT = () => {
           </div>
         </div>
         <div className={Style.SellNftPage_box_form}>
-          <form action="">
+          <form action="" autoComplete={false}>
             <div className={Style.SellNftPage_box_form_input}>
               <label htmlFor="price">Set Price</label>
               <TextField

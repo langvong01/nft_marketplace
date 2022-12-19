@@ -11,10 +11,10 @@ const Banner = ({ bannerImage, collection = null }) => {
         <img
           src={bannerImage || collection?.featuredImage}
           alt="background"
-          className="w-full object-cover h-[350px]"
+          className="w-full object-cover h-[300px]"
         />
 
-        <div className="banner-sub p-2 bg-white rounded-md absolute w-[200px] h-[200px] -translate-y-2/4 translate-x-[40px] shadow-md overflow-hidden">
+        <div className="banner-sub p-2 bg-white rounded-md absolute w-[150px] h-[150px] -translate-y-2/4 translate-x-[40px] shadow-md overflow-hidden">
           <img
             src={bannerImage || collection?.logoImage}
             alt="background"
