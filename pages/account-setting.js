@@ -21,15 +21,18 @@ import { HiOutlineMail } from 'react-icons/hi';
 import { useRouter } from 'next/router';
 import { MdOutlineContentCopy, MdFeaturedPlayList } from 'react-icons/md';
 import BackDrop from '@/components/BackDrop/BackDrop';
+import { profileState } from 'global-state/profile';
 
 const accountSetting = ({}) => {
   const [fileUrl, setFileUrl] = useState(null);
   const [file, setFile] = useState(null);
-  const [openBackDrop,setOpenBackDrop] = useState(false)
+  const [openBackDrop, setOpenBackDrop] = useState(false);
 
   const router = useRouter();
 
   //fetch gloal state
+  const [profile, setProfile] = useRecoilState(profileState);
+
   const [recoil, setRecoil] = useRecoilState(connectMetaMaskState);
   const { accountCurrent } = recoil;
 
@@ -69,7 +72,7 @@ const accountSetting = ({}) => {
   const onSubmitHandle = async (data) => {
     const { name, email } = data;
     try {
-      setOpenBackDrop(true)
+      setOpenBackDrop(true);
       const formData = new FormData();
       formData.append('name', name);
       formData.append('email', email);
@@ -81,7 +84,10 @@ const accountSetting = ({}) => {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
-      setOpenBackDrop(false)
+      setProfile((prev) => {
+        return { ...prev, name: 'aaa' };
+      });
+      setOpenBackDrop(false);
     } catch (error) {
       console.log(error);
     }
@@ -95,81 +101,81 @@ const accountSetting = ({}) => {
 
   return (
     <>
-    <div className={Style.account}>
-      <div className={Style.account_banner}>
-        <Banner
-          bannerImage={fileUrl ? fileUrl : images.imgDefault.src}
-        ></Banner>
-      </div>
-      <div className={Style.account_info}>
-        <h1>Account Details</h1>
-      </div>
-      <form onSubmit={handleSubmit(onSubmitHandle)}>
-        <div className={Style.account_box}>
-          <div className={Style.account_box_img} {...getRootProps()}>
-            <input {...getInputProps()} />
-            {fileUrl ? (
-              <Image
-                loader={() => fileUrl}
-                src={fileUrl}
-                alt="account upload"
-                width={150}
-                height={150}
-                objectFit="cover"
-                className={Style.account_box_img_img}
+      <div className={Style.account}>
+        <div className={Style.account_banner}>
+          <Banner
+            bannerImage={fileUrl ? fileUrl : images.imgDefault.src}
+          ></Banner>
+        </div>
+        <div className={Style.account_info}>
+          <h1>Account Details</h1>
+        </div>
+        <form onSubmit={handleSubmit(onSubmitHandle)}>
+          <div className={Style.account_box}>
+            <div className={Style.account_box_img} {...getRootProps()}>
+              <input {...getInputProps()} />
+              {fileUrl ? (
+                <Image
+                  loader={() => fileUrl}
+                  src={fileUrl}
+                  alt="account upload"
+                  width={150}
+                  height={150}
+                  objectFit="cover"
+                  className={Style.account_box_img_img}
+                />
+              ) : (
+                <Image
+                  src={images.imgDefault}
+                  alt="account upload"
+                  width={150}
+                  height={150}
+                  objectFit="cover"
+                  className={Style.account_box_img_img}
+                />
+              )}
+              <p className={Style.account_box_img_para}>Change Image</p>
+            </div>
+            <div className={Style.account_box_form}>
+              <Input
+                label="name"
+                register={register}
+                type="text"
+                errors={errors}
               />
-            ) : (
-              <Image
-                src={images.imgDefault}
-                alt="account upload"
-                width={150}
-                height={150}
-                objectFit="cover"
-                className={Style.account_box_img_img}
+              <InputWithIcon
+                label="email"
+                register={register}
+                type="text"
+                errors={errors}
+                icon={<HiOutlineMail />}
               />
-            )}
-            <p className={Style.account_box_img_para}>Change Image</p>
-          </div>
-          <div className={Style.account_box_form}>
-            <Input
-              label="name"
-              register={register}
-              type="text"
-              errors={errors}
-            />
-            <InputWithIcon
-              label="email"
-              register={register}
-              type="text"
-              errors={errors}
-              icon={<HiOutlineMail />}
-            />
 
-            {/* Wallet Address fake input  */}
-            <div className={FormStyle.Form_box_input}>
-              <label htmlFor="wallet">Wallet address</label>
-              <div className={FormStyle.Form_box_input_box}>
-                <div className={FormStyle.Form_box_input_box_icon}>
-                  <MdFeaturedPlayList/>
-                </div>
-                <input type="text" readOnly defaultValue={accountCurrent} />
-                <div className={FormStyle.Form_box_input_box_icon}>
-                  <MdOutlineContentCopy />
+              {/* Wallet Address fake input  */}
+              <div className={FormStyle.Form_box_input}>
+                <label htmlFor="wallet">Wallet address</label>
+                <div className={FormStyle.Form_box_input_box}>
+                  <div className={FormStyle.Form_box_input_box_icon}>
+                    <MdFeaturedPlayList />
+                  </div>
+                  <input type="text" readOnly defaultValue={accountCurrent} />
+                  <div className={FormStyle.Form_box_input_box_icon}>
+                    <MdOutlineContentCopy />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={Style.account_box_btn}>
-              <Button
-                btnName="Upload profile"
-                handleClick={() => handleSubmit(onSubmitHandle)}
-                classStyle="w-100"
-              />
+              <div className={Style.account_box_btn}>
+                <Button
+                  btnName="Upload profile"
+                  handleClick={() => handleSubmit(onSubmitHandle)}
+                  classStyle="w-100"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
-    <BackDrop openBackDrop={openBackDrop} />
+        </form>
+      </div>
+      <BackDrop openBackDrop={openBackDrop} />
     </>
   );
 };
