@@ -39,22 +39,22 @@ const AuthorProfileCard = ({ profile }) => {
               src={profile.avatar}
               className={Style.AuthorProfileCard_box_img_img}
               alt="NFT IMAGES"
-              width={220}
-              height={220}
+              width={150}
+              height={150}
             />
           ) : (
             <Image
               src={images.imgDefault}
               className={Style.AuthorProfileCard_box_img_img}
               alt="NFT IMAGES"
-              width={220}
-              height={220}
+              width={150}
+              height={150}
             />
           )}
         </div>
         <div className={Style.AuthorProfileCard_box_info}>
           <div className={Style.AuthorProfileCard_box_info_name}>
-            <h2>{profile?.name}</h2>
+            <p>{profile?.name}</p>
             <MdVerified className={Style.AuthorProfileCard_box_info_icon} />
           </div>
 

@@ -86,6 +86,7 @@ const accountSetting = ({}) => {
       console.log(error);
     }
   };
+  
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,

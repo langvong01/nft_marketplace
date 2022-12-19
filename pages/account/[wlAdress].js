@@ -28,6 +28,17 @@ const AccountPage = ({}) => {
   const { wlAdress } = router.query;
 
   useEffect(() => {
+    const fetchAllItems = async () => {
+      const {
+        data,
+      } = await axiosClient.post(`item/filter`, {
+        sort_by: ['created_at'],
+        order: ['DESC'],
+        page: 1,
+        size: 100000,
+      });
+        return data?.body?.content
+    };
     const fetchAllCollection = async () => {
       const { data } = await axiosClient.get(`/collection/personal`);
       return data.body;
@@ -38,43 +49,22 @@ const AccountPage = ({}) => {
       } = await axiosClient.get(`/profile/${wlAdress}`);
       return body;
     };
-    const fetchItemsOwned = async (name) => {
-      const {
-        data: {
-          body: { content },
-        },
-      } = await axiosClient.post(`/item/filter`, {
-        owned_by: name,
-        sort_by: ['created_at'],
-        order: ['DESC'],
-        page: 1,
-        size: 10,
-      });
-      return content;
-    };
-    const fetchItemsCreated = async (name) => {
-      const {
-        data: {
-          body: { content },
-        },
-      } = await axiosClient.post(`/item/filter`, {
-        creator: name,
-        sort_by: ['created_at'],
-        order: ['DESC'],
-        page: 1,
-        size: 10,
-      });
-      return content;
-    };
 
     if (router.isReady) {
+      fetchAllItems().then((data) => {
+        const filterItemCollected = data.filter((item) => {
+          return item.ownedBy.walletAddress === wlAdress
+        })
+        const filterItemCreated = data.filter((item) => {
+          return item.creator.walletAddress === wlAdress
+        })
+        setItemCreated(filterItemCreated)
+        setItemOwned(filterItemCollected)
+      }).catch(err => console.log(err))
       fetchAllCollection()
         .then((data) => setCollections(data))
         .catch((err) => console.log(err));
       fetchProfileDetail().then((data) => {
-        const { name } = data;
-        fetchItemsOwned(name).then((data) => setItemOwned(data));
-        fetchItemsCreated(name).then((data) => setItemCreated(data));
         setProfile(data);
       });
     }
