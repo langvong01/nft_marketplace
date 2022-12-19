@@ -19,11 +19,14 @@ import { connectMetaMaskState } from 'global-state/connect-metamask';
 //extrenal IMPORT
 import { HiOutlineMail } from 'react-icons/hi';
 import { useRouter } from 'next/router';
-import { MdOutlineContentCopy, MdOutlineHttp } from 'react-icons/md';
+import { MdOutlineContentCopy, MdFeaturedPlayList } from 'react-icons/md';
+import BackDrop from '@/components/BackDrop/BackDrop';
 
 const accountSetting = ({}) => {
   const [fileUrl, setFileUrl] = useState(null);
   const [file, setFile] = useState(null);
+  const [openBackDrop,setOpenBackDrop] = useState(false)
+
   const router = useRouter();
 
   //fetch gloal state
@@ -66,6 +69,7 @@ const accountSetting = ({}) => {
   const onSubmitHandle = async (data) => {
     const { name, email } = data;
     try {
+      setOpenBackDrop(true)
       const formData = new FormData();
       formData.append('name', name);
       formData.append('email', email);
@@ -77,7 +81,7 @@ const accountSetting = ({}) => {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
-      router.push(`/`);
+      setOpenBackDrop(false)
     } catch (error) {
       console.log(error);
     }
@@ -90,6 +94,7 @@ const accountSetting = ({}) => {
   });
 
   return (
+    <>
     <div className={Style.account}>
       <div className={Style.account_banner}>
         <Banner
@@ -145,7 +150,7 @@ const accountSetting = ({}) => {
               <label htmlFor="wallet">Wallet address</label>
               <div className={FormStyle.Form_box_input_box}>
                 <div className={FormStyle.Form_box_input_box_icon}>
-                  <MdOutlineHttp />
+                  <MdFeaturedPlayList/>
                 </div>
                 <input type="text" readOnly defaultValue={accountCurrent} />
                 <div className={FormStyle.Form_box_input_box_icon}>
@@ -164,6 +169,8 @@ const accountSetting = ({}) => {
         </div>
       </form>
     </div>
+    <BackDrop openBackDrop={openBackDrop} />
+    </>
   );
 };
 

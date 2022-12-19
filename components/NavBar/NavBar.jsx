@@ -46,7 +46,7 @@ const NavBar = () => {
   const [discoveryRef, isDiscoveryRef] = useHover();
   const [helpRef, isHelpRef] = useHover();
   const resetMetaMask = useResetRecoilState(connectMetaMaskState);
-  
+
   const [isOpenModalMetaMask, setIsOpenModalMetaMask] = useRecoilState(
     modalNotifyMetaMaskState
   );
@@ -57,11 +57,12 @@ const NavBar = () => {
   const [modalPayment, setModalPayment] = useRecoilState(modalPaymentState);
 
   const fetchProfileDetail = useCallback(async () => {
-    if (metaMask.accountCurrent) {
-      const {
-        data: { body },
-      } = await axiosClient.get(`/profile/${metaMask.accountCurrent}`);
-      return body;
+    if (metaMask?.accountCurrent) {
+      const { data } = await axiosClient.get(
+        `/profile/${metaMask.accountCurrent}`
+      );
+
+      return data?.body;
     }
   }, [metaMask.accountCurrent]);
 

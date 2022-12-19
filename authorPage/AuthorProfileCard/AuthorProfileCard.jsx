@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { MdVerified, MdCloudUpload } from 'react-icons/md';
+import { MdVerified,  } from 'react-icons/md';
 import { FiCopy } from 'react-icons/fi';
 import {
   TiSocialFacebook,

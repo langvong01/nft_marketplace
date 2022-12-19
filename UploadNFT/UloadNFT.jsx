@@ -1,4 +1,11 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
@@ -16,9 +23,6 @@ import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import { connectMetaMaskState } from 'global-state/connect-metamask';
 
-
-
-
 const BASE_API = 'http://localhost:8080/api/v1';
 
 const UloadNFT = () => {
@@ -26,17 +30,17 @@ const UloadNFT = () => {
   const [featuredImage, setFeaturedImage] = useState(null);
   const [logoImage, setLogoImage] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
-  const [openBackDrop,setOpenBackDrop] = useState(false);
-  const [recoilState,setRecoilState] = useRecoilState(connectMetaMaskState)
+  const [openBackDrop, setOpenBackDrop] = useState(false);
+  const [recoilState, setRecoilState] = useRecoilState(connectMetaMaskState);
 
-  const router= useRouter();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
     getValues,
-  } = useForm();
+  } = useForm({});
   const handleChange = (event) => {
     setValue('categoryId', event.target.value);
   };
@@ -46,7 +50,7 @@ const UloadNFT = () => {
       alert('Please upload all images and try again.');
       return;
     }
-    setOpenBackDrop(true)
+    setOpenBackDrop(true);
     const { name, description, categoryId } = data;
 
     try {
@@ -134,13 +138,19 @@ const UloadNFT = () => {
 
                 {/* Select Box */}
                 <Box className="flex  items-center gap-5 mt-3.5">
-                  <FormControl error={!!errors.categoryId} className="w-1/3">
+                  <FormControl
+                    required
+                    error={!!errors.categoryId}
+                    className="w-1/3"
+                  >
                     <InputLabel>Category</InputLabel>
                     <Select
-                      label="Category"
+                      name = "categoryId"
+                      id = "categoryId"
+                      label="Category *"
                       onChange={handleChange}
                       value={getValues('categoryId')}
-                      defaultValue={categories?.[0].categoryId}
+                      defaultValue={categories?.[0].categoryId || ''}
                     >
                       {categories?.map((item) => (
                         <MenuItem value={item.categoryId}>
@@ -148,6 +158,7 @@ const UloadNFT = () => {
                         </MenuItem>
                       ))}
                     </Select>
+                    {errors.categoryId && <FormHelperText error> Choose a category</FormHelperText>}
                   </FormControl>
                 </Box>
 
