@@ -99,7 +99,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <>
+    <NoSsr>
       <div className={Style.navbar}>
         <div className={Style.navbar_container}>
           {/* left */}
@@ -272,7 +272,7 @@ const NavBar = () => {
           </ModalBase>
         ) : null}
       </AnimatePresence>
-    </>
+    </NoSsr>
   );
 };
 
