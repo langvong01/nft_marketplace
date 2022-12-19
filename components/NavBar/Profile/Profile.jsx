@@ -123,7 +123,7 @@ const Profile = ({ name }) => {
               <div className={Style.profile_menu_one_item}>
                 <TbDownload />
                 <p>
-                  <button onClick={handleLogout}>Disconnet</button>
+                  <button onClick={handleLogout}>Disconnect</button>
                 </p>
               </div>
             </div>

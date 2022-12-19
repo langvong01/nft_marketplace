@@ -4,18 +4,17 @@
   position: absolute;
 }
 
-
 .AuthorProfileCard_box {
   width: 60%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   background-color: var(--main-bg-color);
   padding: 1.5rem 2rem;
   border-radius: 1rem;
   box-shadow: var(--box-shadow);
-   gap: 1rem;
+  gap: 1rem;
 }
 
 .AuthorProfileCard_box_img_img {
@@ -27,10 +26,20 @@
   align-items: center;
   margin-left: auto;
   gap: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+.AuthorProfileCard_box_info_name h2 {
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .AuthorProfileCard_box_info_icon {
   transition: all 0.3s ease-in;
-  font-size: 1.5rem;
+  font-size: 1.rem;
 }
 
 .AuthorProfileCard_box_info h2 {
@@ -42,14 +51,13 @@
   display: flex;
   align-items: center;
   margin-top: 1rem;
-  gap: 2rem;
 }
 
 .AuthorProfileCard_box_info_address span {
-max-width: 200px;
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .AuthorProfileCard_box_info_icon:hover {

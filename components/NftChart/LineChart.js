@@ -24,7 +24,8 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const dateStringList = ['01/10/2022', '01/11/2022', '01/12/2022', '01/01/2023'];
+const dateStringList = ['01/09/2022','01/10/2022', '01/11/2022', '01/12/2022'];
+const chartLabels = ['09/2022', '10/2022', '11/2022', '12/2022']
 var options = {
   maintainAspectRatio: false,
   y: {
@@ -86,7 +87,7 @@ const LineChart = ({ chartData }) => {
   ];
 
   var data = {
-    labels: dateStringList,
+    labels: chartLabels,
     datasets: [
       {
         label: 'Price History',

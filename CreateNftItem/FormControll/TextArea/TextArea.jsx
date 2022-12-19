@@ -15,11 +15,10 @@ const TextArea = React.forwardRef(
           rows="6"
           placeholder={placeholder}
           {...register(label, {
-            required: "This field  is required.",
             onChange: onChange,
             maxLength: {
-              value: 50,
-              message: "This content must maximum 50 characters",
+              value: 300,
+              message: "This content must maximum 300 characters",
             },
           })}
         ></textarea>

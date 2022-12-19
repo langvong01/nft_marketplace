@@ -10,7 +10,7 @@ const Input = React.forwardRef(
     return (
       <div className={formStyle.Form_box_input}>
         <label htmlFor="nft" className="text-capitalize">
-          {label}
+          * {label}
         </label>
         <input
           ref={ref}

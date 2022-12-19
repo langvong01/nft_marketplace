@@ -2,6 +2,7 @@
   width: 100%;
 }
 
+
 .NFTDescription_box {
   width: 100%;
   margin: 0 auto;
@@ -59,7 +60,12 @@
 
 .NFTDescription_box_profile_box_right_info span,
 .NFTDescription_box_profile_box_left_info span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
   font-weight: 800;
+  max-width: 170px;
 }
 
 .NFTDescription_box_profile_box_left_img {
