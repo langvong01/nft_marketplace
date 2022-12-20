@@ -51,7 +51,7 @@ const Search = () => {
         return { ...prev, collections: collections };
       });
     });
-  }, []);
+  }, [debouncedSearchText]);
 
   useEffect(() => {
     if (searchText.length === 0) {
