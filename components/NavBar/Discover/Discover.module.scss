@@ -3,6 +3,10 @@
   z-index: 2222222222;
   list-style: none;
   transition: 0.2 all;
+  a {
+    text-decoration: none !important;
+    color: black;
+  }
 }
 
 .discover:hover {

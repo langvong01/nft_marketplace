@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 //INTERNAL IMPORT
-import Style from './Discover.module.css';
+import Style from './Discover.module.scss';
 
 const Discover = () => {
   //--------DISCOVER NAVIGATION MENU

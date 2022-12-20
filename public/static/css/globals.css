@@ -2,9 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'); */
 :root {
   --icons-color: #4c5773;
@@ -47,6 +44,15 @@ body {
   /* color: var(--color-text-primary); */
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: none;
+}
 
 /* ::selection{
   color: var(--shadow-dark-color);
@@ -91,6 +97,9 @@ body {
   font: inherit;
   line-height: unset !important;
 }
+body {
+  line-height: 1.5;
+}
 
 img,
 picture,
@@ -118,10 +127,6 @@ h6 {
   overflow-wrap: break-word;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
 .swiper-horizontal>.swiper-scrollbar,
 .swiper-scrollbar.swiper-scrollbar-horizontal {
   display: none;
@@ -220,3 +225,7 @@ a {
 }
 
 /* react ui */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
