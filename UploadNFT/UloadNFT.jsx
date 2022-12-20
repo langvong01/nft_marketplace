@@ -149,8 +149,7 @@ const UloadNFT = () => {
                       id="categoryId"
                       label="Category *"
                       onChange={handleChange}
-                      value={getValues('categoryId')}
-                      // value={categories?.[0].categoryId ||}
+                      defaultValue = {categories?.[0].categoryId || ''}
                     >
                       {categories?.map((item) => (
                         <MenuItem value={item.categoryId}>
@@ -166,6 +165,7 @@ const UloadNFT = () => {
 
                 <div className={btnStyle.upload_box_btn}>
                   <Button
+                    type='submit'
                     btnName="Upload"
                     handleClick={() =>
                       handleSubmit(connectCreateCollectService)

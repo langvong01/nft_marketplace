@@ -203,6 +203,7 @@ const UploadItem = () => {
         </div>
         <div className={Style.upload_box_btn}>
           <Button
+            type='submit'
             btnName="Upload"
             handleClick={() => handleSubmit(onSubmit)}
             classStyle={`${Style.upload_box_btn_style} w-50`}
