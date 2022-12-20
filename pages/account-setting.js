@@ -27,7 +27,7 @@ const accountSetting = ({}) => {
   const [fileUrl, setFileUrl] = useState(null);
   const [file, setFile] = useState(null);
   const [openBackDrop, setOpenBackDrop] = useState(false);
-
+  const [profile, setProfile] = useRecoilState(profileState);
   const router = useRouter();
 
   //fetch gloal state
@@ -83,9 +83,11 @@ const accountSetting = ({}) => {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });
+
       setProfile((prev) => {
         return { ...prev, name: 'aaa' };
       });
+
       setOpenBackDrop(false);
     } catch (error) {
       console.log(error);

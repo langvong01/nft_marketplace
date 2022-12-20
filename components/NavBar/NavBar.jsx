@@ -76,6 +76,7 @@ const NavBar = () => {
         setNameAccount(data.name);
         setAvatar(data.avatar);
       } else {
+        setNameAccount(data.name);
         setAvatar(images.imgDefault.src);
       }
     });
