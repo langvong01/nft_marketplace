@@ -47,12 +47,13 @@ const accountSetting = ({}) => {
         return { avatar, name, email };
       } catch (error) {}
     };
-
-    fetchAccountProfile().then(({ avatar, name, email }) => {
-      setFileUrl(avatar);
-      setValue('name', name);
-      setValue('email', email);
-    });
+    if (accountCurrent) {
+      fetchAccountProfile().then(({ avatar, name, email }) => {
+        setFileUrl(avatar);
+        setValue('name', name);
+        setValue('email', email);
+      });
+    }
   }, [accountCurrent]);
 
   const {

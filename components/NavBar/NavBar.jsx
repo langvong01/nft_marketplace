@@ -73,10 +73,10 @@ const NavBar = () => {
   useEffect(() => {
     fetchProfileDetail().then((data) => {
       if (data?.avatar) {
-        setNameAccount(data.name);
+        setNameAccount(data?.name ? data.name : null);
         setAvatar(data.avatar);
       } else {
-        setNameAccount(data.name);
+        setNameAccount(data?.name ? data.name : null);
         setAvatar(images.imgDefault.src);
       }
     });
