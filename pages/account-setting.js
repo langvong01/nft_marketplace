@@ -31,7 +31,6 @@ const accountSetting = ({}) => {
   const router = useRouter();
 
   //fetch gloal state
-  const [profile, setProfile] = useRecoilState(profileState);
 
   const [recoil, setRecoil] = useRecoilState(connectMetaMaskState);
   const { accountCurrent } = recoil;
@@ -92,7 +91,6 @@ const accountSetting = ({}) => {
       console.log(error);
     }
   };
-  
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -167,6 +165,7 @@ const accountSetting = ({}) => {
               </div>
               <div className={Style.account_box_btn}>
                 <Button
+                  type="submit"
                   btnName="Upload profile"
                   handleClick={() => handleSubmit(onSubmitHandle)}
                   classStyle="w-100"

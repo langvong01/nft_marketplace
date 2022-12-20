@@ -13,9 +13,6 @@ const AuthorNFTCardBox = ({
   itemCreated,
   collections,
 }) => {
-  console.log(collections)
-  console.log(collectionOwned)
-
   return (
     <div className={Style.AuthorNFTCardBox}>
       {collectiables && (
