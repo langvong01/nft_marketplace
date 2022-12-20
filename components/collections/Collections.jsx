@@ -71,7 +71,9 @@ const Collections = () => {
   return (
     <>
       <CollectionStyles>
-        <h2 className="text-4xl text-center">Top collections and items </h2>
+        <h2 className="text-4xl text-center font-semibold">
+          Top collections and items{' '}
+        </h2>
         <TabContext value={value}>
           <Box
             sx={{
