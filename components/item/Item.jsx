@@ -128,7 +128,7 @@ const Item = ({ item }) => {
 
             {/* <p className="text-base mt-2">End in 7 days</p> */}
           </div>
-          {item.ownedBy.walletAddress !== account.accountCurrent ? (
+          {(item.ownedBy.walletAddress !== account.accountCurrent) && item.isOnSale ? (
             <div className="item-btn py-2 bg-blue-500 absolute bottom-0 w-full text-center text-white  translate-y-[45px] ">
               {!cart.idItemSelected.includes(item.itemId) ? (
                 <button
