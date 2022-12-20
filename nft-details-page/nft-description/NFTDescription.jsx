@@ -228,7 +228,7 @@ const NFTDescription = ({ nft }) => {
               )}
             </div>
           )}
-
+  
           <div className="mt-5">
             <LineChart />
           </div>

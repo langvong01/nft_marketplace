@@ -12,6 +12,8 @@ import axiosClient from 'utils/axiosClient';
 import Banner from '@/components/banner/Banner';
 
 import AuthorNFTCardBox from 'authorPage/AuthorNFTCardBox/AuthorNFTCardBox';
+import { getAllCollections } from 'services/collectionService';
+
 
 const AccountPage = ({}) => {
   const [profile, setProfile] = useState();
@@ -39,11 +41,6 @@ const AccountPage = ({}) => {
       });
         return data?.body?.content
     };
-    const fetchAllCollection = async () => {
-      const { data } = await axiosClient.get(`/collection/personal`);
-      return data.body;
-    };
-
     const fetchProfileDetail = async () => {
       const {
         data: { body },
@@ -62,14 +59,21 @@ const AccountPage = ({}) => {
         setItemCreated(filterItemCreated)
         setItemOwned(filterItemCollected)
       }).catch(err => console.log(err))
-      fetchAllCollection()
-        .then((data) => setCollections(data))
+      getAllCollections()
+        .then((data) => {
+          const filterCollections = data.filter((collection) => {
+            return collection.account.walletAddress === wlAdress
+          })
+          setCollections(filterCollections)
+        })
         .catch((err) => console.log(err));
       fetchProfileDetail().then((data) => {
         setProfile(data);
       });
+    } else {
+      return
     }
-  }, [router.isReady]);
+  }, [router.isReady,wlAdress]);
 
   return (
     <div className={Style.author}>
