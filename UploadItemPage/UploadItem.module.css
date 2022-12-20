@@ -1,4 +1,7 @@
 .upload {
+
+}
+.upload_box {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap : 2rem;
@@ -9,10 +12,12 @@
  }
  
  .upload_box_slider_div{
-  display: flex;
-  gap: 1rem;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1rem;
  }
- 
+
  .upload_box_slider{
      border: 1px solid var(--icons-color);
      border-radius: 1rem;
@@ -45,10 +50,7 @@
  }
  
  .upload_box_btn{
-     display: grid;
-     grid-template-columns: repeat(2, 1fr);
      margin-block: 4rem;
-     gap: 2rem;
  }
  
  .upload_box_btn_style{

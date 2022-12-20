@@ -26,22 +26,26 @@ const SellNFT = () => {
   const fetchItemDetails = async () => {
     const data = await getItemDetails(ItemId);
     if (data) {
-      const { mediaFileUrl } = data;
+      const { mediaFileUrl, isOnSale } = data;
+      if (isOnSale) {
+        return router.push(`/404`);
+      }
       setImage(mediaFileUrl);
     }
   };
 
   useEffect(() => {
+    if(!router.isReady) return
     fetchItemDetails();
-  }, [ItemId]);
+  }, [router.isReady]);
 
   const handleChangePrice = (e) => {
-    setPrice(e.target.value);
     if (+e.target.value > 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
+    setPrice(e.target.value);
   };
 
   const handleListingOnclick = async () => {
@@ -84,7 +88,6 @@ const SellNFT = () => {
           </div>
         </div>
         <div className={Style.SellNftPage_box_form}>
-          <form action="" autoComplete={false}>
             <div className={Style.SellNftPage_box_form_input}>
               <label htmlFor="price">Set Price</label>
               <TextField
@@ -105,8 +108,8 @@ const SellNFT = () => {
                   ),
                 }}
                 inputProps={{
-                  // inputMode: 'numeric',
-                  pattern: '[0-9]*',
+                  inputMode: 'numeric',
+                  // pattern: '[0-9]*',
                   maxLength: '10',
                 }}
               />
@@ -142,13 +145,13 @@ const SellNFT = () => {
               isDisabled={isDisabled}
               handleClick={handleListingOnclick}
             />
-          </form>
+
         </div>
       </div>
 
       {/* backdrop */}
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: '#fff', zIndex: '9999999999' }}
         open={openBackDrop}
       >
         <div className="w-100 text-center">
