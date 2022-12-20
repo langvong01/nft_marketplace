@@ -9,7 +9,7 @@ const Banner = ({ bannerImage, collection = null }) => {
     <div className={Style.banner}>
       <div className={`${Style.banner_img} relative`}>
         <img
-          src={bannerImage || collection?.featuredImage}
+          src={bannerImage || collection?.bannerImage}
           alt="background"
           className="w-full object-cover h-[300px]"
         />

@@ -52,7 +52,7 @@ const UloadNFT = () => {
     }
     setOpenBackDrop(true);
     const { name, description, categoryId } = data;
-
+    console.log(categoryId)
     try {
       const formData = new FormData();
       formData.append('name', name);
@@ -149,8 +149,8 @@ const UloadNFT = () => {
                       id="categoryId"
                       label="Category *"
                       onChange={handleChange}
-                      // value={getValues('categoryId')}
-                      value={categories?.[0].categoryId || ''}
+                      value={getValues('categoryId')}
+                      // value={categories?.[0].categoryId ||}
                     >
                       {categories?.map((item) => (
                         <MenuItem value={item.categoryId}>

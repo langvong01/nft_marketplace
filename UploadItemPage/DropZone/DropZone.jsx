@@ -44,7 +44,7 @@ const DropZone = React.forwardRef(
                 src={fileUrl}
                 alt="upload"
                 width={600}
-                height={600}
+                height={400}
                 objectFit="contain"
                 className={Style.DropZone_box_input_img_img}
               />

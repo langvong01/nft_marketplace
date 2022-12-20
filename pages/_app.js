@@ -13,6 +13,7 @@ import useScrollRestoration from 'hook/useScrollRestoration';
 //INTRNAL IMPORT
 
 const MyApp = ({ Component, pageProps, router }) => {
+
   useScrollRestoration(router);
 
   Router.events.on('routeChangeStart', () => {

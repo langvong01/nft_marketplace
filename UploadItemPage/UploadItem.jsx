@@ -127,84 +127,86 @@ const UploadItem = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={Style.upload}>
-        <DropZone
-          title="JPG, PNG, WEBM , MAX 100MB"
-          heading="Drag & drop file"
-          subHeading="or Browse media on your device"
-          collection={collectionUI}
-          image={images.upload}
-          register={register}
-          label="Item Image"
-          errors={errors}
-          setImage={setImage}
-        />
         <div className={Style.upload_box}>
-          <Input
-            label="itemName"
-            placeholder="Treasure"
-            register={register}
-            type="text"
-            errors={errors}
-          />
-          <TextArea
-            label="description"
-            placeholder="Something about your NFt"
-            register={register}
-            errors={errors}
-          />
-
-          <div className={formStyle.Form_box_input}>
-            <label htmlFor="name">Choose collection</label>
-            <p className={Style.upload_box_input_para}>
-              Choose an exiting collection or
-              <Link href="/uploadNFT">
-                <a className="text-primary ml-1">create a new one</a>
-              </Link>
-            </p>
-
-            <div className={Style.upload_box_slider_div}>
-              {fetchCollection?.map((el, i) => (
-                <div
-                  className={`${Style.upload_box_slider} ${
-                    active == i + 1 ? Style.active : ''
-                  }`}
-                  key={i + 1}
-                  onClick={() => (
-                    setActive(i + 1),
-                    setcollectionUI(el.collectionName),
-                    setCollectionID(el.collectionId)
-                  )}
-                >
-                  <div className={Style.upload_box_slider_box}>
-                    <div className={Style.upload_box_slider_box_img}>
-                      <Image
-                        loader={() => el.logoImage}
-                        width={50}
-                        height={50}
-                        src={el.logoImage}
-                        alt={el.collectionName}
-                        className={Style.upload_box_slider_box_img_img}
-                      />
-                    </div>
-                    <div className={Style.upload_box_slider_box_img_icon}>
-                      <TiTick />
-                    </div>
-                  </div>
-                  <p className="mt-3 fs-6 text-capitalize">
-                    {el.collectionName}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className={Style.upload_box_btn}>
-            <Button
-              btnName="Upload"
-              handleClick={() => handleSubmit(onSubmit)}
-              classStyle={Style.upload_box_btn_style}
+          <div className={Style.upload_box_left}>
+            <DropZone
+              title="JPG, PNG, WEBM , MAX 100MB"
+              heading="Drag & drop file"
+              subHeading="or Browse media on your device"
+              collection={collectionUI}
+              image={images.upload}
+              register={register}
+              label="Item Image"
+              errors={errors}
+              setImage={setImage}
             />
           </div>
+          <div className={Style.upload_box_right}>
+            <Input
+              label="itemName"
+              placeholder="Treasure"
+              register={register}
+              type="text"
+              errors={errors}
+            />
+            <TextArea
+              label="description"
+              placeholder="Something about your NFt"
+              register={register}
+              errors={errors}
+            />
+          </div>
+        </div>
+        <div className={formStyle.Form_box_input}>
+          <label htmlFor="name">Choose collection</label>
+          <p className={Style.upload_box_input_para}>
+            Choose an exiting collection or
+            <Link href="/uploadNFT">
+              <a className="text-primary ml-1">create a new one</a>
+            </Link>
+          </p>
+
+          <div className={Style.upload_box_slider_div}>
+            {fetchCollection?.map((el, i) => (
+              
+              <div
+                className={`${Style.upload_box_slider} ${
+                  active == i + 1 ? Style.active : ''
+                }`}
+                key={i + 1}
+                onClick={() => (
+                  setActive(i + 1),
+                  setcollectionUI(el.collectionName),
+                  setCollectionID(el.collectionId)
+                )}
+              >
+                <div className={Style.upload_box_slider_box}>
+                  <div className={Style.upload_box_slider_box_img}>
+                    <Image
+                      loader={() => el.logoImage}
+                      width={50}
+                      height={50}
+                      src={el.logoImage}
+                      alt={el.collectionName}
+                      className={Style.upload_box_slider_box_img_img}
+                    />
+                  </div>
+                  <div className={Style.upload_box_slider_box_img_icon}>
+                    <TiTick />
+                  </div>
+                </div>
+                <p className="mt-3 fs-6 text-capitalize">{el.collectionName}</p>
+              </div>
+              
+            ))}
+          </div>
+        </div>
+        <div className={Style.upload_box_btn}>
+          <Button
+            btnName="Upload"
+            handleClick={() => handleSubmit(onSubmit)}
+            classStyle={`${Style.upload_box_btn_style} w-50`}
+          />
         </div>
       </div>
       <BackDrop openBackDrop={openBackDrop} />
