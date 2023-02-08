@@ -23,7 +23,7 @@ import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import { connectMetaMaskState } from 'global-state/connect-metamask';
 
-const BASE_API = 'http://localhost:8080/api/v1';
+const BASE_API = 'http://103.161.16.15:8080/api/v1';
 
 const UloadNFT = () => {
   const [categories, setCategory] = useState();
