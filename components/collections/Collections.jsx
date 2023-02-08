@@ -57,7 +57,11 @@ const Collections = () => {
   useEffect(() => {
     if (value === 'collections') {
       getTopTenCollectionLatest(filter).then((data) => {
-        setData(data);
+        if (!data) {
+          setData([])
+        } else {
+          setData(data);
+        }
         setIsLoading(false);
       });
     } else if (value === 'items') {

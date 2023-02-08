@@ -16,24 +16,24 @@ import {
   modalPaymentState,
   modalPaymentStateSuccess,
 } from '../../global-state/modal';
-import ModalBase from '../modal/ModalBase';
-import Cart from '../cart/Cart';
+import ModalBase from '../Modal/ModalBase';
+import Cart from '../Cart/Cart';
 import Link from 'next/link';
 import useHover from '../../hook/useHover';
 import { connectMetaMaskState } from '../../global-state/connect-metamask';
-import ModalMetaMask from '../modal/modal-notify-metamask/ModalMetaMask';
-import ModalWallet from '../modal/modal-wall-net/ModalWallet';
-import Profile from './profile/Profile';
+import ModalMetaMask from '../Modal/modal-notify-metamask/ModalMetaMask';
+import ModalWallet from '../Modal/modal-wall-net/ModalWallet';
+import Profile from './Profile/Profile';
 import HelpCenter from './help-center/HelpCenter';
-import Discover from './discover/Discover';
+import Discover from './Discover/Discover';
 import Search from '../search/Search';
 import SideBar from './side-bar/SideBar';
 import { cartState } from 'global-state/cart';
-import ModalPayment from '../modal/modal-payment/ModalPayment';
+import ModalPayment from '../Modal/modal-payment/ModalPayment';
 import { useCallback } from 'react';
 import axiosClient from 'utils/axiosClient';
 import { useRouter } from 'next/router';
-import ModalPaymentSuccess from '../modal/modal-payment-success/ModalPaymentSuccess';
+import ModalPaymentSuccess from '../Modal/modal-payment-success/ModalPaymentSuccess';
 import { profileState } from 'global-state/profile';
 
 const NavBar = () => {
@@ -92,11 +92,13 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    window.ethereum.on('accountsChanged', async function (accounts) {
-      resetMetaMask();
-      handleOpenMeta();
-      router.push('/');
-    });
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', async function (accounts) {
+        resetMetaMask();
+        handleOpenMeta();
+        router.push('/');
+      });
+    }
   }, []);
 
   return (

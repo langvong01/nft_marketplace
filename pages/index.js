@@ -32,7 +32,10 @@ export async function getServerSideProps(context) {
     'public, s-maxage=10, stale-while-revalidate=59'
   );
 
-  const topTenCollectionLatest = await getTopTenCollectionLatest();
+  let topTenCollectionLatest = await getTopTenCollectionLatest();
+  if (!topTenCollectionLatest) {
+    topTenCollectionLatest = []
+  }
 
   return {
     props: {
