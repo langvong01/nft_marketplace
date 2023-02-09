@@ -22,7 +22,7 @@ export const connectMetaMaskService = async () => {
   try {
     // install metamask - turn on modal
     if (!window.ethereum) {
-      alert('Plesae install metamask before connecting');
+      alert('Please install metamask and reload page to continue');
       window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn', '_blank')
       return {
         error: 'install',
@@ -49,6 +49,11 @@ export const connectMetaMaskService = async () => {
             method: 'wallet_addEthereumChain',
             params: [
               {
+                nativeCurrency: {
+                  name: 'Matic',
+                  symbol: 'MATIC',
+                  decimals: 18,
+                },
                 chainName: 'Mumbai',
                 chainId: '0x13881',
                 rpcUrls: ['https://matic-mumbai.chainstacklabs.com'],
