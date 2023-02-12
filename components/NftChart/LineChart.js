@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment/moment';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -24,8 +25,24 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const dateStringList = ['01/09/2022','01/10/2022', '01/11/2022', '01/12/2022'];
-const chartLabels = ['09/2022', '10/2022', '11/2022', '12/2022']
+function generateData() {
+  var date = moment().startOf('month')
+  var currentMonth = date.format('DD/MM/YYYY')
+  var backMonth3 = date.subtract(3, 'M').format('DD/MM/YYYY')
+  var backMonth2 = date.add(1, 'M').format('DD/MM/YYYY')
+  var backMonth1 = date.add(1, 'M').format('DD/MM/YYYY')
+  return [backMonth3, backMonth2, backMonth1, currentMonth]
+}
+function generateLabels() {
+  var date = moment().startOf('month')
+  var currentMonth = date.format('MM/YYYY')
+  var backMonth3 = date.subtract(3, 'M').format('MM/YYYY')
+  var backMonth2 = date.add(1, 'M').format('MM/YYYY')
+  var backMonth1 = date.add(1, 'M').format('MM/YYYY')
+  return [backMonth3, backMonth2, backMonth1, currentMonth]
+}
+const dateStringList = generateData();
+const chartLabels = generateLabels();
 var options = {
   maintainAspectRatio: false,
   y: {
