@@ -8,7 +8,7 @@ const ListItem = ({ items }) => {
       <div className="list-container w-[95%] mx-auto my-5">
         <div className="list-container grid grid-cols-4 gap-5">
           {items.map((item) => {
-            if (item.price) {
+            if (item.tokenId) {
               return <Item item={item} key={uuidv4()}></Item>;
             } else {
               return null;

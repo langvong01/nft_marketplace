@@ -250,7 +250,7 @@ const SearchFilter = ({
                               <div className={Style.search_item_price}>
                                 <p>
                                   <span className="mr-1">{item.price}</span>
-                                  MATIC
+                                  {renderPrice(item.price)}
                                 </p>
                               </div>
                             </div>
@@ -270,7 +270,14 @@ const SearchFilter = ({
     </>
   );
 };
-
+function renderPrice(price)
+{
+  if (price && price > 0) {
+    return 'MATIC';
+  } else {
+    return 'NOT FOR SALE';
+  }
+}
 const Empty = () => {
   return (
     <>

@@ -34,6 +34,7 @@ const Profile = ({ name }) => {
     if (response.status === 200) {
       resetMetaMask();
       router.push('/');
+      window.location.reload()
     }
   };
 

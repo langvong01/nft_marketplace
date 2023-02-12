@@ -51,10 +51,10 @@ const AccountPage = ({}) => {
     if (router.isReady) {
       fetchAllItems().then((data) => {
         const filterItemCollected = data.filter((item) => {
-          return item.ownedBy.walletAddress === wlAdress
+          return item.ownedBy.walletAddress === wlAdress && item.tokenId
         })
         const filterItemCreated = data.filter((item) => {
-          return item.creator.walletAddress === wlAdress
+          return item.creator.walletAddress === wlAdress && item.tokenId
         })
         setItemCreated(filterItemCreated)
         setItemOwned(filterItemCollected)

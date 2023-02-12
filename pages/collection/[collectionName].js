@@ -166,7 +166,7 @@ export async function getServerSideProps(context) {
   const collection = await getDetailCollectionByName(collectionName);
 
   const listItem = data.filter((item) => {
-    if (item.price) {
+    if (item.tokenId) {
       return item;
     }
   });

@@ -230,7 +230,7 @@ const ListItem = React.memo(({ data }) => {
                   />
                   <p>{item.itemName}</p>
                 </div>
-                <p>{item.price || 1}</p>
+                <p>{item.price || 'NOT FOR SALE'}</p>
               </div>
             ))}
         </div>
@@ -258,7 +258,7 @@ const ListItem = React.memo(({ data }) => {
                       />
                       <p className="capitalize">{item.itemName}</p>
                     </div>
-                    <p>{item.price || 1}</p>
+                    <p>{item.price || 'NOT FOR SALE'}</p>
                   </div>
                 ))}
             </div>

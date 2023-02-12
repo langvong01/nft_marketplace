@@ -6,6 +6,7 @@ import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
+import '../nft-details-page/NFTDetailsPage.module.css';
 import Head from 'next/head';
 import Router from 'next/router';
 import NProgress from 'nprogress';

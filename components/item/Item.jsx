@@ -117,13 +117,11 @@ const Item = ({ item }) => {
           <div className="w-full flex-1 p-2 mt-3">
             <p className="font-semibold text-xl flex justify-between mb-2 ">
               <p className="w-[70%]">{item.itemName}</p>
-              <span className="ml-1"># {item.itemId}</span>
+              <span className="ml-1"># {item.tokenId}</span>
             </p>
             <p className="font-bold text-xl ">
-              {item.price}
-              <span className="ml-1 w-[50px] text-right uppercase text-base">
-                Matic
-              </span>
+              {item.price ? item.price : ''}
+              {renderPrice(item.price)}
             </p>
 
             {/* <p className="text-base mt-2">End in 7 days</p> */}
@@ -162,5 +160,16 @@ const Item = ({ item }) => {
     </>
   );
 };
-
+function renderPrice(price)
+{
+  if (price && price > 0) {
+    return <span className="ml-1 w-[50px] text-right uppercase text-base">
+                Matic
+              </span>;
+  } else {
+    return <span className="ml-1 w-[50px] text-right uppercase text-base">
+                Not for sale
+              </span>;
+  }
+}
 export default Item;

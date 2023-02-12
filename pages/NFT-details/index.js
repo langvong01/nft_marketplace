@@ -107,7 +107,7 @@ export async function getServerSideProps(context) {
 
   const data = await getAllItems();
 
-  const itemWithPrice = data.filter((item) => item.price);
+  const itemWithPrice = data.filter((item) => item.tokenId);
 
   return {
     props: {

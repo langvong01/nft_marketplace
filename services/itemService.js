@@ -9,11 +9,7 @@ export const getTopTenItem = async (order = 'DESC') => {
   });
 
   const data = await response.data.body.content;
-  const items = data.filter((item) => {
-    if (item.price) {
-      return item;
-    }
-  });
+  const items = data
   return items;
 };
 
@@ -40,7 +36,7 @@ export const getItemsInCollectionName = async (nameCollection = null) => {
     sort_by: ['listed_at', 'created_at'],
     order: ['DESC'],
     page: 1,
-    size: 1000,
+    size: 100000,
   });
 
   return await response.data?.body?.content;
